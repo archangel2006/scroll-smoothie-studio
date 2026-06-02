@@ -1,10 +1,11 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRef, useState, FormEvent } from "react";
 import {
-  Github, Linkedin, Mail, Twitter, ExternalLink, MapPin, GraduationCap,
-  Briefcase, Code2, Sparkles, ChevronLeft, ChevronRight, Send, Cpu, Atom,
+  Github, Linkedin, Mail, Twitter, ExternalLink, MapPin,
+  Briefcase, Code2, ChevronLeft, ChevronRight, Send, Atom,
   Brain, Cloud, Layers, Trophy
 } from "lucide-react";
+
 import heroAsset from "@/assets/hero.png.asset.json";
 import cityAsset from "@/assets/city-bg.png.asset.json";
 
