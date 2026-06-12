@@ -183,11 +183,10 @@ function EducationSection() {
 // =================== SKILLS (6 blocks) ===================
 const skillBlocks = [
   { icon: Code2, title: "Programming Languages", items: ["Python", "C++", "JavaScript", "TypeScript", "SQL", "R"] },
-  { icon: Layers, title: "Frontend Development", items: ["React", "Next.js", "HTML", "CSS", "Tailwind CSS"] },
-  { icon: Cloud, title: "Backend & Databases", items: ["FastAPI", "Flask", "Firebase", "MySQL"] },
-  { icon: Brain, title: "Machine Learning & AI", items: ["Scikit-learn", "Pandas", "NumPy", "Matplotlib", "Seaborn", "OpenCV", "Pillow", "Ultralytics", "LangChain", "FAISS", "Genkit"] },
+  { icon: Layers, title: "Full-Stack Development", items: ["React", "Next.js", "HTML", "CSS", "Tailwind CSS", "FastAPI", "Flask", "Firebase", "MySQL"] },
+  { icon: Brain, title: "Machine Learning & AI", items: ["Scikit-learn", "Pandas", "NumPy", "OpenCV", "Ultralytics", "LangChain", "Genkit", "FAISS"] },
   { icon: Atom, title: "Quantum Computing", items: ["Qiskit", "Quantum Kernels", "QSVM", "ZZFeatureMap", "Grover's Search"] },
-  { icon: Trophy, title: "Tools & Platforms", items: ["Git", "GitHub", "VS Code", "Jupyter Notebook", "Google Colab", "Figma", "Vercel", "Netlify", "Firebase"] },
+  { icon: Cloud, title: "Tools & Platforms", items: ["Git", "GitHub", "VS Code", "Jupyter Notebook", "Google Colab", "Figma", "Vercel", "Netlify", "Firebase Hosting"] },
 ];
 
 function SkillsSection() {
