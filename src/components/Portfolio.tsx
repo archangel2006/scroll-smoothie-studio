@@ -309,7 +309,6 @@ function ProjectsSection() {
                   rotateY: rel * -8,
                 }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                style={{ transformStyle: "preserve-3d" }}
                 className="absolute w-[88%] sm:w-[520px] md:w-[640px] rounded-3xl overflow-hidden shadow-card"
                 style={{
                   transformStyle: "preserve-3d",
