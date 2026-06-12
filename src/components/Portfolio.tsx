@@ -310,38 +310,46 @@ function ProjectsSection() {
                 }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                 style={{ transformStyle: "preserve-3d" }}
-                className="absolute w-[88%] sm:w-[520px] md:w-[640px] glass-card rounded-3xl overflow-hidden shadow-card"
+                className="absolute w-[88%] sm:w-[520px] md:w-[640px] rounded-3xl overflow-hidden shadow-card"
+                style={{
+                  transformStyle: "preserve-3d",
+                  background: "oklch(0.18 0.08 295 / 0.45)",
+                  backdropFilter: "blur(24px) saturate(160%)",
+                  WebkitBackdropFilter: "blur(24px) saturate(160%)",
+                  border: "1px solid oklch(0.6 0.18 305 / 0.35)",
+                }}
               >
                 <div className="relative h-56 md:h-72 overflow-hidden">
-                  <img src={p.image} alt={p.title} className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/40 to-transparent" />
+                  <img src={p.image} alt={p.title} className="w-full h-full object-cover opacity-70" style={{ filter: "blur(2px)" }} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-background/30" />
                   <span className="absolute top-4 left-4 text-xs font-semibold px-3 py-1 rounded-full bg-accent/30 backdrop-blur-md border border-accent/40 text-foreground">
                     {p.tag}
                   </span>
-                  <div className="absolute top-4 right-4 flex gap-2">
-                    <a href={p.github} target="_blank" rel="noreferrer" aria-label="GitHub"
-                       className="h-9 w-9 rounded-full glass flex items-center justify-center hover:bg-primary/40 transition">
-                      <Github className="h-4 w-4" />
-                    </a>
-                    <a href={p.demo} target="_blank" rel="noreferrer" aria-label="Live Demo"
-                       className="h-9 w-9 rounded-full glass flex items-center justify-center hover:bg-primary/40 transition">
-                      <ExternalLink className="h-4 w-4" />
-                    </a>
-                  </div>
+                  <h3 className="absolute bottom-4 left-5 right-5 text-2xl md:text-3xl font-bold font-display text-gradient drop-shadow-lg">{p.title}</h3>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-2xl md:text-3xl font-bold font-display text-gradient mb-2">{p.title}</h3>
-                  <p className="text-sm md:text-base text-foreground/80 leading-relaxed mb-4">{p.desc}</p>
-                  <div className="flex flex-wrap gap-2">
+                <div className="p-6 relative">
+                  <p className="text-sm md:text-base text-foreground/85 leading-relaxed mb-4">{p.desc}</p>
+                  <div className="flex flex-wrap gap-2 pr-24">
                     {p.stack.map((s) => (
                       <span key={s} className="text-xs px-2.5 py-1 rounded bg-primary/15 text-foreground/85 border border-primary/30">{s}</span>
                     ))}
+                  </div>
+                  <div className="absolute bottom-5 right-5 flex gap-2">
+                    <a href={p.github} target="_blank" rel="noreferrer" aria-label="GitHub"
+                       className="h-10 w-10 rounded-full glass flex items-center justify-center hover:bg-primary/40 transition">
+                      <Github className="h-4 w-4" />
+                    </a>
+                    <a href={p.demo} target="_blank" rel="noreferrer" aria-label="Live Demo"
+                       className="h-10 w-10 rounded-full glass flex items-center justify-center hover:bg-primary/40 transition">
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
                   </div>
                 </div>
               </motion.article>
             );
           })}
         </div>
+
 
         {/* Controls */}
         <div className="mt-10 flex items-center justify-center gap-6">
