@@ -476,26 +476,9 @@ export default function Portfolio() {
       />
       <div className="fixed inset-0 -z-10 bg-background/35" />
 
-      {/* Navbar */}
-      <motion.nav
-        initial={{ y: -40, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className="fixed top-5 left-1/2 -translate-x-1/2 z-50 glass-strong rounded-full px-2 py-2"
-      >
-        <ul className="flex items-center gap-1 text-sm font-medium">
-          {navItems.map((item) => (
-            <li key={item.href}>
-              <a
-                href={item.href}
-                className="px-4 py-2 rounded-full text-foreground/80 hover:text-foreground hover:bg-primary/20 transition-colors duration-300"
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </motion.nav>
+      {/* Circular expandable menu (bottom-left) */}
+      <CircularMenu />
+
 
       {/* HERO */}
       <section ref={heroRef} id="home" className="relative min-h-screen overflow-hidden">
