@@ -449,11 +449,7 @@ function ContactSection() {
                 placeholder="Tell me about your project..."
               />
             </div>
-            <button
-              type="submit"
-              className="inline-flex items-center gap-2 rounded-full px-7 py-3 font-semibold text-primary-foreground animate-glow"
-              style={{ background: "var(--gradient-primary)" }}
-            >
+            <button type="submit" className="glass-btn">
               Send Message <Send className="h-4 w-4" />
             </button>
           </motion.form>
