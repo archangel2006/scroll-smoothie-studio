@@ -31,7 +31,7 @@
   --color-ring: var(--ring);
   --color-neon: var(--neon);
   --color-neon-foreground: var(--neon-foreground);
-  --font-display: "Orbitron", "Inter", sans-serif;
+  --font-display: "Inter", system-ui, sans-serif;
   --font-sans: "Inter", system-ui, sans-serif;
 }
 
