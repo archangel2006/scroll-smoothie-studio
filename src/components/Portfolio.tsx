@@ -3,19 +3,20 @@ import { useRef, useState, FormEvent } from "react";
 import {
   Github, Linkedin, Mail, Twitter, ExternalLink, MapPin,
   Briefcase, Code2, ChevronLeft, ChevronRight, Send, Atom,
-  Brain, Cloud, Layers, Trophy
+  Brain, Cloud, Layers, Trophy, Home, GraduationCap, Sparkles,
+  FolderKanban, User, Menu, X
 } from "lucide-react";
 
 import heroAsset from "@/assets/hero.png.asset.json";
 import cityAsset from "@/assets/city-bg.png.asset.json";
 
 const navItems = [
-  { label: "Home", href: "#home" },
-  { label: "Education", href: "#education" },
-  { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
-  { label: "Experience", href: "#experience" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "#home", icon: Home },
+  { label: "Education", href: "#education", icon: GraduationCap },
+  { label: "Skills", href: "#skills", icon: Sparkles },
+  { label: "Projects", href: "#projects", icon: FolderKanban },
+  { label: "Experience", href: "#experience", icon: Briefcase },
+  { label: "Contact", href: "#contact", icon: Mail },
 ];
 
 const socials = [
