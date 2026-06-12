@@ -3,19 +3,20 @@ import { useRef, useState, FormEvent } from "react";
 import {
   Github, Linkedin, Mail, Twitter, ExternalLink, MapPin,
   Briefcase, Code2, ChevronLeft, ChevronRight, Send, Atom,
-  Brain, Cloud, Layers, Trophy
+  Brain, Cloud, Layers, Trophy, Home, GraduationCap, Sparkles,
+  FolderKanban, User, Menu, X
 } from "lucide-react";
 
 import heroAsset from "@/assets/hero.png.asset.json";
 import cityAsset from "@/assets/city-bg.png.asset.json";
 
 const navItems = [
-  { label: "Home", href: "#home" },
-  { label: "Education", href: "#education" },
-  { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
-  { label: "Experience", href: "#experience" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "#home", icon: Home },
+  { label: "Education", href: "#education", icon: GraduationCap },
+  { label: "Skills", href: "#skills", icon: Sparkles },
+  { label: "Projects", href: "#projects", icon: FolderKanban },
+  { label: "Experience", href: "#experience", icon: Briefcase },
+  { label: "Contact", href: "#contact", icon: Mail },
 ];
 
 const socials = [
@@ -181,15 +182,12 @@ function EducationSection() {
 
 // =================== SKILLS (6 blocks) ===================
 const skillBlocks = [
-  { icon: Code2, title: "Programming Languages", items: ["Python", "TypeScript", "C++", "Java", "Go", "Rust"] },
-  { icon: Layers, title: "Frontend & Backend", items: ["React", "Next.js", "Node.js", "FastAPI", "PostgreSQL", "GraphQL"] },
-  { icon: Cloud, title: "Tools & Cloud", items: ["AWS", "Docker", "Kubernetes", "Git", "Vercel", "Figma"] },
-  { icon: Brain, title: "AI / ML", items: ["PyTorch", "TensorFlow", "LangChain", "Transformers", "OpenCV", "RAG"] },
-  { icon: Atom, title: "Quantum Computing", items: ["Qiskit", "Cirq", "Quantum Algorithms", "QAOA", "Grover's", "Shor's"] },
-  {
-    icon: Trophy, title: "Problem Solving",
-    items: ["LeetCode 1800+", "Codeforces Specialist", "500+ Problems", "GFG Institute Rank #3", "Hack the Box", "CP Mentor"],
-  },
+  { icon: Code2, title: "Programming Languages", items: ["Python", "C++", "JavaScript", "TypeScript", "SQL", "R"] },
+  { icon: Layers, title: "Frontend Development", items: ["React", "Next.js", "HTML", "CSS", "Tailwind CSS"] },
+  { icon: Cloud, title: "Backend & Databases", items: ["FastAPI", "Flask", "Firebase", "MySQL"] },
+  { icon: Brain, title: "Machine Learning & AI", items: ["Scikit-learn", "Pandas", "NumPy", "Matplotlib", "Seaborn", "OpenCV", "Pillow", "Ultralytics", "LangChain", "FAISS", "Genkit"] },
+  { icon: Atom, title: "Quantum Computing", items: ["Qiskit", "Quantum Kernels", "QSVM", "ZZFeatureMap", "Grover's Search"] },
+  { icon: Trophy, title: "Tools & Platforms", items: ["Git", "GitHub", "VS Code", "Jupyter Notebook", "Google Colab", "Figma", "Vercel", "Netlify", "Firebase"] },
 ];
 
 function SkillsSection() {
@@ -311,39 +309,46 @@ function ProjectsSection() {
                   rotateY: rel * -8,
                 }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                style={{ transformStyle: "preserve-3d" }}
-                className="absolute w-[88%] sm:w-[520px] md:w-[640px] glass-card rounded-3xl overflow-hidden shadow-card"
+                className="absolute w-[88%] sm:w-[520px] md:w-[640px] rounded-3xl overflow-hidden shadow-card"
+                style={{
+                  transformStyle: "preserve-3d",
+                  background: "oklch(0.18 0.08 295 / 0.45)",
+                  backdropFilter: "blur(24px) saturate(160%)",
+                  WebkitBackdropFilter: "blur(24px) saturate(160%)",
+                  border: "1px solid oklch(0.6 0.18 305 / 0.35)",
+                }}
               >
                 <div className="relative h-56 md:h-72 overflow-hidden">
-                  <img src={p.image} alt={p.title} className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/40 to-transparent" />
+                  <img src={p.image} alt={p.title} className="w-full h-full object-cover opacity-70" style={{ filter: "blur(2px)" }} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-background/30" />
                   <span className="absolute top-4 left-4 text-xs font-semibold px-3 py-1 rounded-full bg-accent/30 backdrop-blur-md border border-accent/40 text-foreground">
                     {p.tag}
                   </span>
-                  <div className="absolute top-4 right-4 flex gap-2">
-                    <a href={p.github} target="_blank" rel="noreferrer" aria-label="GitHub"
-                       className="h-9 w-9 rounded-full glass flex items-center justify-center hover:bg-primary/40 transition">
-                      <Github className="h-4 w-4" />
-                    </a>
-                    <a href={p.demo} target="_blank" rel="noreferrer" aria-label="Live Demo"
-                       className="h-9 w-9 rounded-full glass flex items-center justify-center hover:bg-primary/40 transition">
-                      <ExternalLink className="h-4 w-4" />
-                    </a>
-                  </div>
+                  <h3 className="absolute bottom-4 left-5 right-5 text-2xl md:text-3xl font-bold font-display text-gradient drop-shadow-lg">{p.title}</h3>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-2xl md:text-3xl font-bold font-display text-gradient mb-2">{p.title}</h3>
-                  <p className="text-sm md:text-base text-foreground/80 leading-relaxed mb-4">{p.desc}</p>
-                  <div className="flex flex-wrap gap-2">
+                <div className="p-6 relative">
+                  <p className="text-sm md:text-base text-foreground/85 leading-relaxed mb-4">{p.desc}</p>
+                  <div className="flex flex-wrap gap-2 pr-24">
                     {p.stack.map((s) => (
                       <span key={s} className="text-xs px-2.5 py-1 rounded bg-primary/15 text-foreground/85 border border-primary/30">{s}</span>
                     ))}
+                  </div>
+                  <div className="absolute bottom-5 right-5 flex gap-2">
+                    <a href={p.github} target="_blank" rel="noreferrer" aria-label="GitHub"
+                       className="h-10 w-10 rounded-full glass flex items-center justify-center hover:bg-primary/40 transition">
+                      <Github className="h-4 w-4" />
+                    </a>
+                    <a href={p.demo} target="_blank" rel="noreferrer" aria-label="Live Demo"
+                       className="h-10 w-10 rounded-full glass flex items-center justify-center hover:bg-primary/40 transition">
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
                   </div>
                 </div>
               </motion.article>
             );
           })}
         </div>
+
 
         {/* Controls */}
         <div className="mt-10 flex items-center justify-center gap-6">
@@ -444,11 +449,7 @@ function ContactSection() {
                 placeholder="Tell me about your project..."
               />
             </div>
-            <button
-              type="submit"
-              className="inline-flex items-center gap-2 rounded-full px-7 py-3 font-semibold text-primary-foreground animate-glow"
-              style={{ background: "var(--gradient-primary)" }}
-            >
+            <button type="submit" className="glass-btn">
               Send Message <Send className="h-4 w-4" />
             </button>
           </motion.form>
@@ -456,6 +457,61 @@ function ContactSection() {
         <p className="mt-12 text-center text-xs text-foreground/60">© 2026 Alexander · Crafted with neon & caffeine</p>
       </div>
     </Section>
+  );
+}
+
+// =================== CIRCULAR MENU ===================
+function CircularMenu() {
+  const [open, setOpen] = useState(false);
+  const radius = 110;
+  const start = -90; // pointing up
+  const end = 0;     // pointing right (quarter arc into top-right of button)
+  const step = (end - start) / (navItems.length - 1);
+
+  return (
+    <div className="fixed bottom-6 left-6 z-50">
+      <div className="relative h-16 w-16">
+        {/* Radial items */}
+        <AnimatePresence>
+          {open && navItems.map((item, i) => {
+            const angle = (start + step * i) * (Math.PI / 180);
+            const x = Math.cos(angle) * radius;
+            const y = Math.sin(angle) * radius;
+            const Icon = item.icon;
+            return (
+              <motion.a
+                key={item.label}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                initial={{ x: 0, y: 0, opacity: 0, scale: 0.4 }}
+                animate={{ x, y, opacity: 1, scale: 1 }}
+                exit={{ x: 0, y: 0, opacity: 0, scale: 0.4 }}
+                transition={{ type: "spring", stiffness: 260, damping: 22, delay: i * 0.04 }}
+                className="group absolute top-2 left-2 h-12 w-12 rounded-full glass-strong flex items-center justify-center text-foreground hover:bg-primary/40 hover:shadow-neon"
+                aria-label={item.label}
+              >
+                <Icon className="h-5 w-5" />
+                <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-full glass-strong px-3 py-1 text-xs font-semibold opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200">
+                  {item.label}
+                </span>
+              </motion.a>
+            );
+          })}
+        </AnimatePresence>
+
+        {/* Trigger */}
+        <motion.button
+          onClick={() => setOpen((o) => !o)}
+          whileTap={{ scale: 0.92 }}
+          animate={{ rotate: open ? 135 : 0 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          className="relative h-16 w-16 rounded-full glass-strong flex items-center justify-center shadow-neon"
+          aria-label={open ? "Close menu" : "Open menu"}
+        >
+          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </motion.button>
+      </div>
+    </div>
   );
 }
 
@@ -475,26 +531,9 @@ export default function Portfolio() {
       />
       <div className="fixed inset-0 -z-10 bg-background/35" />
 
-      {/* Navbar */}
-      <motion.nav
-        initial={{ y: -40, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className="fixed top-5 left-1/2 -translate-x-1/2 z-50 glass-strong rounded-full px-2 py-2"
-      >
-        <ul className="flex items-center gap-1 text-sm font-medium">
-          {navItems.map((item) => (
-            <li key={item.href}>
-              <a
-                href={item.href}
-                className="px-4 py-2 rounded-full text-foreground/80 hover:text-foreground hover:bg-primary/20 transition-colors duration-300"
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </motion.nav>
+      {/* Circular expandable menu (bottom-left) */}
+      <CircularMenu />
+
 
       {/* HERO */}
       <section ref={heroRef} id="home" className="relative min-h-screen overflow-hidden">
@@ -510,14 +549,6 @@ export default function Portfolio() {
 
         <div className="relative z-10 flex min-h-screen items-center justify-end px-6 md:px-12 lg:px-24">
           <div className="max-w-2xl text-right md:pr-8">
-            <motion.p
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-sm uppercase tracking-[0.4em] text-primary mb-5 font-display"
-            >
-              Portfolio • 2026
-            </motion.p>
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -560,11 +591,7 @@ export default function Portfolio() {
                   <s.icon className="h-5 w-5 text-foreground" />
                 </a>
               ))}
-              <a
-                href="#projects"
-                className="ml-2 inline-flex items-center gap-2 rounded-full px-7 py-3 font-semibold text-primary-foreground animate-glow"
-                style={{ background: "var(--gradient-primary)" }}
-              >
+              <a href="#projects" className="glass-btn ml-2">
                 View Projects <ExternalLink className="h-4 w-4" />
               </a>
             </motion.div>
