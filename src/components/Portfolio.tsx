@@ -183,11 +183,10 @@ function EducationSection() {
 // =================== SKILLS (6 blocks) ===================
 const skillBlocks = [
   { icon: Code2, title: "Programming Languages", items: ["Python", "C++", "JavaScript", "TypeScript", "SQL", "R"] },
-  { icon: Layers, title: "Frontend Development", items: ["React", "Next.js", "HTML", "CSS", "Tailwind CSS"] },
-  { icon: Cloud, title: "Backend & Databases", items: ["FastAPI", "Flask", "Firebase", "MySQL"] },
-  { icon: Brain, title: "Machine Learning & AI", items: ["Scikit-learn", "Pandas", "NumPy", "Matplotlib", "Seaborn", "OpenCV", "Pillow", "Ultralytics", "LangChain", "FAISS", "Genkit"] },
+  { icon: Layers, title: "Full-Stack Development", items: ["React", "Next.js", "HTML", "CSS", "Tailwind CSS", "FastAPI", "Flask", "Firebase", "MySQL"] },
+  { icon: Brain, title: "Machine Learning & AI", items: ["Scikit-learn", "Pandas", "NumPy", "OpenCV", "Ultralytics", "LangChain", "Genkit", "FAISS"] },
   { icon: Atom, title: "Quantum Computing", items: ["Qiskit", "Quantum Kernels", "QSVM", "ZZFeatureMap", "Grover's Search"] },
-  { icon: Trophy, title: "Tools & Platforms", items: ["Git", "GitHub", "VS Code", "Jupyter Notebook", "Google Colab", "Figma", "Vercel", "Netlify", "Firebase"] },
+  { icon: Cloud, title: "Tools & Platforms", items: ["Git", "GitHub", "VS Code", "Jupyter Notebook", "Google Colab", "Figma", "Vercel", "Netlify", "Firebase Hosting"] },
 ];
 
 function SkillsSection() {
@@ -609,13 +608,55 @@ export default function Portfolio() {
         <div className="mx-auto max-w-4xl relative">
           <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-primary/60 to-transparent" />
           {[
-            { role: "Senior Full Stack Engineer", company: "Nightcity Labs", years: "2025 — Present", desc: "Leading frontend architecture for a realtime collaboration suite serving 50k+ users. Mentoring a team of four engineers." },
-            { role: "Full Stack Developer", company: "Pulse Studios", years: "2024 — 2025", desc: "Built core analytics product from scratch — ingest pipeline, query engine, and dashboard UI. Shipped to first 100 paying customers." },
-            { role: "Software Engineer Intern", company: "Vertex Robotics", years: "2023 — 2024", desc: "Worked on telemetry and visualization systems for autonomous warehouse robots. Reduced p95 dashboard latency by 70%." },
-            { role: "Freelance Developer", company: "Independent", years: "2022 — 2023", desc: "Designed and shipped 12+ websites and small SaaS tools for indie founders and creative studios worldwide." },
+            {
+              role: "Quantum Machine Learning Intern",
+              company: "DRDO SAG",
+              years: "Feb 2026 – Present",
+              points: [
+                "Working on Quantum Machine Learning applications for cybersecurity and attack characterization under DRDO SAG.",
+                "Studying and implementing quantum computing concepts, algorithms, quantum kernels, and hybrid quantum-classical approaches using Qiskit.",
+                "Developing and evaluating QSVM-based solutions while benchmarking performance against classical machine learning models.",
+              ],
+            },
+            {
+              role: "Deep Learning Research Intern",
+              company: "IGDTUW",
+              years: "Jun 2026 – Present",
+              points: [
+                "Conducting research on automated Fatty Liver Disease grading from ultrasound images using deep learning techniques.",
+                "Exploring attention mechanisms, explainable AI, and medical image analysis for publication-oriented research.",
+              ],
+            },
+            {
+              role: "Project Admin",
+              company: "Social Winter of Code",
+              years: "Jan 2026 – Mar 2026",
+              points: [
+                "Led contributor management and development activities for SafeHaven: an open-source disaster management platform.",
+                "Reviewed and merged 25+ pull requests from 11+ contributors while maintaining project quality and workflows.",
+              ],
+            },
+            {
+              role: "Open Source Contributor",
+              company: "Social Summer of Code",
+              years: "Jun 2025 – Aug 2025",
+              points: [
+                "Contributed to 6+ open-source projects with 25+ merged pull requests across multiple repositories.",
+                "Ranked among the Top 20 contributors out of 1200+ participants worldwide.",
+              ],
+            },
+            {
+              role: "Python & Machine Learning Intern",
+              company: "Anveshan Foundation, IGDTUW",
+              years: "Jun 2025 – Aug 2025",
+              points: [
+                "Completed an intensive 8-week internship covering Python, data analysis, machine learning, model evaluation, and real-world project development.",
+                "Built and optimized predictive models on the WHO Life Expectancy dataset, leading to a research paper accepted and presented at CONFLUENCE 2026 (Springer LNEE).",
+              ],
+            },
           ].map((job, i) => (
             <motion.div
-              key={job.role}
+              key={job.role + job.company}
               initial={{ opacity: 0, x: i % 2 ? 40 : -40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.3 }}
@@ -629,8 +670,15 @@ export default function Portfolio() {
                   <span className="text-xs uppercase tracking-wider text-primary font-semibold">{job.years}</span>
                 </div>
                 <h3 className="text-xl font-bold font-display">{job.role}</h3>
-                <p className="text-sm text-accent font-semibold mb-2">{job.company}</p>
-                <p className="text-sm text-foreground/75 leading-relaxed">{job.desc}</p>
+                <p className="text-sm text-accent font-semibold mb-3">{job.company}</p>
+                <ul className="space-y-2">
+                  {job.points.map((pt, j) => (
+                    <li key={j} className="text-sm text-foreground/75 leading-relaxed flex items-start gap-2">
+                      <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary/70 shrink-0" />
+                      {pt}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </motion.div>
           ))}
