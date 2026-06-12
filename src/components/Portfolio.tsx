@@ -494,14 +494,6 @@ export default function Portfolio() {
 
         <div className="relative z-10 flex min-h-screen items-center justify-end px-6 md:px-12 lg:px-24">
           <div className="max-w-2xl text-right md:pr-8">
-            <motion.p
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-sm uppercase tracking-[0.4em] text-primary mb-5 font-display"
-            >
-              Portfolio • 2026
-            </motion.p>
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
