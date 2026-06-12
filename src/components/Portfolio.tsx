@@ -536,11 +536,7 @@ export default function Portfolio() {
                   <s.icon className="h-5 w-5 text-foreground" />
                 </a>
               ))}
-              <a
-                href="#projects"
-                className="ml-2 inline-flex items-center gap-2 rounded-full px-7 py-3 font-semibold text-primary-foreground animate-glow"
-                style={{ background: "var(--gradient-primary)" }}
-              >
+              <a href="#projects" className="glass-btn ml-2">
                 View Projects <ExternalLink className="h-4 w-4" />
               </a>
             </motion.div>
