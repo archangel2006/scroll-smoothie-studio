@@ -460,6 +460,61 @@ function ContactSection() {
   );
 }
 
+// =================== CIRCULAR MENU ===================
+function CircularMenu() {
+  const [open, setOpen] = useState(false);
+  const radius = 110;
+  const start = -90; // pointing up
+  const end = 0;     // pointing right (quarter arc into top-right of button)
+  const step = (end - start) / (navItems.length - 1);
+
+  return (
+    <div className="fixed bottom-6 left-6 z-50">
+      <div className="relative h-16 w-16">
+        {/* Radial items */}
+        <AnimatePresence>
+          {open && navItems.map((item, i) => {
+            const angle = (start + step * i) * (Math.PI / 180);
+            const x = Math.cos(angle) * radius;
+            const y = Math.sin(angle) * radius;
+            const Icon = item.icon;
+            return (
+              <motion.a
+                key={item.label}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                initial={{ x: 0, y: 0, opacity: 0, scale: 0.4 }}
+                animate={{ x, y, opacity: 1, scale: 1 }}
+                exit={{ x: 0, y: 0, opacity: 0, scale: 0.4 }}
+                transition={{ type: "spring", stiffness: 260, damping: 22, delay: i * 0.04 }}
+                className="group absolute top-2 left-2 h-12 w-12 rounded-full glass-strong flex items-center justify-center text-foreground hover:bg-primary/40 hover:shadow-neon"
+                aria-label={item.label}
+              >
+                <Icon className="h-5 w-5" />
+                <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-full glass-strong px-3 py-1 text-xs font-semibold opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200">
+                  {item.label}
+                </span>
+              </motion.a>
+            );
+          })}
+        </AnimatePresence>
+
+        {/* Trigger */}
+        <motion.button
+          onClick={() => setOpen((o) => !o)}
+          whileTap={{ scale: 0.92 }}
+          animate={{ rotate: open ? 135 : 0 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          className="relative h-16 w-16 rounded-full glass-strong flex items-center justify-center shadow-neon"
+          aria-label={open ? "Close menu" : "Open menu"}
+        >
+          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </motion.button>
+      </div>
+    </div>
+  );
+}
+
 // =================== ROOT ===================
 export default function Portfolio() {
   const heroRef = useRef<HTMLDivElement>(null);
