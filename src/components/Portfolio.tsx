@@ -182,15 +182,12 @@ function EducationSection() {
 
 // =================== SKILLS (6 blocks) ===================
 const skillBlocks = [
-  { icon: Code2, title: "Programming Languages", items: ["Python", "TypeScript", "C++", "Java", "Go", "Rust"] },
-  { icon: Layers, title: "Frontend & Backend", items: ["React", "Next.js", "Node.js", "FastAPI", "PostgreSQL", "GraphQL"] },
-  { icon: Cloud, title: "Tools & Cloud", items: ["AWS", "Docker", "Kubernetes", "Git", "Vercel", "Figma"] },
-  { icon: Brain, title: "AI / ML", items: ["PyTorch", "TensorFlow", "LangChain", "Transformers", "OpenCV", "RAG"] },
-  { icon: Atom, title: "Quantum Computing", items: ["Qiskit", "Cirq", "Quantum Algorithms", "QAOA", "Grover's", "Shor's"] },
-  {
-    icon: Trophy, title: "Problem Solving",
-    items: ["LeetCode 1800+", "Codeforces Specialist", "500+ Problems", "GFG Institute Rank #3", "Hack the Box", "CP Mentor"],
-  },
+  { icon: Code2, title: "Programming Languages", items: ["Python", "C++", "JavaScript", "TypeScript", "SQL", "R"] },
+  { icon: Layers, title: "Frontend Development", items: ["React", "Next.js", "HTML", "CSS", "Tailwind CSS"] },
+  { icon: Cloud, title: "Backend & Databases", items: ["FastAPI", "Flask", "Firebase", "MySQL"] },
+  { icon: Brain, title: "Machine Learning & AI", items: ["Scikit-learn", "Pandas", "NumPy", "Matplotlib", "Seaborn", "OpenCV", "Pillow", "Ultralytics", "LangChain", "FAISS", "Genkit"] },
+  { icon: Atom, title: "Quantum Computing", items: ["Qiskit", "Quantum Kernels", "QSVM", "ZZFeatureMap", "Grover's Search"] },
+  { icon: Trophy, title: "Tools & Platforms", items: ["Git", "GitHub", "VS Code", "Jupyter Notebook", "Google Colab", "Figma", "Vercel", "Netlify", "Firebase"] },
 ];
 
 function SkillsSection() {
