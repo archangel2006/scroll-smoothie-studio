@@ -648,6 +648,7 @@ function RadialWheel() {
   const rotation = useMotionValue(0); // degrees; 0 means item 0 is centered
   const [active, setActive] = useState(0);
   const dragRef = useRef<HTMLDivElement>(null);
+  const counterRotate = useTransform(rotation, (r) => -r);
 
   // Snap to nearest item index
   const snapTo = (idx: number) => {
