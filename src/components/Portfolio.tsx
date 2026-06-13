@@ -1,10 +1,11 @@
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { useRef, useState, FormEvent } from "react";
+import React, { useRef, useState, useEffect, FormEvent } from "react";
+import { Link } from "@tanstack/react-router";
 import {
   Github, Linkedin, Mail, Twitter, ExternalLink, MapPin,
   Briefcase, Code2, ChevronLeft, ChevronRight, Send, Atom,
   Brain, Cloud, Layers, Trophy, Home, GraduationCap, Sparkles,
-  FolderKanban, User, Menu, X
+  Folder, Wrench, Terminal, Cpu, X, ChevronUp
 } from "lucide-react";
 
 import heroAsset from "@/assets/hero.png.asset.json";
@@ -13,8 +14,8 @@ import cityAsset from "@/assets/city-bg.png.asset.json";
 const navItems = [
   { label: "Home", href: "#home", icon: Home },
   { label: "Education", href: "#education", icon: GraduationCap },
-  { label: "Skills", href: "#skills", icon: Sparkles },
-  { label: "Projects", href: "#projects", icon: FolderKanban },
+  { label: "Skills", href: "#skills", icon: Wrench },
+  { label: "Projects", href: "#projects", icon: Folder },
   { label: "Experience", href: "#experience", icon: Briefcase },
   { label: "Contact", href: "#contact", icon: Mail },
 ];
@@ -39,14 +40,14 @@ function Section({ id, children, className = "" }: { id: string; children: React
   );
 }
 
-function SectionTitle({ kicker, title }: { kicker: string; title: string }) {
+function SectionTitle({ kicker, title, className = "mb-14" }: { kicker: string; title: string; className?: string }) {
   return (
     <motion.div
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.3 }}
       variants={fadeUp}
-      className="mb-14 text-center"
+      className={`${className} text-center`}
     >
       <p className="text-sm uppercase tracking-[0.4em] text-primary mb-3 font-display">{kicker}</p>
       <h2 className="text-5xl md:text-6xl font-bold text-gradient font-display">{title}</h2>
@@ -184,9 +185,10 @@ function EducationSection() {
 const skillBlocks = [
   { icon: Code2, title: "Programming Languages", items: ["Python", "C++", "JavaScript", "TypeScript", "SQL", "R"] },
   { icon: Layers, title: "Full-Stack Development", items: ["React", "Next.js", "HTML", "CSS", "Tailwind CSS", "FastAPI", "Flask", "Firebase", "MySQL"] },
-  { icon: Brain, title: "Machine Learning & AI", items: ["Scikit-learn", "Pandas", "NumPy", "OpenCV", "Ultralytics", "LangChain", "Genkit", "FAISS"] },
+  { icon: Brain, title: "Machine Learning & AI", items: ["Scikit-learn", "Pandas", "NumPy", "OpenCV", "Ultralytics"] },
+  { icon: Cpu, title: "Agentic AI & LLMs", items: ["LangChain", "Genkit", "FAISS", "RAG", "Semantic Search"] },
   { icon: Atom, title: "Quantum Computing", items: ["Qiskit", "Quantum Kernels", "QSVM", "ZZFeatureMap", "Grover's Search"] },
-  { icon: Cloud, title: "Tools & Platforms", items: ["Git", "GitHub", "VS Code", "Jupyter Notebook", "Google Colab", "Figma", "Vercel", "Netlify", "Firebase Hosting"] },
+  { icon: Terminal, title: "Tools & Platforms", items: ["Git", "GitHub", "VS Code", "Jupyter Notebook", "Google Colab", "Figma"] },
 ];
 
 function SkillsSection() {
@@ -289,9 +291,9 @@ function ProjectsSection() {
 
   return (
     <Section id="projects">
-      <SectionTitle kicker="Selected Work" title="Projects" />
+      <SectionTitle kicker="Featured Projects" title="Projects" className="mb-4" />
       <div className="mx-auto max-w-6xl">
-        <div className="relative h-[520px] md:h-[560px] flex items-center justify-center">
+        <div className="relative h-[460px] md:h-[500px] flex items-center justify-center">
           {projects.map((p, i) => {
             const offset = ((i - idx) + projects.length) % projects.length;
             const rel = offset > projects.length / 2 ? offset - projects.length : offset;
@@ -349,22 +351,38 @@ function ProjectsSection() {
         </div>
 
 
-        {/* Controls */}
-        <div className="mt-10 flex items-center justify-center gap-6">
-          <button onClick={prev} aria-label="Previous"
-                  className="h-12 w-12 rounded-full glass-card hover:bg-primary/30 transition flex items-center justify-center">
-            <ChevronLeft className="h-5 w-5" />
-          </button>
-          <div className="flex items-center gap-2">
-            {projects.map((_, i) => (
-              <button key={i} onClick={() => setIdx(i)} aria-label={`Go to slide ${i + 1}`}
-                      className={`h-2 rounded-full transition-all ${i === idx ? "w-8 bg-primary shadow-neon" : "w-2 bg-foreground/30 hover:bg-foreground/60"}`} />
-            ))}
+        {/* Controls and CTA row (aligned to bottom-right of section) */}
+        <div className="mt-4 flex flex-col md:flex-row items-center justify-between gap-6 relative max-w-3xl mx-auto">
+          {/* Left spacer to keep controls centered */}
+          <div className="hidden md:block w-48" />
+
+          {/* Controls */}
+          <div className="flex items-center gap-6">
+            <button onClick={prev} aria-label="Previous"
+                    className="h-12 w-12 rounded-full glass-card hover:bg-primary/30 transition flex items-center justify-center cursor-pointer">
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <div className="flex items-center gap-2">
+              {projects.map((_, i) => (
+                <button key={i} onClick={() => setIdx(i)} aria-label={`Go to slide ${i + 1}`}
+                        className={`h-2 rounded-full transition-all cursor-pointer ${i === idx ? "w-8 bg-primary shadow-neon" : "w-2 bg-foreground/30 hover:bg-foreground/60"}`} />
+              ))}
+            </div>
+            <button onClick={next} aria-label="Next"
+                    className="h-12 w-12 rounded-full glass-card hover:bg-primary/30 transition flex items-center justify-center cursor-pointer">
+              <ChevronRight className="h-5 w-5" />
+            </button>
           </div>
-          <button onClick={next} aria-label="Next"
-                  className="h-12 w-12 rounded-full glass-card hover:bg-primary/30 transition flex items-center justify-center">
-            <ChevronRight className="h-5 w-5" />
-          </button>
+
+          {/* View All Projects CTA (aligned to bottom-right) */}
+          <div className="md:w-48 flex justify-end w-full">
+            <Link
+              to="/projects"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-primary bg-primary/10 text-foreground font-display font-bold tracking-wide hover:bg-primary/20 hover:shadow-neon hover:scale-105 transition-all duration-300 cursor-pointer text-xs"
+            >
+              View All Projects <ChevronRight className="h-3.5 w-3.5 text-primary" />
+            </Link>
+          </div>
         </div>
       </div>
     </Section>
@@ -459,56 +477,227 @@ function ContactSection() {
   );
 }
 
-// =================== CIRCULAR MENU ===================
-function CircularMenu() {
-  const [open, setOpen] = useState(false);
-  const radius = 110;
-  const start = -90; // pointing up
-  const end = 0;     // pointing right (quarter arc into top-right of button)
-  const step = (end - start) / (navItems.length - 1);
+// =================== NAVIGATION WHEEL ===================
+interface NavigationWheelProps {
+  activeSection: string;
+  onSelectSection: (id: string) => void;
+}
+
+function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProps) {
+  const radius = 130;
+  const activeAngle = -45; // middle of the visible quarter circle (-90 to 0)
+  const angleStep = 30; // separation between adjacent menu items
+
+  // Find index of active section
+  const activeIndex = navItems.findIndex(
+    (item) => item.href.replace("#", "") === activeSection
+  );
+  
+  const resolvedActiveIndex = activeIndex === -1 ? 0 : activeIndex;
+
+  const handleWheel = (e: React.WheelEvent) => {
+    if (e.deltaY > 0) {
+      if (resolvedActiveIndex < navItems.length - 1) {
+        onSelectSection(navItems[resolvedActiveIndex + 1].href.replace("#", ""));
+      }
+    } else {
+      if (resolvedActiveIndex > 0) {
+        onSelectSection(navItems[resolvedActiveIndex - 1].href.replace("#", ""));
+      }
+    }
+  };
+
+  const handlePrev = () => {
+    if (resolvedActiveIndex > 0) {
+      onSelectSection(navItems[resolvedActiveIndex - 1].href.replace("#", ""));
+    }
+  };
+
+  const handleNext = () => {
+    if (resolvedActiveIndex < navItems.length - 1) {
+      onSelectSection(navItems[resolvedActiveIndex + 1].href.replace("#", ""));
+    }
+  };
 
   return (
-    <div className="fixed bottom-6 left-6 z-50">
-      <div className="relative h-16 w-16">
-        {/* Radial items */}
-        <AnimatePresence>
-          {open && navItems.map((item, i) => {
-            const angle = (start + step * i) * (Math.PI / 180);
-            const x = Math.cos(angle) * radius;
-            const y = Math.sin(angle) * radius;
-            const Icon = item.icon;
-            return (
-              <motion.a
-                key={item.label}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                initial={{ x: 0, y: 0, opacity: 0, scale: 0.4 }}
-                animate={{ x, y, opacity: 1, scale: 1 }}
-                exit={{ x: 0, y: 0, opacity: 0, scale: 0.4 }}
-                transition={{ type: "spring", stiffness: 260, damping: 22, delay: i * 0.04 }}
-                className="group absolute top-2 left-2 h-12 w-12 rounded-full glass-strong flex items-center justify-center text-foreground hover:bg-primary/40 hover:shadow-neon"
-                aria-label={item.label}
-              >
-                <Icon className="h-5 w-5" />
-                <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-full glass-strong px-3 py-1 text-xs font-semibold opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200">
-                  {item.label}
-                </span>
-              </motion.a>
-            );
-          })}
-        </AnimatePresence>
+    <div 
+      className="fixed bottom-6 left-6 z-50 pointer-events-none select-none" 
+      style={{ width: 220, height: 220 }}
+      onWheel={handleWheel}
+    >
+      <div className="relative w-full h-full pointer-events-auto">
+        {/* Invisible Arc Guidelines/Background */}
+        <svg className="absolute inset-0 pointer-events-none z-0 overflow-visible" style={{ left: 32, top: 120 }}>
+          {/* Main arc ring */}
+          <circle 
+            cx="0" 
+            cy="0" 
+            r={radius} 
+            fill="none" 
+            stroke="rgba(168, 85, 247, 0.15)" 
+            strokeWidth="2" 
+          />
+          {/* Glowing dash ring */}
+          <circle 
+            cx="0" 
+            cy="0" 
+            r={radius + 8} 
+            fill="none" 
+            stroke="rgba(236, 72, 153, 0.2)" 
+            strokeWidth="1" 
+            strokeDasharray="6 15"
+          />
+        </svg>
 
-        {/* Trigger */}
-        <motion.button
-          onClick={() => setOpen((o) => !o)}
-          whileTap={{ scale: 0.92 }}
-          animate={{ rotate: open ? 135 : 0 }}
-          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-          className="relative h-16 w-16 rounded-full glass-strong flex items-center justify-center shadow-neon"
-          aria-label={open ? "Close menu" : "Open menu"}
+        {/* Center fixed "VS" monogram core */}
+        <motion.div 
+          className="absolute rounded-full flex items-center justify-center bg-background/95 border-2 border-primary z-20 font-display font-extrabold text-xl text-primary tracking-tighter cursor-pointer hover:scale-105 transition-all duration-300 select-none"
+          style={{ 
+            width: 64, 
+            height: 64, 
+            left: 0, 
+            bottom: 0,
+          }}
+          animate={{
+            boxShadow: [
+              "0 0 15px rgba(168, 85, 247, 0.6), inset 0 0 10px rgba(168, 85, 247, 0.3)",
+              "0 0 25px rgba(168, 85, 247, 0.9), inset 0 0 15px rgba(168, 85, 247, 0.5)",
+              "0 0 15px rgba(168, 85, 247, 0.6), inset 0 0 10px rgba(168, 85, 247, 0.3)"
+            ]
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 3,
+            ease: "easeInOut"
+          }}
+          onClick={() => onSelectSection("home")}
+          title="Go to Home"
         >
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </motion.button>
+          {/* Animated spinning hud outer border */}
+          <motion.div 
+            className="absolute inset-[-4px] rounded-full border border-dashed border-primary/50 pointer-events-none" 
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+          />
+          {/* Rotating scanner line */}
+          <motion.div 
+            className="absolute inset-0 rounded-full border-t border-accent/40 pointer-events-none" 
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
+          />
+          VS
+        </motion.div>
+
+        {/* Navigation Arrows on HUD inner ring */}
+        <button
+          onClick={handlePrev}
+          disabled={resolvedActiveIndex === 0}
+          className="absolute z-30 flex items-center justify-center rounded-full border border-primary/40 bg-background/90 text-primary hover:bg-primary/20 hover:text-foreground transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
+          style={{
+            width: 24,
+            height: 24,
+            left: 20,
+            bottom: 76,
+            boxShadow: "0 0 5px rgba(168, 85, 247, 0.2)"
+          }}
+          aria-label="Previous Section"
+        >
+          <ChevronUp className="h-3.5 w-3.5" />
+        </button>
+
+        <button
+          onClick={handleNext}
+          disabled={resolvedActiveIndex === navItems.length - 1}
+          className="absolute z-30 flex items-center justify-center rounded-full border border-primary/40 bg-background/90 text-primary hover:bg-primary/20 hover:text-foreground transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
+          style={{
+            width: 24,
+            height: 24,
+            left: 76,
+            bottom: 20,
+            boxShadow: "0 0 5px rgba(168, 85, 247, 0.2)"
+          }}
+          aria-label="Next Section"
+        >
+          <ChevronRight className="h-3.5 w-3.5" />
+        </button>
+
+        {/* Rotating Icons on the circumference */}
+        {navItems.map((item, i) => {
+          const Icon = item.icon;
+          const isCurrentActive = i === resolvedActiveIndex;
+          
+          // Calculate angle for this item based on the active index
+          const angleDeg = activeAngle + (i - resolvedActiveIndex) * angleStep;
+          
+          // Convert to radians for trigonometric functions
+          const angleRad = angleDeg * (Math.PI / 180);
+          
+          // Calculate coordinates from center (32, 188)
+          const cx = 32;
+          const cy = 188;
+          const x = cx + radius * Math.cos(angleRad);
+          const y = cy + radius * Math.sin(angleRad);
+
+          // Determine visibility based on angle
+          const isVisible = angleDeg >= -110 && angleDeg <= 20;
+          
+          // Compute opacity: fade out as it approaches boundaries
+          let opacity = 0;
+          if (isVisible) {
+            if (angleDeg < -90) {
+              opacity = 1 - ((-90 - angleDeg) / 20);
+            } else if (angleDeg > 0) {
+              opacity = 1 - (angleDeg / 20);
+            } else {
+              opacity = 1;
+            }
+          }
+          
+          const size = isCurrentActive ? 48 : 36;
+
+          return (
+            <div
+              key={item.label}
+              className="absolute z-10 transition-all duration-700 ease-out"
+              style={{
+                left: x,
+                top: y,
+                transform: `translate(-50%, -50%) scale(${isVisible ? 1 : 0})`,
+                opacity: isVisible ? opacity : 0,
+                pointerEvents: isVisible && opacity > 0.3 ? "auto" : "none"
+              }}
+            >
+              <button
+                onClick={() => onSelectSection(item.href.replace("#", ""))}
+                className={`group flex items-center justify-center rounded-full transition-all duration-300 cursor-pointer ${
+                  isCurrentActive 
+                    ? "bg-primary/20 text-foreground border-2 border-primary shadow-neon scale-110" 
+                    : "bg-background/80 text-foreground/70 border border-primary/30 hover:border-primary/70 hover:text-foreground hover:bg-primary/10"
+                }`}
+                style={{
+                  width: size,
+                  height: size,
+                  boxShadow: isCurrentActive ? "0 0 15px rgba(168, 85, 247, 0.5)" : "none"
+                }}
+                title={item.label}
+              >
+                <Icon className={`${isCurrentActive ? "h-5 w-5" : "h-4 w-4"}`} />
+                
+                {/* Text label beside active icon only */}
+                {isCurrentActive && (
+                  <span 
+                    className="absolute left-full ml-3 whitespace-nowrap rounded-lg bg-background/90 border border-primary/40 px-2.5 py-1 text-xs font-display font-semibold tracking-wider text-primary shadow-neon pointer-events-none"
+                    style={{
+                      textShadow: "0 0 5px rgba(168, 85, 247, 0.5)"
+                    }}
+                  >
+                    {item.label}
+                  </span>
+                )}
+              </button>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -521,6 +710,45 @@ export default function Portfolio() {
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
 
+  const [activeSection, setActiveSection] = useState("home");
+
+  useEffect(() => {
+    const sections = ["home", "education", "skills", "projects", "experience", "contact"];
+    const observerOptions = {
+      root: null,
+      rootMargin: "-40% 0px -50% 0px",
+      threshold: 0,
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => {
+      sections.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) observer.unobserve(el);
+      });
+    };
+  }, []);
+
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="relative min-h-screen text-foreground">
       {/* Persistent city background — kept visible (no global blur) */}
@@ -530,8 +758,8 @@ export default function Portfolio() {
       />
       <div className="fixed inset-0 -z-10 bg-background/35" />
 
-      {/* Circular expandable menu (bottom-left) */}
-      <CircularMenu />
+      {/* Circular HUD navigation wheel (bottom-left) */}
+      <NavigationWheel activeSection={activeSection} onSelectSection={scrollToSection} />
 
 
       {/* HERO */}
