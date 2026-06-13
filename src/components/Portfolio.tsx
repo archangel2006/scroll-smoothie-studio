@@ -9,8 +9,21 @@ import {
   Instagram
 } from "lucide-react";
 
-import heroAsset from "@/assets/hero.png.asset.json";
-import cityAsset from "@/assets/city-bg.png.asset.json";
+import heroAsset from "@/assets/hero.png";
+import cityAsset from "@/assets/background-1.png";
+
+// Education images
+import igdtuwAsset from "@/assets/education/igdtuw.png";
+import cjmAsset from "@/assets/education/cjm.png";
+import bbpsAsset from "@/assets/education/bbps.png";
+
+// Project images — uncomment each line when you add the file to src/assets/projects/
+// import learnscapeImg from "@/assets/projects/learnscape.jpg";   // TODO: add learnscape.jpg
+// import ambucastImg from "@/assets/projects/ambucast.jpg";       // TODO: add ambucast.jpg
+// import udyaraImg from "@/assets/projects/udyara.jpg";           // TODO: add udyara.jpg
+// import lawyeraiImg from "@/assets/projects/lawyerai.jpg";       // TODO: add lawyerai.jpg
+// import quantinelImg from "@/assets/projects/quantinel.jpg";     // TODO: add quantinel.jpg
+// import msisImg from "@/assets/projects/msis.jpg";               // TODO: add msis.jpg
 
 const navItems = [
   { label: "Home", href: "#home", icon: Home },
@@ -67,7 +80,7 @@ const educationData = [
     field: "Computer Science Engineering with Artificial Intelligence",
     score: "CGPA: 9.12",
     desc: "Focused on building practical software projects while strengthening foundations in algorithms, artificial intelligence, and system design. Actively exploring full-stack development and modern development tools.",
-    image: "/education/igdtuw.jpeg",
+    image: igdtuwAsset,
     tag: "",
   },
   {
@@ -76,9 +89,9 @@ const educationData = [
     place: "Convent Of Jesus & Mary",
     course: "CBSE — Class XII",
     field: "Physics, Chemistry, Mathematics with Computer Science",
-    score: "95%",
+    score: "Marks: 95%",
     desc: "Concentrated on core sciences and programming, building foundations in Python programming and SQL-based database systems. AISSCE Subject Topper in Physics and Chemistry.",
-    image: "/education/cjm.jpg",
+    image: cjmAsset,
     tag: "",
   },
   {
@@ -87,9 +100,9 @@ const educationData = [
     place: "Bal Bharati Public School",
     course: "CBSE — Class X",
     field: "Foundational Sciences & Mathematics",
-    score: "96%",
+    score: "Marks: 96%",
     desc: "Developed strong academic foundations throughout school, receiving multiple meritorious distinctions across the years. Earned multiple awards and recognitions in volleyball and chess. Actively participated in sports, music, and art alongside academics.",
-    image: "/education/bbps.jpg",
+    image: bbpsAsset,
     tag: "",
   },
 ];
@@ -242,7 +255,7 @@ const projects = [
     tag: "Multimodal AI",
     desc: "AI-powered visual learning platform that transforms real-world objects into interactive STEM lessons using computer vision, educational overlays, voice interaction, and agentic reasoning.",
     stack: ["Next.js", "TypeScript", "Genkit", "Gemini", "Canvas API"],
-    image: "/projects/learnscape.jpg",
+    image: "", // TODO: replace with learnscapeImg once learnscape.jpg is added
     demo: "",
     github: "https://github.com/archangel2006/learnscape",
   },
@@ -251,7 +264,7 @@ const projects = [
     tag: "Healthcare AI",
     desc: "Predictive ambulance intelligence system that forecasts emergency hotspots, analyzes risk levels, and recommends optimal ambulance deployment using machine learning and optimization pipelines.",
     stack: ["Python", "XGBoost", "Scikit-learn", "Streamlit", "Pandas"],
-    image: "/projects/ambucast.jpg",
+    image: "", // TODO: replace with ambucastImg once ambucast.jpg is added
     demo: "",
     github: "https://github.com/archangel2006/ambucast-dispatch",
   },
@@ -260,7 +273,7 @@ const projects = [
     tag: "Trustworthy RAG",
     desc: "Retrieval-Augmented Generation platform helping women entrepreneurs navigate government startup policies through semantic search, embeddings, and source-backed explanations.",
     stack: ["FastAPI", "LangChain", "FAISS", "Gemini", "React"],
-    image: "/projects/udyara.jpg",
+    image: "", // TODO: replace with udyaraImg once udyara.jpg is added
     demo: "",
     github: "https://github.com/archangel2006/Udyara",
   },
@@ -270,7 +283,7 @@ const projects = [
     tag: "Legal AI",
     desc: "Legal Retrieval-Augmented Generation assistant designed for document-aware legal question answering, intelligent policy interpretation, and context-grounded information retrieval.",
     stack: ["FastAPI", "LangChain", "FAISS", "Gemini"],
-    image: "/projects/lawyerai.jpg",
+    image: "", // TODO: replace with lawyeraiImg once lawyerai.jpg is added
     demo: "",
     github: "https://github.com/archangel2006/LawyerAI",
   },
@@ -279,7 +292,7 @@ const projects = [
     tag: "Quantum Cybersecurity",
     desc: "Quantum-enhanced cybersecurity research platform combining Quantum Machine Learning, Intrusion Detection Systems, attack characterization, and threat intelligence pipelines for next-generation cyber defense.",
     stack: ["Python", "Qiskit", "Scikit-learn", "Pandas", "NumPy"],
-    image: "/projects/quantinel.jpg",
+    image: "", // TODO: replace with quantinelImg once quantinel.jpg is added
     demo: "",
     github: "https://github.com/archangel2006/Quantinel",
   },
@@ -289,7 +302,7 @@ const projects = [
     tag: "Financial ML",
     desc: "Market Shock Intelligence System for financial regime detection, volatility analysis, drawdown prediction, risk modeling, and explainable market analytics.",
     stack: ["Python", "XGBoost", "Scikit-learn", "Plotly", "Pandas"],
-    image: "/projects/msis.jpg",
+    image: "", // TODO: replace with msisImg once msis.jpg is added
     demo: "",
     github: "https://github.com/archangel2006/MSIS",
   }
@@ -764,7 +777,7 @@ export default function Portfolio() {
       {/* Persistent city background — kept visible (no global blur) */}
       <div
         className="fixed inset-0 -z-10 bg-cover bg-center"
-        style={{ backgroundImage: `url(${cityAsset.url})` }}
+        style={{ backgroundImage: `url(${cityAsset})` }}
       />
       <div className="fixed inset-0 -z-10 bg-background/35" />
 
@@ -778,7 +791,7 @@ export default function Portfolio() {
           style={{ y: heroY, opacity: heroOpacity }}
           className="absolute inset-0 bg-cover bg-center"
         >
-          <img src={heroAsset.url} alt="" className="absolute inset-0 w-full h-full object-cover" />
+          <img src={heroAsset} alt="" className="absolute inset-0 w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-background/20 to-background/60" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
           <div className="rain-overlay" />

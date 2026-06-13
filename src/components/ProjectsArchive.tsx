@@ -6,7 +6,7 @@ import {
   Search, ArrowLeft, Github, ExternalLink, BookOpen
 } from "lucide-react";
 import { placeholderProjects, Project } from "@/lib/projectData";
-import cityAsset from "@/assets/city-bg.png.asset.json";
+import cityAsset from "@/assets/background-1.png";
 
 const filters = [
   { id: "Featured", label: "Featured", icon: Star },
@@ -43,7 +43,7 @@ export default function ProjectsArchive() {
       {/* Persistent city background */}
       <div
         className="fixed inset-0 -z-10 bg-cover bg-center"
-        style={{ backgroundImage: `url(${cityAsset.url})` }}
+        style={{ backgroundImage: `url(${cityAsset})` }}
       />
       <div className="fixed inset-0 -z-10 bg-background/35" />
 
