@@ -1,10 +1,10 @@
-import { motion, useScroll, useTransform, AnimatePresence, useMotionValue, animate } from "framer-motion";
-import { useRef, useState, FormEvent, useEffect, useMemo } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useRef, useState, FormEvent } from "react";
 import {
   Github, Linkedin, Mail, Twitter, ExternalLink, MapPin,
-  Briefcase, Code2, Send, Atom, Brain, Cloud, Layers, Home,
-  GraduationCap, FolderKanban, Wrench, Bot, Star, Cpu,
-  Palette, Globe2, Gamepad2,
+  Briefcase, Code2, ChevronLeft, ChevronRight, Send, Atom,
+  Brain, Cloud, Layers, Trophy, Home, GraduationCap, Sparkles,
+  FolderKanban, User, Menu, X
 } from "lucide-react";
 
 import heroAsset from "@/assets/hero.png.asset.json";
@@ -13,7 +13,7 @@ import cityAsset from "@/assets/city-bg.png.asset.json";
 const navItems = [
   { label: "Home", href: "#home", icon: Home },
   { label: "Education", href: "#education", icon: GraduationCap },
-  { label: "Skills", href: "#skills", icon: Wrench },
+  { label: "Skills", href: "#skills", icon: Sparkles },
   { label: "Projects", href: "#projects", icon: FolderKanban },
   { label: "Experience", href: "#experience", icon: Briefcase },
   { label: "Contact", href: "#contact", icon: Mail },
@@ -31,22 +31,22 @@ const fadeUp = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const } },
 };
 
-function Section({ id, children, className = "", padded = true }: { id: string; children: React.ReactNode; className?: string; padded?: boolean }) {
+function Section({ id, children, className = "" }: { id: string; children: React.ReactNode; className?: string }) {
   return (
-    <section id={id} className={`relative min-h-screen px-6 md:px-12 lg:px-24 ${padded ? "py-24" : ""} ${className}`}>
+    <section id={id} className={`relative min-h-screen px-6 md:px-12 lg:px-24 py-24 ${className}`}>
       {children}
     </section>
   );
 }
 
-function SectionTitle({ kicker, title, compact = false }: { kicker: string; title: string; compact?: boolean }) {
+function SectionTitle({ kicker, title }: { kicker: string; title: string }) {
   return (
     <motion.div
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.3 }}
       variants={fadeUp}
-      className={compact ? "mb-6 text-center" : "mb-14 text-center"}
+      className="mb-14 text-center"
     >
       <p className="text-sm uppercase tracking-[0.4em] text-primary mb-3 font-display">{kicker}</p>
       <h2 className="text-5xl md:text-6xl font-bold text-gradient font-display">{title}</h2>
@@ -55,7 +55,7 @@ function SectionTitle({ kicker, title, compact = false }: { kicker: string; titl
   );
 }
 
-// =================== EDUCATION ===================
+// =================== EDUCATION (Harmonium) ===================
 const educationData = [
   {
     title: "Bachelor of Technology",
@@ -100,6 +100,7 @@ function EducationSection() {
     <Section id="education">
       <SectionTitle kicker="Academic Journey" title="Education" />
       <div className="mx-auto max-w-6xl grid md:grid-cols-2 gap-6 items-start">
+        {/* Left: accordion panels */}
         <div className="space-y-5">
           {educationData.map((edu, i) => {
             const isOpen = active === i;
@@ -118,6 +119,9 @@ function EducationSection() {
               >
                 <motion.div layout="position" className="flex items-center justify-between">
                   <h3 className="text-xl md:text-2xl font-bold font-display">{edu.title}</h3>
+                  <motion.div animate={{ rotate: isOpen ? 90 : 0 }} className="text-primary">
+                    <ChevronRight className="h-5 w-5" />
+                  </motion.div>
                 </motion.div>
                 <motion.span layout="position" className="inline-block mt-3 px-4 py-1.5 rounded-full text-xs font-semibold bg-primary/20 text-foreground border border-primary/40">
                   {edu.years}
@@ -140,6 +144,7 @@ function EducationSection() {
           })}
         </div>
 
+        {/* Right: detail panel */}
         <div className="md:sticky md:top-28">
           <AnimatePresence mode="wait">
             <motion.div
@@ -179,10 +184,9 @@ function EducationSection() {
 const skillBlocks = [
   { icon: Code2, title: "Programming Languages", items: ["Python", "C++", "JavaScript", "TypeScript", "SQL", "R"] },
   { icon: Layers, title: "Full-Stack Development", items: ["React", "Next.js", "HTML", "CSS", "Tailwind CSS", "FastAPI", "Flask", "Firebase", "MySQL"] },
-  { icon: Brain, title: "Machine Learning & AI", items: ["Scikit-learn", "Pandas", "NumPy", "OpenCV", "Ultralytics"] },
-  { icon: Bot, title: "Agentic AI & LLMs", items: ["LangChain", "Genkit", "FAISS", "RAG", "Semantic Search"] },
+  { icon: Brain, title: "Machine Learning & AI", items: ["Scikit-learn", "Pandas", "NumPy", "OpenCV", "Ultralytics", "LangChain", "Genkit", "FAISS"] },
   { icon: Atom, title: "Quantum Computing", items: ["Qiskit", "Quantum Kernels", "QSVM", "ZZFeatureMap", "Grover's Search"] },
-  { icon: Cloud, title: "Tools & Platforms", items: ["Git", "GitHub", "VS Code", "Jupyter Notebook", "Google Colab", "Figma"] },
+  { icon: Cloud, title: "Tools & Platforms", items: ["Git", "GitHub", "VS Code", "Jupyter Notebook", "Google Colab", "Figma", "Vercel", "Netlify", "Firebase Hosting"] },
 ];
 
 function SkillsSection() {
@@ -229,326 +233,141 @@ function SkillsSection() {
   );
 }
 
-// =================== PROJECTS (Filterable showcase) ===================
-type Project = {
-  title: string;
-  desc: string;
-  domains: string[];
-  stack: string[];
-  image: string;
-  github?: string;
-  demo?: string;
-  featured?: boolean;
-  categories: string[]; // for filtering
-};
-
-const projects: Project[] = [
+// =================== PROJECTS (Cinematic Slider) ===================
+const projects = [
   {
-    title: "Quantinel",
-    desc: "Quantum-enhanced cybersecurity research platform combining Quantum Machine Learning, Intrusion Detection Systems, attack characterization, and threat intelligence pipelines.",
-    domains: ["Quantum Computing", "Cybersecurity", "ML", "Research"],
-    stack: ["Python", "Qiskit", "Scikit-learn", "Pandas", "NumPy", "Matplotlib"],
+    title: "Neon Commerce",
+    tag: "Full-Stack",
+    desc: "Cyberpunk-themed e-commerce platform with realtime inventory, payment processing, and a custom headless CMS that scales to millions of products.",
+    stack: ["Next.js", "Stripe", "Postgres", "Redis"],
+    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1600&q=80",
+    demo: "https://example.com",
+    github: "https://github.com",
+  },
+  {
+    title: "Synth AI Studio",
+    tag: "AI / ML",
+    desc: "Browser-based AI music generation suite. Trains on user samples and produces stems in seconds using diffusion models running on WebGPU.",
+    stack: ["Python", "WebGPU", "FastAPI", "PyTorch"],
+    image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1600&q=80",
+    demo: "https://example.com",
+    github: "https://github.com",
+  },
+  {
+    title: "Nightcity Maps",
+    tag: "Visualization",
+    desc: "Interactive 3D city explorer with live data overlays. Built for a smart-city research lab to visualize traffic, energy and pollution in real time.",
+    stack: ["Three.js", "Mapbox", "TS", "Deck.gl"],
+    image: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1600&q=80",
+    demo: "https://example.com",
+    github: "https://github.com",
+  },
+  {
+    title: "Pulse Analytics",
+    tag: "SaaS",
+    desc: "Realtime product analytics dashboard with anomaly detection. Powering 30+ early-stage startups with sub-second query latency over billions of events.",
+    stack: ["React", "ClickHouse", "Go"],
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80",
+    demo: "https://example.com",
+    github: "https://github.com",
+  },
+  {
+    title: "Quantum Lab",
+    tag: "Research",
+    desc: "Interactive playground for quantum circuit design with live state-vector visualizations and one-click execution on IBM Q hardware.",
+    stack: ["Qiskit", "Next.js", "Python"],
     image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1600&q=80",
-    featured: true,
-    categories: ["featured", "ai"],
+    demo: "https://example.com",
+    github: "https://github.com",
   },
-  {
-    title: "Learnscape",
-    desc: "AI-powered visual learning platform that turns real-world objects into interactive STEM lessons using multimodal AI, computer vision, educational overlays, and voice interaction.",
-    domains: ["Multimodal AI", "Computer Vision", "EdTech", "Agentic AI"],
-    stack: ["Next.js", "TypeScript", "Genkit", "Gemini", "Canvas API", "Web Speech API"],
-    image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1600&q=80",
-    featured: true,
-    categories: ["featured", "ai"],
-  },
-  {
-    title: "AmbuCast",
-    desc: "Predictive ambulance intelligence system that forecasts emergency hotspots, analyzes risk levels, and recommends optimal ambulance deployment using ML and decision optimization.",
-    domains: ["Predictive Analytics", "Healthcare AI", "ML", "Optimization"],
-    stack: ["Python", "Scikit-learn", "XGBoost", "Streamlit", "Pandas", "NumPy"],
-    image: "https://images.unsplash.com/photo-1587574293340-e0011c4e8ecf?auto=format&fit=crop&w=1600&q=80",
-    featured: true,
-    categories: ["featured", "ai", "social"],
-  },
-  {
-    title: "Udyara",
-    desc: "Trustworthy Retrieval-Augmented Generation system helping women entrepreneurs navigate government startup policies through semantic search and source-backed explanations.",
-    domains: ["RAG", "Trustworthy AI", "Policy Intelligence"],
-    stack: ["FastAPI", "LangChain", "FAISS", "Sentence Transformers", "Gemini", "React"],
-    image: "https://images.unsplash.com/photo-1551836022-deb4988cc6c0?auto=format&fit=crop&w=1600&q=80",
-    featured: true,
-    categories: ["featured", "ai", "social"],
-  },
-  {
-    title: "MSIS",
-    desc: "Market Shock Intelligence System that detects financial market regimes, analyzes volatility behavior, predicts drawdown risks, and evaluates strategy robustness.",
-    domains: ["Financial ML", "Risk Modeling", "Explainable Analytics"],
-    stack: ["Python", "Scikit-learn", "XGBoost", "Streamlit", "Plotly", "Pandas"],
-    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=1600&q=80",
-    featured: true,
-    categories: ["featured", "ai"],
-  },
-  {
-    title: "FridgeMate",
-    desc: "AI-powered recipe generator that detects ingredients from fridge images using computer vision and generates personalized recipes using LLMs.",
-    domains: ["Computer Vision", "Generative AI"],
-    stack: ["YOLOv8", "FastAPI", "React", "Gemini", "OpenCV"],
-    image: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=1600&q=80",
-    categories: ["ai", "fullstack"],
-  },
-  {
-    title: "AgroNomics",
-    desc: "Crop price forecasting platform providing state and district-level agricultural market predictions across India using ML and historical commodity datasets.",
-    domains: ["Agritech", "Machine Learning"],
-    stack: ["Python", "Flask", "Scikit-learn", "Pandas"],
-    image: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1600&q=80",
-    categories: ["ai", "social"],
-  },
-  {
-    title: "ResQTweet",
-    desc: "Disaster tweet intelligence system that classifies crisis-related tweets and generates concise alerts through NLP and summarization pipelines.",
-    domains: ["NLP", "Crisis Intelligence"],
-    stack: ["Python", "Scikit-learn", "Transformers", "Hugging Face"],
-    image: "https://images.unsplash.com/photo-1611605698335-8b1569810432?auto=format&fit=crop&w=1600&q=80",
-    categories: ["ai", "social"],
-  },
-  {
-    title: "LawyerAI",
-    desc: "Legal Retrieval-Augmented Generation assistant for document-aware legal question answering and intelligent policy interpretation.",
-    domains: ["Legal Tech", "RAG"],
-    stack: ["FastAPI", "LangChain", "FAISS", "Gemini"],
-    image: "https://images.unsplash.com/photo-1589994965851-a8f479c573a9?auto=format&fit=crop&w=1600&q=80",
-    categories: ["ai"],
-  },
-  {
-    title: "Virasya",
-    desc: "AI-powered artisan marketplace connecting traditional Indian artisans with global buyers through intelligent content generation and multilingual support.",
-    domains: ["Marketplace", "Generative AI"],
-    stack: ["Next.js", "Firebase", "Genkit", "Gemini"],
-    image: "https://images.unsplash.com/photo-1582582621959-48d27397dc69?auto=format&fit=crop&w=1600&q=80",
-    categories: ["fullstack"],
-  },
-  {
-    title: "Waste2Worth",
-    desc: "AI-assisted food waste redistribution platform connecting donors, organizations, and volunteers to reduce waste and improve community sustainability.",
-    domains: ["Sustainability", "Full Stack"],
-    stack: ["Next.js", "Firebase", "Genkit", "Gemini"],
-    image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1600&q=80",
-    categories: ["fullstack", "social"],
-  },
-  {
-    title: "SugarSync",
-    desc: "Healthcare-focused platform designed to improve disease monitoring, tracking, and patient engagement through intelligent health workflows.",
-    domains: ["Healthcare", "Product Design"],
-    stack: ["React", "Firebase"],
-    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1600&q=80",
-    categories: ["fullstack", "social"],
-  },
-  {
-    title: "SafeHaven",
-    desc: "Crowdsourced disaster management platform providing alerts, coordination, preparedness resources, and community-driven disaster response.",
-    domains: ["Disaster Management", "Social Impact"],
-    stack: ["HTML", "CSS", "JavaScript"],
-    image: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=1600&q=80",
-    categories: ["fullstack", "social"],
-  },
-  {
-    title: "CryptoPulse",
-    desc: "Interactive cryptocurrency analytics dashboard providing market intelligence, visualizations, and trend monitoring.",
-    domains: ["FinTech", "Data Visualization"],
-    stack: ["React", "APIs", "Charts"],
-    image: "https://images.unsplash.com/photo-1518544801976-3e159e50e5bb?auto=format&fit=crop&w=1600&q=80",
-    categories: ["fullstack"],
-  },
-  {
-    title: "PlanetQuest",
-    desc: "Interactive environmental learning platform combining education, quizzes, eco-challenges, and sustainability awareness in a gamified experience.",
-    domains: ["Education", "Sustainability"],
-    stack: ["HTML", "CSS", "JavaScript"],
-    image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1600&q=80",
-    categories: ["social"],
-  },
-  {
-    title: "Apple Crate",
-    desc: "Premium e-commerce and product experience design inspired by modern Apple-style interactions and visual storytelling.",
-    domains: ["UI/UX", "E-commerce"],
-    stack: ["Figma"],
-    image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&w=1600&q=80",
-    categories: ["design"],
-  },
-  {
-    title: "LoreTrail",
-    desc: "Narrative-driven travel and exploration experience focused on immersive storytelling and information architecture.",
-    domains: ["UI/UX", "Travel"],
-    stack: ["Figma"],
-    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80",
-    categories: ["design"],
-  },
-  {
-    title: "The Hidden Mile",
-    desc: "Experience-focused interface concept exploring navigation, engagement, and visual hierarchy.",
-    domains: ["UI/UX", "Concept"],
-    stack: ["Figma"],
-    image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&w=1600&q=80",
-    categories: ["design"],
-  },
-  {
-    title: "Wireframes Collection",
-    desc: "Collection of user flows, low-fidelity wireframes, interaction experiments, and design explorations.",
-    domains: ["UI/UX", "Wireframes"],
-    stack: ["Figma"],
-    image: "https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1600&q=80",
-    categories: ["design"],
-  },
-  {
-    title: "Unstable Flappy",
-    desc: "Experimental physics-inspired recreation of Flappy Bird with intentionally chaotic mechanics and gameplay.",
-    domains: ["Game", "Experiment"],
-    stack: ["JavaScript", "Canvas"],
-    image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1600&q=80",
-    categories: ["fun"],
-  },
-  {
-    title: "Tic Tac Toe",
-    desc: "Interactive implementation of the classic strategy game with clean UI and responsive gameplay.",
-    domains: ["Game"],
-    stack: ["React"],
-    image: "https://images.unsplash.com/photo-1611996575749-79a3a250f948?auto=format&fit=crop&w=1600&q=80",
-    categories: ["fun"],
-  },
-  {
-    title: "Pokedex",
-    desc: "Pokémon encyclopedia application powered by public APIs and dynamic search functionality.",
-    domains: ["API", "App"],
-    stack: ["React", "PokeAPI"],
-    image: "https://images.unsplash.com/photo-1542779283-429940ce8336?auto=format&fit=crop&w=1600&q=80",
-    categories: ["fun"],
-  },
-  {
-    title: "Word Game",
-    desc: "Vocabulary and word-association game built to explore frontend interaction patterns.",
-    domains: ["Game"],
-    stack: ["JavaScript"],
-    image: "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&w=1600&q=80",
-    categories: ["fun"],
-  },
-  {
-    title: "Weather App",
-    desc: "Weather forecasting application using real-time weather APIs and responsive user interfaces.",
-    domains: ["API", "Utility"],
-    stack: ["React", "OpenWeather"],
-    image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?auto=format&fit=crop&w=1600&q=80",
-    categories: ["fun"],
-  },
-];
-
-const filters = [
-  { id: "featured", label: "Featured", icon: Star },
-  { id: "ai", label: "AI & ML", icon: Brain },
-  { id: "fullstack", label: "Full-Stack & Products", icon: Cpu },
-  { id: "design", label: "Design & UI/UX", icon: Palette },
-  { id: "social", label: "Social Impact", icon: Globe2 },
-  { id: "fun", label: "Fun & Experimental", icon: Gamepad2 },
 ];
 
 function ProjectsSection() {
-  const [filter, setFilter] = useState("featured");
-  const visible = useMemo(() => projects.filter((p) => p.categories.includes(filter)), [filter]);
+  const [idx, setIdx] = useState(0);
+  const next = () => setIdx((i) => (i + 1) % projects.length);
+  const prev = () => setIdx((i) => (i - 1 + projects.length) % projects.length);
 
   return (
-    <section id="projects" className="relative px-6 md:px-12 lg:px-24 pt-16 pb-20">
-      <SectionTitle kicker="Featured Builds" title="Projects" compact />
-
-      {/* Filters */}
-      <div className="mx-auto max-w-6xl mb-8 flex flex-wrap items-center justify-center gap-2 md:gap-3">
-        {filters.map((f) => {
-          const Icon = f.icon;
-          const active = filter === f.id;
-          return (
-            <button
-              key={f.id}
-              onClick={() => setFilter(f.id)}
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs md:text-sm font-semibold transition-all ${
-                active
-                  ? "glass-btn"
-                  : "glass border border-primary/30 hover:border-primary/60 text-foreground/80 hover:text-foreground"
-              }`}
-            >
-              <Icon className="h-4 w-4" />
-              {f.label}
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Grid */}
+    <Section id="projects">
+      <SectionTitle kicker="Selected Work" title="Projects" />
       <div className="mx-auto max-w-6xl">
-        <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <AnimatePresence mode="popLayout">
-            {visible.map((p, i) => (
+        <div className="relative h-[520px] md:h-[560px] flex items-center justify-center">
+          {projects.map((p, i) => {
+            const offset = ((i - idx) + projects.length) % projects.length;
+            const rel = offset > projects.length / 2 ? offset - projects.length : offset;
+            const isActive = rel === 0;
+            const abs = Math.abs(rel);
+            return (
               <motion.article
                 key={p.title}
-                layout
-                initial={{ opacity: 0, y: 30, scale: 0.96 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -20, scale: 0.96 }}
-                transition={{ duration: 0.4, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] }}
-                whileHover={{ y: -6 }}
-                className="group glass-card rounded-2xl overflow-hidden flex flex-col hover:shadow-neon transition-all duration-500"
+                animate={{
+                  x: rel * 80,
+                  scale: isActive ? 1 : 0.82 - abs * 0.04,
+                  opacity: abs > 2 ? 0 : 1 - abs * 0.25,
+                  zIndex: 10 - abs,
+                  rotateY: rel * -8,
+                }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute w-[88%] sm:w-[520px] md:w-[640px] rounded-3xl overflow-hidden shadow-card"
+                style={{
+                  transformStyle: "preserve-3d",
+                  background: "oklch(0.18 0.08 295 / 0.45)",
+                  backdropFilter: "blur(24px) saturate(160%)",
+                  WebkitBackdropFilter: "blur(24px) saturate(160%)",
+                  border: "1px solid oklch(0.6 0.18 305 / 0.35)",
+                }}
               >
-                <div className="relative h-44 overflow-hidden">
-                  <img
-                    src={p.image}
-                    alt={p.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-                  {p.featured && (
-                    <span className="absolute top-3 left-3 inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-accent/30 backdrop-blur-md border border-accent/50 text-foreground">
-                      <Star className="h-3 w-3" /> Featured
-                    </span>
-                  )}
-                  <h3 className="absolute bottom-3 left-4 right-4 text-xl font-bold font-display text-gradient drop-shadow-lg">
-                    {p.title}
-                  </h3>
+                <div className="relative h-56 md:h-72 overflow-hidden">
+                  <img src={p.image} alt={p.title} className="w-full h-full object-cover opacity-70" style={{ filter: "blur(2px)" }} />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-background/30" />
+                  <span className="absolute top-4 left-4 text-xs font-semibold px-3 py-1 rounded-full bg-accent/30 backdrop-blur-md border border-accent/40 text-foreground">
+                    {p.tag}
+                  </span>
+                  <h3 className="absolute bottom-4 left-5 right-5 text-2xl md:text-3xl font-bold font-display text-gradient drop-shadow-lg">{p.title}</h3>
                 </div>
-                <div className="p-5 flex-1 flex flex-col">
-                  <p className="text-sm text-foreground/80 leading-relaxed mb-3 line-clamp-3">{p.desc}</p>
-                  <div className="flex flex-wrap gap-1.5 mb-3">
-                    {p.domains.slice(0, 3).map((d) => (
-                      <span key={d} className="text-[10px] px-2 py-0.5 rounded-full bg-accent/20 text-foreground/85 border border-accent/40">
-                        {d}
-                      </span>
+                <div className="p-6 relative">
+                  <p className="text-sm md:text-base text-foreground/85 leading-relaxed mb-4">{p.desc}</p>
+                  <div className="flex flex-wrap gap-2 pr-24">
+                    {p.stack.map((s) => (
+                      <span key={s} className="text-xs px-2.5 py-1 rounded bg-primary/15 text-foreground/85 border border-primary/30">{s}</span>
                     ))}
                   </div>
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {p.stack.slice(0, 5).map((s) => (
-                      <span key={s} className="text-[10px] px-2 py-0.5 rounded bg-primary/15 text-foreground/80 border border-primary/30">
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="mt-auto flex items-center gap-2">
-                    {p.github && (
-                      <a href={p.github} target="_blank" rel="noreferrer" aria-label="GitHub"
-                        className="h-9 w-9 rounded-full glass flex items-center justify-center hover:bg-primary/40 transition">
-                        <Github className="h-4 w-4" />
-                      </a>
-                    )}
-                    {p.demo && (
-                      <a href={p.demo} target="_blank" rel="noreferrer" aria-label="Live Demo"
-                        className="h-9 w-9 rounded-full glass flex items-center justify-center hover:bg-primary/40 transition">
-                        <ExternalLink className="h-4 w-4" />
-                      </a>
-                    )}
+                  <div className="absolute bottom-5 right-5 flex gap-2">
+                    <a href={p.github} target="_blank" rel="noreferrer" aria-label="GitHub"
+                       className="h-10 w-10 rounded-full glass flex items-center justify-center hover:bg-primary/40 transition">
+                      <Github className="h-4 w-4" />
+                    </a>
+                    <a href={p.demo} target="_blank" rel="noreferrer" aria-label="Live Demo"
+                       className="h-10 w-10 rounded-full glass flex items-center justify-center hover:bg-primary/40 transition">
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
                   </div>
                 </div>
               </motion.article>
+            );
+          })}
+        </div>
+
+
+        {/* Controls */}
+        <div className="mt-10 flex items-center justify-center gap-6">
+          <button onClick={prev} aria-label="Previous"
+                  className="h-12 w-12 rounded-full glass-card hover:bg-primary/30 transition flex items-center justify-center">
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <div className="flex items-center gap-2">
+            {projects.map((_, i) => (
+              <button key={i} onClick={() => setIdx(i)} aria-label={`Go to slide ${i + 1}`}
+                      className={`h-2 rounded-full transition-all ${i === idx ? "w-8 bg-primary shadow-neon" : "w-2 bg-foreground/30 hover:bg-foreground/60"}`} />
             ))}
-          </AnimatePresence>
-        </motion.div>
+          </div>
+          <button onClick={next} aria-label="Next"
+                  className="h-12 w-12 rounded-full glass-card hover:bg-primary/30 transition flex items-center justify-center">
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        </div>
       </div>
-    </section>
+    </Section>
   );
 }
 
@@ -640,168 +459,55 @@ function ContactSection() {
   );
 }
 
-// =================== RADIAL WHEEL NAV ===================
-function RadialWheel() {
-  const n = navItems.length;
-  const stepAngle = 36; // degrees between items on the arc
-  const radius = 130;
-  const rotation = useMotionValue(0); // degrees; 0 means item 0 is centered
-  const [active, setActive] = useState(0);
-  const dragRef = useRef<HTMLDivElement>(null);
-  const counterRotate = counterRotate;
-
-  // Snap to nearest item index
-  const snapTo = (idx: number) => {
-    const target = -idx * stepAngle;
-    animate(rotation, target, { type: "spring", stiffness: 180, damping: 22 });
-    setActive(((idx % n) + n) % n);
-  };
-
-  const handleWheel = (e: React.WheelEvent) => {
-    e.preventDefault();
-    const dir = e.deltaY > 0 ? 1 : -1;
-    snapTo(active + dir);
-  };
-
-  const handleClick = (i: number, href: string) => {
-    if (i === active) {
-      const el = document.querySelector(href);
-      el?.scrollIntoView({ behavior: "smooth" });
-    } else {
-      snapTo(i);
-    }
-  };
-
-  // Drag to rotate
-  const dragStart = useRef<{ x: number; y: number; rot: number } | null>(null);
-  const onPointerDown = (e: React.PointerEvent) => {
-    (e.target as HTMLElement).setPointerCapture(e.pointerId);
-    dragStart.current = { x: e.clientX, y: e.clientY, rot: rotation.get() };
-  };
-  const onPointerMove = (e: React.PointerEvent) => {
-    if (!dragStart.current) return;
-    const dy = e.clientY - dragStart.current.y;
-    rotation.set(dragStart.current.rot - dy * 0.6);
-  };
-  const onPointerUp = () => {
-    if (!dragStart.current) return;
-    dragStart.current = null;
-    const r = rotation.get();
-    const idx = Math.round(-r / stepAngle);
-    snapTo(idx);
-  };
-
-  // Auto-detect active section on scroll
-  useEffect(() => {
-    const onScroll = () => {
-      const offsets = navItems.map((it) => {
-        const el = document.querySelector(it.href) as HTMLElement | null;
-        if (!el) return Infinity;
-        const r = el.getBoundingClientRect();
-        return Math.abs(r.top - 120);
-      });
-      const idx = offsets.indexOf(Math.min(...offsets));
-      if (idx >= 0 && idx !== active) {
-        const target = -idx * stepAngle;
-        animate(rotation, target, { type: "spring", stiffness: 180, damping: 24 });
-        setActive(idx);
-      }
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-     
-  }, [active]);
+// =================== CIRCULAR MENU ===================
+function CircularMenu() {
+  const [open, setOpen] = useState(false);
+  const radius = 110;
+  const start = -90; // pointing up
+  const end = 0;     // pointing right (quarter arc into top-right of button)
+  const step = (end - start) / (navItems.length - 1);
 
   return (
-    <div className="fixed bottom-6 left-6 z-50 select-none">
-      <div
-        ref={dragRef}
-        onWheel={handleWheel}
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={onPointerUp}
-        onPointerCancel={onPointerUp}
-        className="relative h-52 w-52 touch-none"
-        style={{ cursor: "grab" }}
-      >
-        {/* Outer arc track */}
-        <div className="absolute inset-0 rounded-full opacity-40"
-             style={{
-               background: "radial-gradient(circle at center, transparent 55%, oklch(0.6 0.18 305 / 0.18) 56%, transparent 72%)",
-             }}
-        />
-        {/* Rotating ring of items */}
-        <motion.div
-          className="absolute inset-0"
-          style={{ rotate: rotation }}
-        >
-          {navItems.map((item, i) => {
-            const angle = i * stepAngle - 90; // start at top
-            const rad = (angle * Math.PI) / 180;
-            const x = Math.cos(rad) * radius;
-            const y = Math.sin(rad) * radius;
+    <div className="fixed bottom-6 left-6 z-50">
+      <div className="relative h-16 w-16">
+        {/* Radial items */}
+        <AnimatePresence>
+          {open && navItems.map((item, i) => {
+            const angle = (start + step * i) * (Math.PI / 180);
+            const x = Math.cos(angle) * radius;
+            const y = Math.sin(angle) * radius;
             const Icon = item.icon;
-            const isActive = i === active;
-            // Distance from center index for fade
-            let diff = i - active;
-            if (diff > n / 2) diff -= n;
-            if (diff < -n / 2) diff += n;
-            const abs = Math.abs(diff);
-            const visible = abs <= 1; // only show 3 (active + neighbors)
             return (
-              <motion.button
+              <motion.a
                 key={item.label}
-                onClick={(e) => { e.stopPropagation(); handleClick(i, item.href); }}
-                animate={{
-                  opacity: visible ? (isActive ? 1 : 0.55) : 0,
-                  scale: isActive ? 1.15 : 0.9,
-                }}
-                transition={{ type: "spring", stiffness: 220, damping: 22 }}
-                className="group absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-                style={{ x, y, pointerEvents: visible ? "auto" : "none" }}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                initial={{ x: 0, y: 0, opacity: 0, scale: 0.4 }}
+                animate={{ x, y, opacity: 1, scale: 1 }}
+                exit={{ x: 0, y: 0, opacity: 0, scale: 0.4 }}
+                transition={{ type: "spring", stiffness: 260, damping: 22, delay: i * 0.04 }}
+                className="group absolute top-2 left-2 h-12 w-12 rounded-full glass-strong flex items-center justify-center text-foreground hover:bg-primary/40 hover:shadow-neon"
                 aria-label={item.label}
               >
-                {/* Counter-rotate so icons stay upright */}
-                <motion.div
-                  style={{ rotate: counterRotate }}
-                  className={`h-12 w-12 rounded-full flex items-center justify-center transition-all ${
-                    isActive
-                      ? "glass-strong shadow-neon ring-1 ring-primary/70"
-                      : "glass border border-primary/40 hover:border-primary"
-                  }`}
-                >
-                  <Icon className={`h-5 w-5 ${isActive ? "text-primary" : "text-foreground/85"}`} />
-                </motion.div>
-                {/* Tooltip */}
-                <motion.span
-                  style={{ rotate: counterRotate }}
-                  className="pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full glass-strong px-2.5 py-1 text-[10px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                >
+                <Icon className="h-5 w-5" />
+                <span className="pointer-events-none absolute left-full ml-3 whitespace-nowrap rounded-full glass-strong px-3 py-1 text-xs font-semibold opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200">
                   {item.label}
-                </motion.span>
-              </motion.button>
+                </span>
+              </motion.a>
             );
           })}
-        </motion.div>
+        </AnimatePresence>
 
-        {/* VS Hub */}
+        {/* Trigger */}
         <motion.button
-          onClick={() => {
-            const el = document.querySelector(navItems[active].href);
-            el?.scrollIntoView({ behavior: "smooth" });
-          }}
-          whileTap={{ scale: 0.94 }}
-          whileHover={{ scale: 1.05 }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-16 w-16 rounded-full flex items-center justify-center font-display font-extrabold text-lg tracking-wider text-foreground"
-          style={{
-            background: "linear-gradient(135deg, oklch(0.55 0.2 305 / 0.6), oklch(0.45 0.18 290 / 0.5))",
-            backdropFilter: "blur(16px) saturate(160%)",
-            border: "1px solid oklch(0.85 0.15 305 / 0.55)",
-            boxShadow: "0 0 24px oklch(0.72 0.22 305 / 0.55), inset 0 1px 0 oklch(1 0 0 / 0.25)",
-          }}
-          aria-label="Navigate to current section"
+          onClick={() => setOpen((o) => !o)}
+          whileTap={{ scale: 0.92 }}
+          animate={{ rotate: open ? 135 : 0 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          className="relative h-16 w-16 rounded-full glass-strong flex items-center justify-center shadow-neon"
+          aria-label={open ? "Close menu" : "Open menu"}
         >
-          VS
+          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </motion.button>
       </div>
     </div>
@@ -817,13 +523,16 @@ export default function Portfolio() {
 
   return (
     <div className="relative min-h-screen text-foreground">
+      {/* Persistent city background — kept visible (no global blur) */}
       <div
         className="fixed inset-0 -z-10 bg-cover bg-center"
         style={{ backgroundImage: `url(${cityAsset.url})` }}
       />
       <div className="fixed inset-0 -z-10 bg-background/35" />
 
-      <RadialWheel />
+      {/* Circular expandable menu (bottom-left) */}
+      <CircularMenu />
+
 
       {/* HERO */}
       <section ref={heroRef} id="home" className="relative min-h-screen overflow-hidden">
