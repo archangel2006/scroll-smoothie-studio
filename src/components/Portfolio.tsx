@@ -5,11 +5,25 @@ import {
   Github, Linkedin, Mail, Twitter, ExternalLink, MapPin,
   Briefcase, Code2, ChevronLeft, ChevronRight, Send, Atom,
   Brain, Cloud, Layers, Trophy, Home, GraduationCap, Sparkles,
-  Folder, Wrench, Terminal, Cpu, X, ChevronUp
+  Folder, Wrench, Terminal, Cpu, X, ChevronUp,
+  Instagram
 } from "lucide-react";
 
-import heroAsset from "@/assets/hero.png.asset.json";
-import cityAsset from "@/assets/city-bg.png.asset.json";
+import heroAsset from "@/assets/hero.png";
+import cityAsset from "@/assets/background-1.png";
+
+// Education images
+import igdtuwAsset from "@/assets/education/igdtuw.png";
+import cjmAsset from "@/assets/education/cjm.png";
+import bbpsAsset from "@/assets/education/bbps.png";
+
+// Project images — uncomment each line when you add the file to src/assets/projects/
+// import learnscapeImg from "@/assets/projects/learnscape.jpg";   // TODO: add learnscape.jpg
+// import ambucastImg from "@/assets/projects/ambucast.jpg";       // TODO: add ambucast.jpg
+// import udyaraImg from "@/assets/projects/udyara.jpg";           // TODO: add udyara.jpg
+// import lawyeraiImg from "@/assets/projects/lawyerai.jpg";       // TODO: add lawyerai.jpg
+// import quantinelImg from "@/assets/projects/quantinel.jpg";     // TODO: add quantinel.jpg
+// import msisImg from "@/assets/projects/msis.jpg";               // TODO: add msis.jpg
 
 const navItems = [
   { label: "Home", href: "#home", icon: Home },
@@ -21,10 +35,10 @@ const navItems = [
 ];
 
 const socials = [
-  { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: Github, href: "https://github.com", label: "GitHub" },
-  { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
-  { icon: Mail, href: "mailto:hello@alexander.dev", label: "Email" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/vaibhavi-srivastava26/", label: "LinkedIn" },
+  { icon: Github, href: "https://github.com/archangel2006", label: "GitHub" },
+  { icon: Instagram, href: "https://www.instagram.com/archangel.26/", label: "Instagram" },
+  { icon: Mail, href: "mailto:26.archangel@gmail.com", label: "Email" },
 ];
 
 const fadeUp = {
@@ -60,36 +74,36 @@ function SectionTitle({ kicker, title, className = "mb-14" }: { kicker: string; 
 const educationData = [
   {
     title: "Bachelor of Technology",
-    years: "2024 — 2026",
+    years: "2024 — 2028",
     place: "Indira Gandhi Delhi Technical University",
     course: "Bachelor Of Technology",
     field: "Computer Science Engineering with Artificial Intelligence",
     score: "CGPA: 9.12",
     desc: "Focused on building practical software projects while strengthening foundations in algorithms, artificial intelligence, and system design. Actively exploring full-stack development and modern development tools.",
-    image: "https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1200&q=80",
-    tag: "Clubs",
+    image: igdtuwAsset,
+    tag: "",
   },
   {
     title: "Senior Secondary Education",
     years: "2022 — 2024",
-    place: "Delhi Public School",
+    place: "Convent Of Jesus & Mary",
     course: "CBSE — Class XII",
     field: "Physics, Chemistry, Mathematics with Computer Science",
-    score: "95.4%",
-    desc: "Concentrated on core sciences and programming. Led the coding club, mentored juniors and represented school in inter-school hackathons and olympiads.",
-    image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1200&q=80",
-    tag: "Topper",
+    score: "Marks: 95%",
+    desc: "Concentrated on core sciences and programming, building foundations in Python programming and SQL-based database systems. AISSCE Subject Topper in Physics and Chemistry.",
+    image: cjmAsset,
+    tag: "",
   },
   {
     title: "Secondary Education",
     years: "2010 — 2022",
-    place: "Delhi Public School",
+    place: "Bal Bharati Public School",
     course: "CBSE — Class X",
     field: "Foundational Sciences & Mathematics",
-    score: "96.2%",
-    desc: "Built strong foundations in mathematics, science and computing. Captained the robotics team to a regional championship and won multiple inter-school science fairs.",
-    image: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=1200&q=80",
-    tag: "Robotics",
+    score: "Marks: 96%",
+    desc: "Developed strong academic foundations throughout school, receiving multiple meritorious distinctions across the years. Earned multiple awards and recognitions in volleyball and chess. Actively participated in sports, music, and art alongside academics.",
+    image: bbpsAsset,
+    tag: "",
   },
 ];
 
@@ -114,9 +128,8 @@ function EducationSection() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
                 onClick={() => setActive(i)}
-                className={`glass-card cursor-pointer rounded-2xl p-6 transition-all duration-500 ${
-                  isOpen ? "neon-border shadow-neon" : "hover:border-primary/40"
-                }`}
+                className={`glass-card cursor-pointer rounded-2xl p-6 transition-all duration-500 ${isOpen ? "neon-border shadow-neon" : "hover:border-primary/40"
+                  }`}
               >
                 <motion.div layout="position" className="flex items-center justify-between">
                   <h3 className="text-xl md:text-2xl font-bold font-display">{edu.title}</h3>
@@ -238,50 +251,61 @@ function SkillsSection() {
 // =================== PROJECTS (Cinematic Slider) ===================
 const projects = [
   {
-    title: "Neon Commerce",
-    tag: "Full-Stack",
-    desc: "Cyberpunk-themed e-commerce platform with realtime inventory, payment processing, and a custom headless CMS that scales to millions of products.",
-    stack: ["Next.js", "Stripe", "Postgres", "Redis"],
-    image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1600&q=80",
-    demo: "https://example.com",
-    github: "https://github.com",
+    title: "Learnscape",
+    tag: "Multimodal AI",
+    desc: "AI-powered visual learning platform that transforms real-world objects into interactive STEM lessons using computer vision, educational overlays, voice interaction, and agentic reasoning.",
+    stack: ["Next.js", "TypeScript", "Genkit", "Gemini", "Canvas API"],
+    image: "", // TODO: replace with learnscapeImg once learnscape.jpg is added
+    demo: "",
+    github: "https://github.com/archangel2006/learnscape",
   },
   {
-    title: "Synth AI Studio",
-    tag: "AI / ML",
-    desc: "Browser-based AI music generation suite. Trains on user samples and produces stems in seconds using diffusion models running on WebGPU.",
-    stack: ["Python", "WebGPU", "FastAPI", "PyTorch"],
-    image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1600&q=80",
-    demo: "https://example.com",
-    github: "https://github.com",
+    title: "AmbuCast",
+    tag: "Healthcare AI",
+    desc: "Predictive ambulance intelligence system that forecasts emergency hotspots, analyzes risk levels, and recommends optimal ambulance deployment using machine learning and optimization pipelines.",
+    stack: ["Python", "XGBoost", "Scikit-learn", "Streamlit", "Pandas"],
+    image: "", // TODO: replace with ambucastImg once ambucast.jpg is added
+    demo: "",
+    github: "https://github.com/archangel2006/ambucast-dispatch",
   },
   {
-    title: "Nightcity Maps",
-    tag: "Visualization",
-    desc: "Interactive 3D city explorer with live data overlays. Built for a smart-city research lab to visualize traffic, energy and pollution in real time.",
-    stack: ["Three.js", "Mapbox", "TS", "Deck.gl"],
-    image: "https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1600&q=80",
-    demo: "https://example.com",
-    github: "https://github.com",
+    title: "Udyara",
+    tag: "Trustworthy RAG",
+    desc: "Retrieval-Augmented Generation platform helping women entrepreneurs navigate government startup policies through semantic search, embeddings, and source-backed explanations.",
+    stack: ["FastAPI", "LangChain", "FAISS", "Gemini", "React"],
+    image: "", // TODO: replace with udyaraImg once udyara.jpg is added
+    demo: "",
+    github: "https://github.com/archangel2006/Udyara",
+  },
+
+  {
+    title: "LawyerAI",
+    tag: "Legal AI",
+    desc: "Legal Retrieval-Augmented Generation assistant designed for document-aware legal question answering, intelligent policy interpretation, and context-grounded information retrieval.",
+    stack: ["FastAPI", "LangChain", "FAISS", "Gemini"],
+    image: "", // TODO: replace with lawyeraiImg once lawyerai.jpg is added
+    demo: "",
+    github: "https://github.com/archangel2006/LawyerAI",
   },
   {
-    title: "Pulse Analytics",
-    tag: "SaaS",
-    desc: "Realtime product analytics dashboard with anomaly detection. Powering 30+ early-stage startups with sub-second query latency over billions of events.",
-    stack: ["React", "ClickHouse", "Go"],
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80",
-    demo: "https://example.com",
-    github: "https://github.com",
+    title: "Quantinel",
+    tag: "Quantum Cybersecurity",
+    desc: "Quantum-enhanced cybersecurity research platform combining Quantum Machine Learning, Intrusion Detection Systems, attack characterization, and threat intelligence pipelines for next-generation cyber defense.",
+    stack: ["Python", "Qiskit", "Scikit-learn", "Pandas", "NumPy"],
+    image: "", // TODO: replace with quantinelImg once quantinel.jpg is added
+    demo: "",
+    github: "https://github.com/archangel2006/Quantinel",
   },
+
   {
-    title: "Quantum Lab",
-    tag: "Research",
-    desc: "Interactive playground for quantum circuit design with live state-vector visualizations and one-click execution on IBM Q hardware.",
-    stack: ["Qiskit", "Next.js", "Python"],
-    image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1600&q=80",
-    demo: "https://example.com",
-    github: "https://github.com",
-  },
+    title: "MSIS",
+    tag: "Financial ML",
+    desc: "Market Shock Intelligence System for financial regime detection, volatility analysis, drawdown prediction, risk modeling, and explainable market analytics.",
+    stack: ["Python", "XGBoost", "Scikit-learn", "Plotly", "Pandas"],
+    image: "", // TODO: replace with msisImg once msis.jpg is added
+    demo: "",
+    github: "https://github.com/archangel2006/MSIS",
+  }
 ];
 
 function ProjectsSection() {
@@ -336,11 +360,11 @@ function ProjectsSection() {
                   </div>
                   <div className="absolute bottom-5 right-5 flex gap-2">
                     <a href={p.github} target="_blank" rel="noreferrer" aria-label="GitHub"
-                       className="h-10 w-10 rounded-full glass flex items-center justify-center hover:bg-primary/40 transition">
+                      className="h-10 w-10 rounded-full glass flex items-center justify-center hover:bg-primary/40 transition">
                       <Github className="h-4 w-4" />
                     </a>
                     <a href={p.demo} target="_blank" rel="noreferrer" aria-label="Live Demo"
-                       className="h-10 w-10 rounded-full glass flex items-center justify-center hover:bg-primary/40 transition">
+                      className="h-10 w-10 rounded-full glass flex items-center justify-center hover:bg-primary/40 transition">
                       <ExternalLink className="h-4 w-4" />
                     </a>
                   </div>
@@ -359,17 +383,17 @@ function ProjectsSection() {
           {/* Controls */}
           <div className="flex items-center gap-6">
             <button onClick={prev} aria-label="Previous"
-                    className="h-12 w-12 rounded-full glass-card hover:bg-primary/30 transition flex items-center justify-center cursor-pointer">
+              className="h-12 w-12 rounded-full glass-card hover:bg-primary/30 transition flex items-center justify-center cursor-pointer">
               <ChevronLeft className="h-5 w-5" />
             </button>
             <div className="flex items-center gap-2">
               {projects.map((_, i) => (
                 <button key={i} onClick={() => setIdx(i)} aria-label={`Go to slide ${i + 1}`}
-                        className={`h-2 rounded-full transition-all cursor-pointer ${i === idx ? "w-8 bg-primary shadow-neon" : "w-2 bg-foreground/30 hover:bg-foreground/60"}`} />
+                  className={`h-2 rounded-full transition-all cursor-pointer ${i === idx ? "w-8 bg-primary shadow-neon" : "w-2 bg-foreground/30 hover:bg-foreground/60"}`} />
               ))}
             </div>
             <button onClick={next} aria-label="Next"
-                    className="h-12 w-12 rounded-full glass-card hover:bg-primary/30 transition flex items-center justify-center cursor-pointer">
+              className="h-12 w-12 rounded-full glass-card hover:bg-primary/30 transition flex items-center justify-center cursor-pointer">
               <ChevronRight className="h-5 w-5" />
             </button>
           </div>
@@ -397,7 +421,7 @@ function ContactSection() {
     e.preventDefault();
     const subject = encodeURIComponent(`Portfolio message from ${form.name}`);
     const body = encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`);
-    window.location.href = `mailto:hello@alexander.dev?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:26.archangel@gmail.com?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -416,13 +440,13 @@ function ContactSection() {
             <div className="flex items-center gap-2 text-sm text-foreground/70 mb-6">
               <MapPin className="h-4 w-4 text-primary" /> New Delhi · Available worldwide
             </div>
-            <a href="mailto:hello@alexander.dev" className="block text-lg font-bold text-gradient mb-6 break-all">
-              hello@alexander.dev
+            <a href="mailto:26.archangel@gmail.com" className="block text-lg font-bold text-gradient mb-6 break-all">
+              26.archangel@gmail.com
             </a>
             <div className="flex items-center gap-3">
               {socials.map((s) => (
                 <a key={s.label} href={s.href} aria-label={s.label}
-                   className="h-11 w-11 rounded-xl glass flex items-center justify-center hover:bg-primary/30 hover:scale-110 transition">
+                  className="h-11 w-11 rounded-xl glass flex items-center justify-center hover:bg-primary/30 hover:scale-110 transition">
                   <s.icon className="h-5 w-5" />
                 </a>
               ))}
@@ -471,7 +495,7 @@ function ContactSection() {
             </button>
           </motion.form>
         </div>
-        <p className="mt-12 text-center text-xs text-foreground/60">© 2026 Alexander · Crafted with neon & caffeine</p>
+        <p className="mt-12 text-center text-xs text-foreground/60">© 2026 Vaibhavi Srivastava · Crafted with !hate</p>
       </div>
     </Section>
   );
@@ -492,7 +516,7 @@ function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProp
   const activeIndex = navItems.findIndex(
     (item) => item.href.replace("#", "") === activeSection
   );
-  
+
   const resolvedActiveIndex = activeIndex === -1 ? 0 : activeIndex;
 
   const handleWheel = (e: React.WheelEvent) => {
@@ -520,8 +544,8 @@ function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProp
   };
 
   return (
-    <div 
-      className="fixed bottom-6 left-6 z-50 pointer-events-none select-none" 
+    <div
+      className="fixed bottom-6 left-6 z-50 pointer-events-none select-none"
       style={{ width: 220, height: 220 }}
       onWheel={handleWheel}
     >
@@ -529,33 +553,33 @@ function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProp
         {/* Invisible Arc Guidelines/Background */}
         <svg className="absolute inset-0 pointer-events-none z-0 overflow-visible" style={{ left: 32, top: 120 }}>
           {/* Main arc ring */}
-          <circle 
-            cx="0" 
-            cy="0" 
-            r={radius} 
-            fill="none" 
-            stroke="rgba(168, 85, 247, 0.15)" 
-            strokeWidth="2" 
+          <circle
+            cx="0"
+            cy="0"
+            r={radius}
+            fill="none"
+            stroke="rgba(168, 85, 247, 0.15)"
+            strokeWidth="2"
           />
           {/* Glowing dash ring */}
-          <circle 
-            cx="0" 
-            cy="0" 
-            r={radius + 8} 
-            fill="none" 
-            stroke="rgba(236, 72, 153, 0.2)" 
-            strokeWidth="1" 
+          <circle
+            cx="0"
+            cy="0"
+            r={radius + 8}
+            fill="none"
+            stroke="rgba(236, 72, 153, 0.2)"
+            strokeWidth="1"
             strokeDasharray="6 15"
           />
         </svg>
 
         {/* Center fixed "VS" monogram core */}
-        <motion.div 
+        <motion.div
           className="absolute rounded-full flex items-center justify-center bg-background/95 border-2 border-primary z-20 font-display font-extrabold text-xl text-primary tracking-tighter cursor-pointer hover:scale-105 transition-all duration-300 select-none"
-          style={{ 
-            width: 64, 
-            height: 64, 
-            left: 0, 
+          style={{
+            width: 64,
+            height: 64,
+            left: 0,
             bottom: 0,
           }}
           animate={{
@@ -574,14 +598,14 @@ function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProp
           title="Go to Home"
         >
           {/* Animated spinning hud outer border */}
-          <motion.div 
-            className="absolute inset-[-4px] rounded-full border border-dashed border-primary/50 pointer-events-none" 
+          <motion.div
+            className="absolute inset-[-4px] rounded-full border border-dashed border-primary/50 pointer-events-none"
             animate={{ rotate: 360 }}
             transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
           />
           {/* Rotating scanner line */}
-          <motion.div 
-            className="absolute inset-0 rounded-full border-t border-accent/40 pointer-events-none" 
+          <motion.div
+            className="absolute inset-0 rounded-full border-t border-accent/40 pointer-events-none"
             animate={{ rotate: 360 }}
             transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
           />
@@ -625,13 +649,13 @@ function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProp
         {navItems.map((item, i) => {
           const Icon = item.icon;
           const isCurrentActive = i === resolvedActiveIndex;
-          
+
           // Calculate angle for this item based on the active index
           const angleDeg = activeAngle + (i - resolvedActiveIndex) * angleStep;
-          
+
           // Convert to radians for trigonometric functions
           const angleRad = angleDeg * (Math.PI / 180);
-          
+
           // Calculate coordinates from center (32, 188)
           const cx = 32;
           const cy = 188;
@@ -640,7 +664,7 @@ function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProp
 
           // Determine visibility based on angle
           const isVisible = angleDeg >= -110 && angleDeg <= 20;
-          
+
           // Compute opacity: fade out as it approaches boundaries
           let opacity = 0;
           if (isVisible) {
@@ -652,7 +676,7 @@ function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProp
               opacity = 1;
             }
           }
-          
+
           const size = isCurrentActive ? 48 : 36;
 
           return (
@@ -669,11 +693,10 @@ function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProp
             >
               <button
                 onClick={() => onSelectSection(item.href.replace("#", ""))}
-                className={`group flex items-center justify-center rounded-full transition-all duration-300 cursor-pointer ${
-                  isCurrentActive 
-                    ? "bg-primary/20 text-foreground border-2 border-primary shadow-neon scale-110" 
-                    : "bg-background/80 text-foreground/70 border border-primary/30 hover:border-primary/70 hover:text-foreground hover:bg-primary/10"
-                }`}
+                className={`group flex items-center justify-center rounded-full transition-all duration-300 cursor-pointer ${isCurrentActive
+                  ? "bg-primary/20 text-foreground border-2 border-primary shadow-neon scale-110"
+                  : "bg-background/80 text-foreground/70 border border-primary/30 hover:border-primary/70 hover:text-foreground hover:bg-primary/10"
+                  }`}
                 style={{
                   width: size,
                   height: size,
@@ -682,10 +705,10 @@ function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProp
                 title={item.label}
               >
                 <Icon className={`${isCurrentActive ? "h-5 w-5" : "h-4 w-4"}`} />
-                
+
                 {/* Text label beside active icon only */}
                 {isCurrentActive && (
-                  <span 
+                  <span
                     className="absolute left-full ml-3 whitespace-nowrap rounded-lg bg-background/90 border border-primary/40 px-2.5 py-1 text-xs font-display font-semibold tracking-wider text-primary shadow-neon pointer-events-none"
                     style={{
                       textShadow: "0 0 5px rgba(168, 85, 247, 0.5)"
@@ -754,7 +777,7 @@ export default function Portfolio() {
       {/* Persistent city background — kept visible (no global blur) */}
       <div
         className="fixed inset-0 -z-10 bg-cover bg-center"
-        style={{ backgroundImage: `url(${cityAsset.url})` }}
+        style={{ backgroundImage: `url(${cityAsset})` }}
       />
       <div className="fixed inset-0 -z-10 bg-background/35" />
 
@@ -768,7 +791,7 @@ export default function Portfolio() {
           style={{ y: heroY, opacity: heroOpacity }}
           className="absolute inset-0 bg-cover bg-center"
         >
-          <img src={heroAsset.url} alt="" className="absolute inset-0 w-full h-full object-cover" />
+          <img src={heroAsset} alt="" className="absolute inset-0 w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-background/20 to-background/60" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
           <div className="rain-overlay" />
@@ -782,7 +805,7 @@ export default function Portfolio() {
               transition={{ duration: 0.8, delay: 0.5 }}
               className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground drop-shadow-[0_4px_30px_rgba(0,0,0,0.6)] font-display"
             >
-              Hi! I'm Alexander
+              Hi! I'm Vaibhavi Srivastava
             </motion.h1>
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
