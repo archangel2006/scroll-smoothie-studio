@@ -24,17 +24,17 @@ export default function ProjectsArchive() {
 
   // Filter projects by both search query and active category pill
   const filteredProjects = placeholderProjects.filter((project) => {
-    const matchesFilter = 
-      activeFilter === "Featured" 
-        ? project.featured 
-        : project.category === activeFilter;
+    const matchesFilter =
+      activeFilter === "Featured"
+        ? project.featured
+        : project.categories.includes(activeFilter);
 
-    const matchesSearch = 
+    const matchesSearch =
       project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.tags.some(t => t.toLowerCase().includes(searchQuery.toLowerCase())) ||
       project.techStack.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
-    
+
     return matchesFilter && matchesSearch;
   });
 
@@ -97,11 +97,10 @@ export default function ProjectsArchive() {
                 onClick={() => {
                   setActiveFilter(filter.id);
                 }}
-                className={`flex items-center gap-2.5 px-4 py-2.5 rounded-full text-xs font-semibold font-display tracking-wider uppercase border transition-all duration-300 cursor-pointer ${
-                  isSelected
-                    ? "bg-primary/20 text-foreground border-primary shadow-neon scale-105"
-                    : "bg-background/50 border-primary/25 text-foreground/70 hover:border-primary/50 hover:text-foreground"
-                }`}
+                className={`flex items-center gap-2.5 px-4 py-2.5 rounded-full text-xs font-semibold font-display tracking-wider uppercase border transition-all duration-300 cursor-pointer ${isSelected
+                  ? "bg-primary/20 text-foreground border-primary shadow-neon scale-105"
+                  : "bg-background/50 border-primary/25 text-foreground/70 hover:border-primary/50 hover:text-foreground"
+                  }`}
               >
                 <Icon className="h-3.5 w-3.5" />
                 {filter.label}
@@ -111,8 +110,8 @@ export default function ProjectsArchive() {
         </div>
 
         {/* Projects Cards Grid */}
-        <motion.div 
-          layout 
+        <motion.div
+          layout
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           <AnimatePresence mode="popLayout">
@@ -142,7 +141,7 @@ export default function ProjectsArchive() {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/45 to-transparent" />
-                  
+
                   {/* Domain Tags */}
                   <div className="absolute top-4 left-4 flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
