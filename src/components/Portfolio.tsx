@@ -648,7 +648,7 @@ function RadialWheel() {
   const rotation = useMotionValue(0); // degrees; 0 means item 0 is centered
   const [active, setActive] = useState(0);
   const dragRef = useRef<HTMLDivElement>(null);
-  const counterRotate = useTransform(rotation, (r) => -r);
+  const counterRotate = counterRotate;
 
   // Snap to nearest item index
   const snapTo = (idx: number) => {
@@ -763,7 +763,7 @@ function RadialWheel() {
               >
                 {/* Counter-rotate so icons stay upright */}
                 <motion.div
-                  style={{ rotate: useTransform(rotation, (r) => -r) }}
+                  style={{ rotate: counterRotate }}
                   className={`h-12 w-12 rounded-full flex items-center justify-center transition-all ${
                     isActive
                       ? "glass-strong shadow-neon ring-1 ring-primary/70"
@@ -774,7 +774,7 @@ function RadialWheel() {
                 </motion.div>
                 {/* Tooltip */}
                 <motion.span
-                  style={{ rotate: useTransform(rotation, (r) => -r) }}
+                  style={{ rotate: counterRotate }}
                   className="pointer-events-none absolute left-1/2 top-full mt-2 -translate-x-1/2 whitespace-nowrap rounded-full glass-strong px-2.5 py-1 text-[10px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-200"
                 >
                   {item.label}
