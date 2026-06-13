@@ -5,7 +5,8 @@ import {
   Github, Linkedin, Mail, Twitter, ExternalLink, MapPin,
   Briefcase, Code2, ChevronLeft, ChevronRight, Send, Atom,
   Brain, Cloud, Layers, Trophy, Home, GraduationCap, Sparkles,
-  Folder, Wrench, Terminal, Cpu, X, ChevronUp
+  Folder, Wrench, Terminal, Cpu, X, ChevronUp,
+  Instagram
 } from "lucide-react";
 
 import heroAsset from "@/assets/hero.png.asset.json";
@@ -21,10 +22,10 @@ const navItems = [
 ];
 
 const socials = [
-  { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: Github, href: "https://github.com", label: "GitHub" },
-  { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
-  { icon: Mail, href: "mailto:hello@alexander.dev", label: "Email" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/vaibhavi-srivastava26/", label: "LinkedIn" },
+  { icon: Github, href: "https://github.com/archangel2006", label: "GitHub" },
+  { icon: Instagram, href: "https://www.instagram.com/archangel.26/", label: "Instagram" },
+  { icon: Mail, href: "mailto:26.archangel@gmail.com", label: "Email" },
 ];
 
 const fadeUp = {
@@ -114,9 +115,8 @@ function EducationSection() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
                 onClick={() => setActive(i)}
-                className={`glass-card cursor-pointer rounded-2xl p-6 transition-all duration-500 ${
-                  isOpen ? "neon-border shadow-neon" : "hover:border-primary/40"
-                }`}
+                className={`glass-card cursor-pointer rounded-2xl p-6 transition-all duration-500 ${isOpen ? "neon-border shadow-neon" : "hover:border-primary/40"
+                  }`}
               >
                 <motion.div layout="position" className="flex items-center justify-between">
                   <h3 className="text-xl md:text-2xl font-bold font-display">{edu.title}</h3>
@@ -336,11 +336,11 @@ function ProjectsSection() {
                   </div>
                   <div className="absolute bottom-5 right-5 flex gap-2">
                     <a href={p.github} target="_blank" rel="noreferrer" aria-label="GitHub"
-                       className="h-10 w-10 rounded-full glass flex items-center justify-center hover:bg-primary/40 transition">
+                      className="h-10 w-10 rounded-full glass flex items-center justify-center hover:bg-primary/40 transition">
                       <Github className="h-4 w-4" />
                     </a>
                     <a href={p.demo} target="_blank" rel="noreferrer" aria-label="Live Demo"
-                       className="h-10 w-10 rounded-full glass flex items-center justify-center hover:bg-primary/40 transition">
+                      className="h-10 w-10 rounded-full glass flex items-center justify-center hover:bg-primary/40 transition">
                       <ExternalLink className="h-4 w-4" />
                     </a>
                   </div>
@@ -359,17 +359,17 @@ function ProjectsSection() {
           {/* Controls */}
           <div className="flex items-center gap-6">
             <button onClick={prev} aria-label="Previous"
-                    className="h-12 w-12 rounded-full glass-card hover:bg-primary/30 transition flex items-center justify-center cursor-pointer">
+              className="h-12 w-12 rounded-full glass-card hover:bg-primary/30 transition flex items-center justify-center cursor-pointer">
               <ChevronLeft className="h-5 w-5" />
             </button>
             <div className="flex items-center gap-2">
               {projects.map((_, i) => (
                 <button key={i} onClick={() => setIdx(i)} aria-label={`Go to slide ${i + 1}`}
-                        className={`h-2 rounded-full transition-all cursor-pointer ${i === idx ? "w-8 bg-primary shadow-neon" : "w-2 bg-foreground/30 hover:bg-foreground/60"}`} />
+                  className={`h-2 rounded-full transition-all cursor-pointer ${i === idx ? "w-8 bg-primary shadow-neon" : "w-2 bg-foreground/30 hover:bg-foreground/60"}`} />
               ))}
             </div>
             <button onClick={next} aria-label="Next"
-                    className="h-12 w-12 rounded-full glass-card hover:bg-primary/30 transition flex items-center justify-center cursor-pointer">
+              className="h-12 w-12 rounded-full glass-card hover:bg-primary/30 transition flex items-center justify-center cursor-pointer">
               <ChevronRight className="h-5 w-5" />
             </button>
           </div>
@@ -397,7 +397,7 @@ function ContactSection() {
     e.preventDefault();
     const subject = encodeURIComponent(`Portfolio message from ${form.name}`);
     const body = encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`);
-    window.location.href = `mailto:hello@alexander.dev?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:26.archangel@gmail.com?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -416,13 +416,13 @@ function ContactSection() {
             <div className="flex items-center gap-2 text-sm text-foreground/70 mb-6">
               <MapPin className="h-4 w-4 text-primary" /> New Delhi · Available worldwide
             </div>
-            <a href="mailto:hello@alexander.dev" className="block text-lg font-bold text-gradient mb-6 break-all">
-              hello@alexander.dev
+            <a href="mailto:26.archangel@gmail.com" className="block text-lg font-bold text-gradient mb-6 break-all">
+              26.archangel@gmail.com
             </a>
             <div className="flex items-center gap-3">
               {socials.map((s) => (
                 <a key={s.label} href={s.href} aria-label={s.label}
-                   className="h-11 w-11 rounded-xl glass flex items-center justify-center hover:bg-primary/30 hover:scale-110 transition">
+                  className="h-11 w-11 rounded-xl glass flex items-center justify-center hover:bg-primary/30 hover:scale-110 transition">
                   <s.icon className="h-5 w-5" />
                 </a>
               ))}
@@ -471,7 +471,7 @@ function ContactSection() {
             </button>
           </motion.form>
         </div>
-        <p className="mt-12 text-center text-xs text-foreground/60">© 2026 Alexander · Crafted with neon & caffeine</p>
+        <p className="mt-12 text-center text-xs text-foreground/60">© 2026 Vaibhavi Srivastava · Crafted with !hate</p>
       </div>
     </Section>
   );
@@ -492,7 +492,7 @@ function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProp
   const activeIndex = navItems.findIndex(
     (item) => item.href.replace("#", "") === activeSection
   );
-  
+
   const resolvedActiveIndex = activeIndex === -1 ? 0 : activeIndex;
 
   const handleWheel = (e: React.WheelEvent) => {
@@ -520,8 +520,8 @@ function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProp
   };
 
   return (
-    <div 
-      className="fixed bottom-6 left-6 z-50 pointer-events-none select-none" 
+    <div
+      className="fixed bottom-6 left-6 z-50 pointer-events-none select-none"
       style={{ width: 220, height: 220 }}
       onWheel={handleWheel}
     >
@@ -529,33 +529,33 @@ function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProp
         {/* Invisible Arc Guidelines/Background */}
         <svg className="absolute inset-0 pointer-events-none z-0 overflow-visible" style={{ left: 32, top: 120 }}>
           {/* Main arc ring */}
-          <circle 
-            cx="0" 
-            cy="0" 
-            r={radius} 
-            fill="none" 
-            stroke="rgba(168, 85, 247, 0.15)" 
-            strokeWidth="2" 
+          <circle
+            cx="0"
+            cy="0"
+            r={radius}
+            fill="none"
+            stroke="rgba(168, 85, 247, 0.15)"
+            strokeWidth="2"
           />
           {/* Glowing dash ring */}
-          <circle 
-            cx="0" 
-            cy="0" 
-            r={radius + 8} 
-            fill="none" 
-            stroke="rgba(236, 72, 153, 0.2)" 
-            strokeWidth="1" 
+          <circle
+            cx="0"
+            cy="0"
+            r={radius + 8}
+            fill="none"
+            stroke="rgba(236, 72, 153, 0.2)"
+            strokeWidth="1"
             strokeDasharray="6 15"
           />
         </svg>
 
         {/* Center fixed "VS" monogram core */}
-        <motion.div 
+        <motion.div
           className="absolute rounded-full flex items-center justify-center bg-background/95 border-2 border-primary z-20 font-display font-extrabold text-xl text-primary tracking-tighter cursor-pointer hover:scale-105 transition-all duration-300 select-none"
-          style={{ 
-            width: 64, 
-            height: 64, 
-            left: 0, 
+          style={{
+            width: 64,
+            height: 64,
+            left: 0,
             bottom: 0,
           }}
           animate={{
@@ -574,14 +574,14 @@ function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProp
           title="Go to Home"
         >
           {/* Animated spinning hud outer border */}
-          <motion.div 
-            className="absolute inset-[-4px] rounded-full border border-dashed border-primary/50 pointer-events-none" 
+          <motion.div
+            className="absolute inset-[-4px] rounded-full border border-dashed border-primary/50 pointer-events-none"
             animate={{ rotate: 360 }}
             transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
           />
           {/* Rotating scanner line */}
-          <motion.div 
-            className="absolute inset-0 rounded-full border-t border-accent/40 pointer-events-none" 
+          <motion.div
+            className="absolute inset-0 rounded-full border-t border-accent/40 pointer-events-none"
             animate={{ rotate: 360 }}
             transition={{ repeat: Infinity, duration: 4, ease: "linear" }}
           />
@@ -625,13 +625,13 @@ function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProp
         {navItems.map((item, i) => {
           const Icon = item.icon;
           const isCurrentActive = i === resolvedActiveIndex;
-          
+
           // Calculate angle for this item based on the active index
           const angleDeg = activeAngle + (i - resolvedActiveIndex) * angleStep;
-          
+
           // Convert to radians for trigonometric functions
           const angleRad = angleDeg * (Math.PI / 180);
-          
+
           // Calculate coordinates from center (32, 188)
           const cx = 32;
           const cy = 188;
@@ -640,7 +640,7 @@ function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProp
 
           // Determine visibility based on angle
           const isVisible = angleDeg >= -110 && angleDeg <= 20;
-          
+
           // Compute opacity: fade out as it approaches boundaries
           let opacity = 0;
           if (isVisible) {
@@ -652,7 +652,7 @@ function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProp
               opacity = 1;
             }
           }
-          
+
           const size = isCurrentActive ? 48 : 36;
 
           return (
@@ -669,11 +669,10 @@ function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProp
             >
               <button
                 onClick={() => onSelectSection(item.href.replace("#", ""))}
-                className={`group flex items-center justify-center rounded-full transition-all duration-300 cursor-pointer ${
-                  isCurrentActive 
-                    ? "bg-primary/20 text-foreground border-2 border-primary shadow-neon scale-110" 
-                    : "bg-background/80 text-foreground/70 border border-primary/30 hover:border-primary/70 hover:text-foreground hover:bg-primary/10"
-                }`}
+                className={`group flex items-center justify-center rounded-full transition-all duration-300 cursor-pointer ${isCurrentActive
+                  ? "bg-primary/20 text-foreground border-2 border-primary shadow-neon scale-110"
+                  : "bg-background/80 text-foreground/70 border border-primary/30 hover:border-primary/70 hover:text-foreground hover:bg-primary/10"
+                  }`}
                 style={{
                   width: size,
                   height: size,
@@ -682,10 +681,10 @@ function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProp
                 title={item.label}
               >
                 <Icon className={`${isCurrentActive ? "h-5 w-5" : "h-4 w-4"}`} />
-                
+
                 {/* Text label beside active icon only */}
                 {isCurrentActive && (
-                  <span 
+                  <span
                     className="absolute left-full ml-3 whitespace-nowrap rounded-lg bg-background/90 border border-primary/40 px-2.5 py-1 text-xs font-display font-semibold tracking-wider text-primary shadow-neon pointer-events-none"
                     style={{
                       textShadow: "0 0 5px rgba(168, 85, 247, 0.5)"
@@ -782,7 +781,7 @@ export default function Portfolio() {
               transition={{ duration: 0.8, delay: 0.5 }}
               className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground drop-shadow-[0_4px_30px_rgba(0,0,0,0.6)] font-display"
             >
-              Hi! I'm Alexander
+              Hi! I'm Vaibhavi Srivastava
             </motion.h1>
             <motion.h2
               initial={{ opacity: 0, y: 30 }}
