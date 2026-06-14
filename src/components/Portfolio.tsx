@@ -9,8 +9,9 @@ import {
   Instagram
 } from "lucide-react";
 
-import heroAsset from "@/assets/hero.png";
-import cityAsset from "@/assets/background-1.png";
+import heroAsset from "@/assets/hero1.png";
+import hero2Asset from "@/assets/hero2.png";
+import cityAsset from "@/assets/background1.png";
 
 // Education images
 import igdtuwAsset from "@/assets/education/igdtuw.png";
@@ -750,7 +751,18 @@ function MobileNav({ activeSection, onSelectSection }: MobileNavProps) {
           >
             VS
           </span>
-          <span className="text-sm font-semibold text-foreground/80 font-display tracking-wide">
+          <span
+            className="
+              text-sm
+              font-semibold
+              text-foreground/80
+              font-display
+              tracking-wide
+              truncate
+              max-w-[140px]
+              sm:max-w-none
+            "
+          >
             Vaibhavi Srivastava
           </span>
         </button>
@@ -890,19 +902,22 @@ export default function Portfolio() {
           style={{ y: heroY, opacity: heroOpacity }}
           className="absolute inset-0 bg-cover bg-center"
         >
-          <img src={heroAsset} alt="" className="absolute inset-0 w-full h-full object-cover" />
+          {/* Mobile hero background (hero2) */}
+          <img src={hero2Asset} alt="" className="md:hidden absolute inset-0 w-full h-full object-cover object-top" />
+          {/* Desktop hero background (hero1) */}
+          <img src={heroAsset} alt="" className="hidden md:block absolute inset-0 w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-background/20 to-background/60" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
           <div className="rain-overlay" />
         </motion.div>
 
-        <div className="relative z-10 flex min-h-screen items-center justify-end px-6 md:px-12 lg:px-24">
-          <div className="max-w-2xl text-right md:pr-8">
+        <div className="relative z-10 flex min-h-screen items-center justify-center md:justify-end px-6 md:px-12 lg:px-24 pt-16 md:pt-0">
+          <div className="max-w-2xl text-center md:text-right md:pr-8">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground font-display"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground font-display"
               style={{
                 fontFamily: '"Inter", system-ui, sans-serif',
                 textShadow:
@@ -916,7 +931,7 @@ export default function Portfolio() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.9 }}
-              className="mt-6 text-base md:text-lg text-foreground/85 font-semibold leading-relaxed max-w-xl ml-auto"
+              className="mt-6 text-sm sm:text-base md:text-lg text-foreground/85 font-semibold leading-relaxed max-w-xl mx-auto md:ml-auto md:mr-0"
             >
               Crafting immersive digital experiences with code, design, and a touch of neon.
               Specialized in building scalable web applications that blur the line between art and engineering.
@@ -926,7 +941,7 @@ export default function Portfolio() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.1 }}
-              className="mt-8 flex items-center justify-end gap-4"
+              className="mt-8 flex items-center justify-center md:justify-end gap-4 flex-wrap"
             >
               {socials.map((s) => (
                 <a

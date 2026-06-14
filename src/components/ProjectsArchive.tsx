@@ -6,7 +6,7 @@ import {
   Search, ArrowLeft, Github, ExternalLink, BookOpen
 } from "lucide-react";
 import { placeholderProjects, Project } from "@/lib/projectData";
-import cityAsset from "@/assets/background-1.png";
+import cityAsset from "@/assets/background1.png";
 
 const filters = [
   { id: "Featured", label: "Featured", icon: Star },
