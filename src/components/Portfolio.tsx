@@ -571,11 +571,11 @@ interface NavigationWheelProps {
 }
 
 function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProps) {
-  const radius = 80;
+  const radius = 100;
   const activeAngle = -45;
   const angleStep = 50;
 
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
 
   const activeIndex = navItems.findIndex(
     (item) => item.href.replace("#", "") === activeSection
@@ -597,7 +597,7 @@ function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProp
 
   return (
     <div
-      className="fixed bottom-6 left-6 z-50 pointer-events-none select-none"
+      className="hidden md:block fixed bottom-6 left-6 z-50 pointer-events-none select-none"
       style={{ width: 220, height: 220 }}
       onWheel={handleWheel}
     >
@@ -615,7 +615,7 @@ function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProp
         {/* Center VS core — smaller, click toggles arc */}
         <motion.div
           className="absolute rounded-full flex items-center justify-center bg-background/95 border-2 border-primary z-20 font-display font-extrabold text-base text-primary tracking-tighter cursor-pointer hover:scale-105 transition-all duration-300 select-none"
-          style={{ width: 46, height: 46, left: 0, bottom: 0 }}
+          style={{ width: 55, height: 55, left: 0, bottom: 0 }}
           animate={{
             boxShadow: expanded
               ? ["0 0 20px rgba(168,85,247,0.9), inset 0 0 14px rgba(168,85,247,0.5)",
@@ -712,6 +712,116 @@ function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProp
   );
 }
 
+// =================== MOBILE NAV ===================
+interface MobileNavProps {
+  activeSection: string;
+  onSelectSection: (id: string) => void;
+}
+
+function MobileNav({ activeSection, onSelectSection }: MobileNavProps) {
+  const [open, setOpen] = useState(false);
+
+  const handleNav = (id: string) => {
+    onSelectSection(id);
+    setOpen(false);
+  };
+
+  return (
+    <div className="md:hidden fixed top-0 left-0 right-0 z-50">
+      {/* Top bar */}
+      <div
+        className="flex items-center justify-between px-5 py-3"
+        style={{
+          background: "oklch(0.18 0.08 295 / 0.85)",
+          backdropFilter: "blur(16px)",
+          WebkitBackdropFilter: "blur(16px)",
+          borderBottom: "1px solid oklch(0.6 0.18 305 / 0.25)",
+          boxShadow: "0 2px 20px oklch(0.1 0.05 290 / 0.4)",
+        }}
+      >
+        {/* VS brand */}
+        <button
+          onClick={() => handleNav("home")}
+          className="flex items-center gap-2 cursor-pointer"
+        >
+          <span
+            className="h-9 w-9 rounded-full flex items-center justify-center font-display font-extrabold text-sm text-primary border-2 border-primary"
+            style={{ boxShadow: "0 0 12px rgba(168,85,247,0.6)" }}
+          >
+            VS
+          </span>
+          <span className="text-sm font-semibold text-foreground/80 font-display tracking-wide">
+            Vaibhavi Srivastava
+          </span>
+        </button>
+
+        {/* Hamburger button */}
+        <button
+          onClick={() => setOpen((v) => !v)}
+          aria-label={open ? "Close menu" : "Open menu"}
+          className="flex flex-col justify-center items-center gap-1.5 w-9 h-9 rounded-lg border border-primary/30 bg-primary/10 hover:bg-primary/20 transition cursor-pointer"
+        >
+          <motion.span
+            animate={open ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+            transition={{ duration: 0.25 }}
+            className="block w-5 h-0.5 bg-primary rounded-full"
+          />
+          <motion.span
+            animate={open ? { opacity: 0 } : { opacity: 1 }}
+            transition={{ duration: 0.15 }}
+            className="block w-5 h-0.5 bg-primary rounded-full"
+          />
+          <motion.span
+            animate={open ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+            transition={{ duration: 0.25 }}
+            className="block w-5 h-0.5 bg-primary rounded-full"
+          />
+        </button>
+      </div>
+
+      {/* Dropdown menu */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden"
+            style={{
+              background: "oklch(0.18 0.08 295 / 0.95)",
+              backdropFilter: "blur(20px)",
+              WebkitBackdropFilter: "blur(20px)",
+              borderBottom: "1px solid oklch(0.6 0.18 305 / 0.25)",
+            }}
+          >
+            <nav className="flex flex-col px-4 py-3 gap-1">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = item.href.replace("#", "") === activeSection;
+                return (
+                  <button
+                    key={item.label}
+                    onClick={() => handleNav(item.href.replace("#", ""))}
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-display font-semibold tracking-wide transition-all cursor-pointer ${isActive
+                      ? "bg-primary/20 text-primary border border-primary/40"
+                      : "text-foreground/70 hover:bg-primary/10 hover:text-foreground border border-transparent"
+                      }`}
+                    style={isActive ? { boxShadow: "0 0 12px rgba(168,85,247,0.25)" } : {}}
+                  >
+                    <Icon className="h-4 w-4 shrink-0" />
+                    {item.label}
+                  </button>
+                );
+              })}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 // =================== ROOT ===================
 export default function Portfolio() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -767,7 +877,10 @@ export default function Portfolio() {
       />
       <div className="fixed inset-0 -z-10 bg-background/35" />
 
-      {/* Circular HUD navigation wheel (bottom-left) */}
+      {/* Mobile sticky top navbar (hidden on md+) */}
+      <MobileNav activeSection={activeSection} onSelectSection={scrollToSection} />
+
+      {/* Circular HUD navigation wheel — desktop only (hidden on mobile) */}
       <NavigationWheel activeSection={activeSection} onSelectSection={scrollToSection} />
 
 
