@@ -25,6 +25,69 @@ import bbpsAsset from "@/assets/education/bbps.png";
 // import quantinelImg from "@/assets/projects/quantinel.jpg";     // TODO: add quantinel.jpg
 // import msisImg from "@/assets/projects/msis.jpg";               // TODO: add msis.jpg
 
+// =================== TYPEWRITER HOOK ===================
+const ROLES = [
+  "Full Stack Developer",
+  "AI / ML Engineer",
+  "UI / UX Designer",
+];
+
+function useTypewriter(words: string[], typeSpeed = 70, deleteSpeed = 40, pause = 1800) {
+  const [wordIndex, setWordIndex] = useState(0);
+  const [displayed, setDisplayed] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const current = words[wordIndex % words.length];
+    let timeout: ReturnType<typeof setTimeout>;
+
+    if (!isDeleting && displayed === current) {
+      timeout = setTimeout(() => setIsDeleting(true), pause);
+    } else if (isDeleting && displayed === "") {
+      setIsDeleting(false);
+      setWordIndex((i) => (i + 1) % words.length);
+    } else {
+      const next = isDeleting
+        ? current.slice(0, displayed.length - 1)
+        : current.slice(0, displayed.length + 1);
+      timeout = setTimeout(() => setDisplayed(next), isDeleting ? deleteSpeed : typeSpeed);
+    }
+    return () => clearTimeout(timeout);
+  }, [displayed, isDeleting, wordIndex, words, typeSpeed, deleteSpeed, pause]);
+
+  return displayed;
+}
+
+function TypewriterTitle() {
+  const text = useTypewriter(ROLES);
+  return (
+    <motion.h2
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.7 }}
+      className="mt-4 text-4xl md:text-5xl lg:text-[3.375rem] font-bold"
+      style={{
+        fontFamily: '"Sansita", sans-serif',
+        fontWeight: 700,
+        letterSpacing: "0.01em",
+        color: "#c4b5fd",
+        textShadow: "0 0 30px rgba(196,181,253,0.35)",
+      }}
+    >
+      {text}
+      <span
+        className="inline-block w-[3px] ml-1 align-middle rounded-sm"
+        style={{
+          height: "0.85em",
+          background: "#c4b5fd",
+          boxShadow: "0 0 8px rgba(196,181,253,0.9)",
+          animation: "blink-cursor 0.75s step-end infinite",
+        }}
+      />
+    </motion.h2>
+  );
+}
+
 const navItems = [
   { label: "Home", href: "#home", icon: Home },
   { label: "Education", href: "#education", icon: GraduationCap },
@@ -803,18 +866,16 @@ export default function Portfolio() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground drop-shadow-[0_4px_30px_rgba(0,0,0,0.6)] font-display"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground font-display"
+              style={{
+                fontFamily: '"Inter", system-ui, sans-serif',
+                textShadow:
+                  "0 0 8px rgba(168,85,247,0.9), 0 0 20px rgba(168,85,247,0.7), 0 0 45px rgba(168,85,247,0.5), 0 4px 30px rgba(0,0,0,0.6)",
+              }}
             >
-              Hi! I'm Vaibhavi Srivastava
+              Hi! I'm<br />Vaibhavi Srivastava
             </motion.h1>
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-              className="mt-4 text-4xl md:text-5xl lg:text-6xl font-bold text-gradient font-display"
-            >
-              Full Stack Developer
-            </motion.h2>
+<TypewriterTitle />
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
