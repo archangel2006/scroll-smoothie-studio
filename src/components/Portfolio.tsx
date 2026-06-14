@@ -571,38 +571,27 @@ interface NavigationWheelProps {
 }
 
 function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProps) {
-  const radius = 130;
-  const activeAngle = -45; // middle of the visible quarter circle (-90 to 0)
-  const angleStep = 30; // separation between adjacent menu items
+  const radius = 80;
+  const activeAngle = -45;
+  const angleStep = 50;
 
-  // Find index of active section
+  const [expanded, setExpanded] = useState(false);
+
   const activeIndex = navItems.findIndex(
     (item) => item.href.replace("#", "") === activeSection
   );
-
   const resolvedActiveIndex = activeIndex === -1 ? 0 : activeIndex;
 
+  // Scroll through sections when wheel is expanded
   const handleWheel = (e: React.WheelEvent) => {
+    if (!expanded) return;
+    e.preventDefault();
     if (e.deltaY > 0) {
-      if (resolvedActiveIndex < navItems.length - 1) {
+      if (resolvedActiveIndex < navItems.length - 1)
         onSelectSection(navItems[resolvedActiveIndex + 1].href.replace("#", ""));
-      }
     } else {
-      if (resolvedActiveIndex > 0) {
+      if (resolvedActiveIndex > 0)
         onSelectSection(navItems[resolvedActiveIndex - 1].href.replace("#", ""));
-      }
-    }
-  };
-
-  const handlePrev = () => {
-    if (resolvedActiveIndex > 0) {
-      onSelectSection(navItems[resolvedActiveIndex - 1].href.replace("#", ""));
-    }
-  };
-
-  const handleNext = () => {
-    if (resolvedActiveIndex < navItems.length - 1) {
-      onSelectSection(navItems[resolvedActiveIndex + 1].href.replace("#", ""));
     }
   };
 
@@ -613,60 +602,40 @@ function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProp
       onWheel={handleWheel}
     >
       <div className="relative w-full h-full pointer-events-auto">
-        {/* Invisible Arc Guidelines/Background */}
-        <svg className="absolute inset-0 pointer-events-none z-0 overflow-visible" style={{ left: 32, top: 120 }}>
-          {/* Main arc ring */}
-          <circle
-            cx="0"
-            cy="0"
-            r={radius}
-            fill="none"
-            stroke="rgba(168, 85, 247, 0.15)"
-            strokeWidth="2"
-          />
-          {/* Glowing dash ring */}
-          <circle
-            cx="0"
-            cy="0"
-            r={radius + 8}
-            fill="none"
-            stroke="rgba(236, 72, 153, 0.2)"
-            strokeWidth="1"
-            strokeDasharray="6 15"
-          />
+
+        {/* Arc ring SVG — only visible when expanded */}
+        <svg
+          className="absolute inset-0 pointer-events-none z-0 overflow-visible transition-opacity duration-500"
+          style={{ left: 23, top: 130, opacity: expanded ? 1 : 0 }}
+        >
+          <circle cx="0" cy="0" r={radius} fill="none" stroke="rgba(168, 85, 247, 0.15)" strokeWidth="2" />
+          <circle cx="0" cy="0" r={radius + 8} fill="none" stroke="rgba(236, 72, 153, 0.2)" strokeWidth="1" strokeDasharray="6 15" />
         </svg>
 
-        {/* Center fixed "VS" monogram core */}
+        {/* Center VS core — smaller, click toggles arc */}
         <motion.div
-          className="absolute rounded-full flex items-center justify-center bg-background/95 border-2 border-primary z-20 font-display font-extrabold text-xl text-primary tracking-tighter cursor-pointer hover:scale-105 transition-all duration-300 select-none"
-          style={{
-            width: 64,
-            height: 64,
-            left: 0,
-            bottom: 0,
-          }}
+          className="absolute rounded-full flex items-center justify-center bg-background/95 border-2 border-primary z-20 font-display font-extrabold text-base text-primary tracking-tighter cursor-pointer hover:scale-105 transition-all duration-300 select-none"
+          style={{ width: 46, height: 46, left: 0, bottom: 0 }}
           animate={{
-            boxShadow: [
-              "0 0 15px rgba(168, 85, 247, 0.6), inset 0 0 10px rgba(168, 85, 247, 0.3)",
-              "0 0 25px rgba(168, 85, 247, 0.9), inset 0 0 15px rgba(168, 85, 247, 0.5)",
-              "0 0 15px rgba(168, 85, 247, 0.6), inset 0 0 10px rgba(168, 85, 247, 0.3)"
-            ]
+            boxShadow: expanded
+              ? ["0 0 20px rgba(168,85,247,0.9), inset 0 0 14px rgba(168,85,247,0.5)",
+                "0 0 30px rgba(168,85,247,1), inset 0 0 20px rgba(168,85,247,0.7)",
+                "0 0 20px rgba(168,85,247,0.9), inset 0 0 14px rgba(168,85,247,0.5)"]
+              : ["0 0 12px rgba(168,85,247,0.5), inset 0 0 8px rgba(168,85,247,0.2)",
+                "0 0 20px rgba(168,85,247,0.8), inset 0 0 12px rgba(168,85,247,0.4)",
+                "0 0 12px rgba(168,85,247,0.5), inset 0 0 8px rgba(168,85,247,0.2)"]
           }}
-          transition={{
-            repeat: Infinity,
-            duration: 3,
-            ease: "easeInOut"
-          }}
-          onClick={() => onSelectSection("home")}
-          title="Go to Home"
+          transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+          onClick={() => setExpanded((v) => !v)}
+          title={expanded ? "Collapse menu" : "Open menu"}
         >
-          {/* Animated spinning hud outer border */}
+          {/* Spinning dashed ring */}
           <motion.div
             className="absolute inset-[-4px] rounded-full border border-dashed border-primary/50 pointer-events-none"
             animate={{ rotate: 360 }}
             transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
           />
-          {/* Rotating scanner line */}
+          {/* Scanner sweep */}
           <motion.div
             className="absolute inset-0 rounded-full border-t border-accent/40 pointer-events-none"
             animate={{ rotate: 360 }}
@@ -675,115 +644,69 @@ function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProp
           VS
         </motion.div>
 
-        {/* Navigation Arrows on HUD inner ring */}
-        <button
-          onClick={handlePrev}
-          disabled={resolvedActiveIndex === 0}
-          className="absolute z-30 flex items-center justify-center rounded-full border border-primary/40 bg-background/90 text-primary hover:bg-primary/20 hover:text-foreground transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
-          style={{
-            width: 24,
-            height: 24,
-            left: 20,
-            bottom: 76,
-            boxShadow: "0 0 5px rgba(168, 85, 247, 0.2)"
-          }}
-          aria-label="Previous Section"
-        >
-          <ChevronUp className="h-3.5 w-3.5" />
-        </button>
+        {/* Arc icons — only rendered/visible when expanded */}
+        <AnimatePresence>
+          {expanded && navItems.map((item, i) => {
+            const Icon = item.icon;
+            const isCurrentActive = i === resolvedActiveIndex;
+            const angleDeg = activeAngle + (i - resolvedActiveIndex) * angleStep;
+            const angleRad = angleDeg * (Math.PI / 180);
+            const cx = 23;
+            const cy = 177;
+            const x = cx + radius * Math.cos(angleRad);
+            const y = cy + radius * Math.sin(angleRad);
+            const isVisible = angleDeg >= -110 && angleDeg <= 20;
 
-        <button
-          onClick={handleNext}
-          disabled={resolvedActiveIndex === navItems.length - 1}
-          className="absolute z-30 flex items-center justify-center rounded-full border border-primary/40 bg-background/90 text-primary hover:bg-primary/20 hover:text-foreground transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
-          style={{
-            width: 24,
-            height: 24,
-            left: 76,
-            bottom: 20,
-            boxShadow: "0 0 5px rgba(168, 85, 247, 0.2)"
-          }}
-          aria-label="Next Section"
-        >
-          <ChevronRight className="h-3.5 w-3.5" />
-        </button>
-
-        {/* Rotating Icons on the circumference */}
-        {navItems.map((item, i) => {
-          const Icon = item.icon;
-          const isCurrentActive = i === resolvedActiveIndex;
-
-          // Calculate angle for this item based on the active index
-          const angleDeg = activeAngle + (i - resolvedActiveIndex) * angleStep;
-
-          // Convert to radians for trigonometric functions
-          const angleRad = angleDeg * (Math.PI / 180);
-
-          // Calculate coordinates from center (32, 188)
-          const cx = 32;
-          const cy = 188;
-          const x = cx + radius * Math.cos(angleRad);
-          const y = cy + radius * Math.sin(angleRad);
-
-          // Determine visibility based on angle
-          const isVisible = angleDeg >= -110 && angleDeg <= 20;
-
-          // Compute opacity: fade out as it approaches boundaries
-          let opacity = 0;
-          if (isVisible) {
-            if (angleDeg < -90) {
-              opacity = 1 - ((-90 - angleDeg) / 20);
-            } else if (angleDeg > 0) {
-              opacity = 1 - (angleDeg / 20);
-            } else {
-              opacity = 1;
+            let opacity = 0;
+            if (isVisible) {
+              if (angleDeg < -90) opacity = 1 - ((-90 - angleDeg) / 20);
+              else if (angleDeg > 0) opacity = 1 - (angleDeg / 20);
+              else opacity = 1;
             }
-          }
 
-          const size = isCurrentActive ? 48 : 36;
+            const size = isCurrentActive ? 44 : 34;
 
-          return (
-            <div
-              key={item.label}
-              className="absolute z-10 transition-all duration-700 ease-out"
-              style={{
-                left: x,
-                top: y,
-                transform: `translate(-50%, -50%) scale(${isVisible ? 1 : 0})`,
-                opacity: isVisible ? opacity : 0,
-                pointerEvents: isVisible && opacity > 0.3 ? "auto" : "none"
-              }}
-            >
-              <button
-                onClick={() => onSelectSection(item.href.replace("#", ""))}
-                className={`group flex items-center justify-center rounded-full transition-all duration-300 cursor-pointer ${isCurrentActive
-                  ? "bg-primary/20 text-foreground border-2 border-primary shadow-neon scale-110"
-                  : "bg-background/80 text-foreground/70 border border-primary/30 hover:border-primary/70 hover:text-foreground hover:bg-primary/10"
-                  }`}
-                style={{
-                  width: size,
-                  height: size,
-                  boxShadow: isCurrentActive ? "0 0 15px rgba(168, 85, 247, 0.5)" : "none"
-                }}
-                title={item.label}
+            if (!isVisible || opacity <= 0) return null;
+
+            return (
+              <motion.div
+                key={item.label}
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity }}
+                exit={{ scale: 0, opacity: 0 }}
+                transition={{ duration: 0.3, delay: i * 0.04 }}
+                className="absolute z-10 group"
+                style={{ left: x, top: y, transform: "translate(-50%, -50%)", pointerEvents: "auto" }}
               >
-                <Icon className={`${isCurrentActive ? "h-5 w-5" : "h-4 w-4"}`} />
+                <button
+                  onClick={() => { onSelectSection(item.href.replace("#", "")); }}
+                  className={`flex items-center justify-center rounded-full transition-all duration-300 cursor-pointer ${isCurrentActive
+                    ? "bg-primary/20 text-foreground border-2 border-primary shadow-neon scale-110"
+                    : "bg-background/80 text-foreground/70 border border-primary/30 hover:border-primary/70 hover:text-foreground hover:bg-primary/10"
+                    }`}
+                  style={{
+                    width: size,
+                    height: size,
+                    boxShadow: isCurrentActive ? "0 0 15px rgba(168, 85, 247, 0.5)" : "none"
+                  }}
+                  title={item.label}
+                >
+                  <Icon className={isCurrentActive ? "h-4 w-4" : "h-3.5 w-3.5"} />
 
-                {/* Text label beside active icon only */}
-                {isCurrentActive && (
+                  {/* Label — appears only on hover via group-hover */}
                   <span
-                    className="absolute left-full ml-3 whitespace-nowrap rounded-lg bg-background/90 border border-primary/40 px-2.5 py-1 text-xs font-display font-semibold tracking-wider text-primary shadow-neon pointer-events-none"
-                    style={{
-                      textShadow: "0 0 5px rgba(168, 85, 247, 0.5)"
-                    }}
+                    className="absolute left-full ml-3 whitespace-nowrap rounded-lg bg-background/90 border border-primary/40 px-2.5 py-1 text-xs font-display font-semibold tracking-wider text-primary shadow-neon pointer-events-none
+                               opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                    style={{ textShadow: "0 0 5px rgba(168, 85, 247, 0.5)" }}
                   >
                     {item.label}
                   </span>
-                )}
-              </button>
-            </div>
-          );
-        })}
+                </button>
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
+
       </div>
     </div>
   );
@@ -875,7 +798,7 @@ export default function Portfolio() {
             >
               Hi! I'm<br />Vaibhavi Srivastava
             </motion.h1>
-<TypewriterTitle />
+            <TypewriterTitle />
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
