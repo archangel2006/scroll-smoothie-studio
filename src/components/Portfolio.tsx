@@ -25,6 +25,69 @@ import bbpsAsset from "@/assets/education/bbps.png";
 // import quantinelImg from "@/assets/projects/quantinel.jpg";     // TODO: add quantinel.jpg
 // import msisImg from "@/assets/projects/msis.jpg";               // TODO: add msis.jpg
 
+// =================== TYPEWRITER HOOK ===================
+const ROLES = [
+  "Full Stack Developer",
+  "AI / ML Engineer",
+  "UI / UX Designer",
+];
+
+function useTypewriter(words: string[], typeSpeed = 70, deleteSpeed = 40, pause = 1800) {
+  const [wordIndex, setWordIndex] = useState(0);
+  const [displayed, setDisplayed] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const current = words[wordIndex % words.length];
+    let timeout: ReturnType<typeof setTimeout>;
+
+    if (!isDeleting && displayed === current) {
+      timeout = setTimeout(() => setIsDeleting(true), pause);
+    } else if (isDeleting && displayed === "") {
+      setIsDeleting(false);
+      setWordIndex((i) => (i + 1) % words.length);
+    } else {
+      const next = isDeleting
+        ? current.slice(0, displayed.length - 1)
+        : current.slice(0, displayed.length + 1);
+      timeout = setTimeout(() => setDisplayed(next), isDeleting ? deleteSpeed : typeSpeed);
+    }
+    return () => clearTimeout(timeout);
+  }, [displayed, isDeleting, wordIndex, words, typeSpeed, deleteSpeed, pause]);
+
+  return displayed;
+}
+
+function TypewriterTitle() {
+  const text = useTypewriter(ROLES);
+  return (
+    <motion.h2
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.7 }}
+      className="mt-4 text-4xl md:text-5xl lg:text-[3.375rem] font-bold"
+      style={{
+        fontFamily: '"Sansita", sans-serif',
+        fontWeight: 700,
+        letterSpacing: "0.01em",
+        color: "#c4b5fd",
+        textShadow: "0 0 30px rgba(196,181,253,0.35)",
+      }}
+    >
+      {text}
+      <span
+        className="inline-block w-[3px] ml-1 align-middle rounded-sm"
+        style={{
+          height: "0.85em",
+          background: "#c4b5fd",
+          boxShadow: "0 0 8px rgba(196,181,253,0.9)",
+          animation: "blink-cursor 0.75s step-end infinite",
+        }}
+      />
+    </motion.h2>
+  );
+}
+
 const navItems = [
   { label: "Home", href: "#home", icon: Home },
   { label: "Education", href: "#education", icon: GraduationCap },
@@ -508,102 +571,71 @@ interface NavigationWheelProps {
 }
 
 function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProps) {
-  const radius = 130;
-  const activeAngle = -45; // middle of the visible quarter circle (-90 to 0)
-  const angleStep = 30; // separation between adjacent menu items
+  const radius = 100;
+  const activeAngle = -45;
+  const angleStep = 50;
 
-  // Find index of active section
+  const [expanded, setExpanded] = useState(true);
+
   const activeIndex = navItems.findIndex(
     (item) => item.href.replace("#", "") === activeSection
   );
-
   const resolvedActiveIndex = activeIndex === -1 ? 0 : activeIndex;
 
+  // Scroll through sections when wheel is expanded
   const handleWheel = (e: React.WheelEvent) => {
+    if (!expanded) return;
+    e.preventDefault();
     if (e.deltaY > 0) {
-      if (resolvedActiveIndex < navItems.length - 1) {
+      if (resolvedActiveIndex < navItems.length - 1)
         onSelectSection(navItems[resolvedActiveIndex + 1].href.replace("#", ""));
-      }
     } else {
-      if (resolvedActiveIndex > 0) {
+      if (resolvedActiveIndex > 0)
         onSelectSection(navItems[resolvedActiveIndex - 1].href.replace("#", ""));
-      }
-    }
-  };
-
-  const handlePrev = () => {
-    if (resolvedActiveIndex > 0) {
-      onSelectSection(navItems[resolvedActiveIndex - 1].href.replace("#", ""));
-    }
-  };
-
-  const handleNext = () => {
-    if (resolvedActiveIndex < navItems.length - 1) {
-      onSelectSection(navItems[resolvedActiveIndex + 1].href.replace("#", ""));
     }
   };
 
   return (
     <div
-      className="fixed bottom-6 left-6 z-50 pointer-events-none select-none"
+      className="hidden md:block fixed bottom-6 left-6 z-50 pointer-events-none select-none"
       style={{ width: 220, height: 220 }}
       onWheel={handleWheel}
     >
       <div className="relative w-full h-full pointer-events-auto">
-        {/* Invisible Arc Guidelines/Background */}
-        <svg className="absolute inset-0 pointer-events-none z-0 overflow-visible" style={{ left: 32, top: 120 }}>
-          {/* Main arc ring */}
-          <circle
-            cx="0"
-            cy="0"
-            r={radius}
-            fill="none"
-            stroke="rgba(168, 85, 247, 0.15)"
-            strokeWidth="2"
-          />
-          {/* Glowing dash ring */}
-          <circle
-            cx="0"
-            cy="0"
-            r={radius + 8}
-            fill="none"
-            stroke="rgba(236, 72, 153, 0.2)"
-            strokeWidth="1"
-            strokeDasharray="6 15"
-          />
+
+        {/* Arc ring SVG — only visible when expanded */}
+        <svg
+          className="absolute inset-0 pointer-events-none z-0 overflow-visible transition-opacity duration-500"
+          style={{ left: 23, top: 130, opacity: expanded ? 1 : 0 }}
+        >
+          <circle cx="0" cy="0" r={radius} fill="none" stroke="rgba(168, 85, 247, 0.15)" strokeWidth="2" />
+          <circle cx="0" cy="0" r={radius + 8} fill="none" stroke="rgba(236, 72, 153, 0.2)" strokeWidth="1" strokeDasharray="6 15" />
         </svg>
 
-        {/* Center fixed "VS" monogram core */}
+        {/* Center VS core — smaller, click toggles arc */}
         <motion.div
-          className="absolute rounded-full flex items-center justify-center bg-background/95 border-2 border-primary z-20 font-display font-extrabold text-xl text-primary tracking-tighter cursor-pointer hover:scale-105 transition-all duration-300 select-none"
-          style={{
-            width: 64,
-            height: 64,
-            left: 0,
-            bottom: 0,
-          }}
+          className="absolute rounded-full flex items-center justify-center bg-background/95 border-2 border-primary z-20 font-display font-extrabold text-base text-primary tracking-tighter cursor-pointer hover:scale-105 transition-all duration-300 select-none"
+          style={{ width: 55, height: 55, left: 0, bottom: 0 }}
           animate={{
-            boxShadow: [
-              "0 0 15px rgba(168, 85, 247, 0.6), inset 0 0 10px rgba(168, 85, 247, 0.3)",
-              "0 0 25px rgba(168, 85, 247, 0.9), inset 0 0 15px rgba(168, 85, 247, 0.5)",
-              "0 0 15px rgba(168, 85, 247, 0.6), inset 0 0 10px rgba(168, 85, 247, 0.3)"
-            ]
+            boxShadow: expanded
+              ? ["0 0 20px rgba(168,85,247,0.9), inset 0 0 14px rgba(168,85,247,0.5)",
+                "0 0 30px rgba(168,85,247,1), inset 0 0 20px rgba(168,85,247,0.7)",
+                "0 0 20px rgba(168,85,247,0.9), inset 0 0 14px rgba(168,85,247,0.5)"]
+              : ["0 0 12px rgba(168,85,247,0.5), inset 0 0 8px rgba(168,85,247,0.2)",
+                "0 0 20px rgba(168,85,247,0.8), inset 0 0 12px rgba(168,85,247,0.4)",
+                "0 0 12px rgba(168,85,247,0.5), inset 0 0 8px rgba(168,85,247,0.2)"]
           }}
-          transition={{
-            repeat: Infinity,
-            duration: 3,
-            ease: "easeInOut"
-          }}
-          onClick={() => onSelectSection("home")}
-          title="Go to Home"
+          transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+          onClick={() => setExpanded((v) => !v)}
+          title={expanded ? "Collapse menu" : "Open menu"}
         >
-          {/* Animated spinning hud outer border */}
+          {/* Spinning dashed ring */}
           <motion.div
             className="absolute inset-[-4px] rounded-full border border-dashed border-primary/50 pointer-events-none"
             animate={{ rotate: 360 }}
             transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
           />
-          {/* Rotating scanner line */}
+          {/* Scanner sweep */}
           <motion.div
             className="absolute inset-0 rounded-full border-t border-accent/40 pointer-events-none"
             animate={{ rotate: 360 }}
@@ -612,116 +644,180 @@ function NavigationWheel({ activeSection, onSelectSection }: NavigationWheelProp
           VS
         </motion.div>
 
-        {/* Navigation Arrows on HUD inner ring */}
-        <button
-          onClick={handlePrev}
-          disabled={resolvedActiveIndex === 0}
-          className="absolute z-30 flex items-center justify-center rounded-full border border-primary/40 bg-background/90 text-primary hover:bg-primary/20 hover:text-foreground transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
-          style={{
-            width: 24,
-            height: 24,
-            left: 20,
-            bottom: 76,
-            boxShadow: "0 0 5px rgba(168, 85, 247, 0.2)"
-          }}
-          aria-label="Previous Section"
-        >
-          <ChevronUp className="h-3.5 w-3.5" />
-        </button>
+        {/* Arc icons — only rendered/visible when expanded */}
+        <AnimatePresence>
+          {expanded && navItems.map((item, i) => {
+            const Icon = item.icon;
+            const isCurrentActive = i === resolvedActiveIndex;
+            const angleDeg = activeAngle + (i - resolvedActiveIndex) * angleStep;
+            const angleRad = angleDeg * (Math.PI / 180);
+            const cx = 23;
+            const cy = 177;
+            const x = cx + radius * Math.cos(angleRad);
+            const y = cy + radius * Math.sin(angleRad);
+            const isVisible = angleDeg >= -110 && angleDeg <= 20;
 
-        <button
-          onClick={handleNext}
-          disabled={resolvedActiveIndex === navItems.length - 1}
-          className="absolute z-30 flex items-center justify-center rounded-full border border-primary/40 bg-background/90 text-primary hover:bg-primary/20 hover:text-foreground transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
-          style={{
-            width: 24,
-            height: 24,
-            left: 76,
-            bottom: 20,
-            boxShadow: "0 0 5px rgba(168, 85, 247, 0.2)"
-          }}
-          aria-label="Next Section"
-        >
-          <ChevronRight className="h-3.5 w-3.5" />
-        </button>
-
-        {/* Rotating Icons on the circumference */}
-        {navItems.map((item, i) => {
-          const Icon = item.icon;
-          const isCurrentActive = i === resolvedActiveIndex;
-
-          // Calculate angle for this item based on the active index
-          const angleDeg = activeAngle + (i - resolvedActiveIndex) * angleStep;
-
-          // Convert to radians for trigonometric functions
-          const angleRad = angleDeg * (Math.PI / 180);
-
-          // Calculate coordinates from center (32, 188)
-          const cx = 32;
-          const cy = 188;
-          const x = cx + radius * Math.cos(angleRad);
-          const y = cy + radius * Math.sin(angleRad);
-
-          // Determine visibility based on angle
-          const isVisible = angleDeg >= -110 && angleDeg <= 20;
-
-          // Compute opacity: fade out as it approaches boundaries
-          let opacity = 0;
-          if (isVisible) {
-            if (angleDeg < -90) {
-              opacity = 1 - ((-90 - angleDeg) / 20);
-            } else if (angleDeg > 0) {
-              opacity = 1 - (angleDeg / 20);
-            } else {
-              opacity = 1;
+            let opacity = 0;
+            if (isVisible) {
+              if (angleDeg < -90) opacity = 1 - ((-90 - angleDeg) / 20);
+              else if (angleDeg > 0) opacity = 1 - (angleDeg / 20);
+              else opacity = 1;
             }
-          }
 
-          const size = isCurrentActive ? 48 : 36;
+            const size = isCurrentActive ? 44 : 34;
 
-          return (
-            <div
-              key={item.label}
-              className="absolute z-10 transition-all duration-700 ease-out"
-              style={{
-                left: x,
-                top: y,
-                transform: `translate(-50%, -50%) scale(${isVisible ? 1 : 0})`,
-                opacity: isVisible ? opacity : 0,
-                pointerEvents: isVisible && opacity > 0.3 ? "auto" : "none"
-              }}
-            >
-              <button
-                onClick={() => onSelectSection(item.href.replace("#", ""))}
-                className={`group flex items-center justify-center rounded-full transition-all duration-300 cursor-pointer ${isCurrentActive
-                  ? "bg-primary/20 text-foreground border-2 border-primary shadow-neon scale-110"
-                  : "bg-background/80 text-foreground/70 border border-primary/30 hover:border-primary/70 hover:text-foreground hover:bg-primary/10"
-                  }`}
-                style={{
-                  width: size,
-                  height: size,
-                  boxShadow: isCurrentActive ? "0 0 15px rgba(168, 85, 247, 0.5)" : "none"
-                }}
-                title={item.label}
+            if (!isVisible || opacity <= 0) return null;
+
+            return (
+              <motion.div
+                key={item.label}
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity }}
+                exit={{ scale: 0, opacity: 0 }}
+                transition={{ duration: 0.3, delay: i * 0.04 }}
+                className="absolute z-10 group"
+                style={{ left: x, top: y, transform: "translate(-50%, -50%)", pointerEvents: "auto" }}
               >
-                <Icon className={`${isCurrentActive ? "h-5 w-5" : "h-4 w-4"}`} />
+                <button
+                  onClick={() => { onSelectSection(item.href.replace("#", "")); }}
+                  className={`flex items-center justify-center rounded-full transition-all duration-300 cursor-pointer ${isCurrentActive
+                    ? "bg-primary/20 text-foreground border-2 border-primary shadow-neon scale-110"
+                    : "bg-background/80 text-foreground/70 border border-primary/30 hover:border-primary/70 hover:text-foreground hover:bg-primary/10"
+                    }`}
+                  style={{
+                    width: size,
+                    height: size,
+                    boxShadow: isCurrentActive ? "0 0 15px rgba(168, 85, 247, 0.5)" : "none"
+                  }}
+                  title={item.label}
+                >
+                  <Icon className={isCurrentActive ? "h-4 w-4" : "h-3.5 w-3.5"} />
 
-                {/* Text label beside active icon only */}
-                {isCurrentActive && (
+                  {/* Label — appears only on hover via group-hover */}
                   <span
-                    className="absolute left-full ml-3 whitespace-nowrap rounded-lg bg-background/90 border border-primary/40 px-2.5 py-1 text-xs font-display font-semibold tracking-wider text-primary shadow-neon pointer-events-none"
-                    style={{
-                      textShadow: "0 0 5px rgba(168, 85, 247, 0.5)"
-                    }}
+                    className="absolute left-full ml-3 whitespace-nowrap rounded-lg bg-background/90 border border-primary/40 px-2.5 py-1 text-xs font-display font-semibold tracking-wider text-primary shadow-neon pointer-events-none
+                               opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                    style={{ textShadow: "0 0 5px rgba(168, 85, 247, 0.5)" }}
                   >
                     {item.label}
                   </span>
-                )}
-              </button>
-            </div>
-          );
-        })}
+                </button>
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
+
       </div>
+    </div>
+  );
+}
+
+// =================== MOBILE NAV ===================
+interface MobileNavProps {
+  activeSection: string;
+  onSelectSection: (id: string) => void;
+}
+
+function MobileNav({ activeSection, onSelectSection }: MobileNavProps) {
+  const [open, setOpen] = useState(false);
+
+  const handleNav = (id: string) => {
+    onSelectSection(id);
+    setOpen(false);
+  };
+
+  return (
+    <div className="md:hidden fixed top-0 left-0 right-0 z-50">
+      {/* Top bar */}
+      <div
+        className="flex items-center justify-between px-5 py-3"
+        style={{
+          background: "oklch(0.18 0.08 295 / 0.85)",
+          backdropFilter: "blur(16px)",
+          WebkitBackdropFilter: "blur(16px)",
+          borderBottom: "1px solid oklch(0.6 0.18 305 / 0.25)",
+          boxShadow: "0 2px 20px oklch(0.1 0.05 290 / 0.4)",
+        }}
+      >
+        {/* VS brand */}
+        <button
+          onClick={() => handleNav("home")}
+          className="flex items-center gap-2 cursor-pointer"
+        >
+          <span
+            className="h-9 w-9 rounded-full flex items-center justify-center font-display font-extrabold text-sm text-primary border-2 border-primary"
+            style={{ boxShadow: "0 0 12px rgba(168,85,247,0.6)" }}
+          >
+            VS
+          </span>
+          <span className="text-sm font-semibold text-foreground/80 font-display tracking-wide">
+            Vaibhavi Srivastava
+          </span>
+        </button>
+
+        {/* Hamburger button */}
+        <button
+          onClick={() => setOpen((v) => !v)}
+          aria-label={open ? "Close menu" : "Open menu"}
+          className="flex flex-col justify-center items-center gap-1.5 w-9 h-9 rounded-lg border border-primary/30 bg-primary/10 hover:bg-primary/20 transition cursor-pointer"
+        >
+          <motion.span
+            animate={open ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+            transition={{ duration: 0.25 }}
+            className="block w-5 h-0.5 bg-primary rounded-full"
+          />
+          <motion.span
+            animate={open ? { opacity: 0 } : { opacity: 1 }}
+            transition={{ duration: 0.15 }}
+            className="block w-5 h-0.5 bg-primary rounded-full"
+          />
+          <motion.span
+            animate={open ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+            transition={{ duration: 0.25 }}
+            className="block w-5 h-0.5 bg-primary rounded-full"
+          />
+        </button>
+      </div>
+
+      {/* Dropdown menu */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden"
+            style={{
+              background: "oklch(0.18 0.08 295 / 0.95)",
+              backdropFilter: "blur(20px)",
+              WebkitBackdropFilter: "blur(20px)",
+              borderBottom: "1px solid oklch(0.6 0.18 305 / 0.25)",
+            }}
+          >
+            <nav className="flex flex-col px-4 py-3 gap-1">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = item.href.replace("#", "") === activeSection;
+                return (
+                  <button
+                    key={item.label}
+                    onClick={() => handleNav(item.href.replace("#", ""))}
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-display font-semibold tracking-wide transition-all cursor-pointer ${isActive
+                      ? "bg-primary/20 text-primary border border-primary/40"
+                      : "text-foreground/70 hover:bg-primary/10 hover:text-foreground border border-transparent"
+                      }`}
+                    style={isActive ? { boxShadow: "0 0 12px rgba(168,85,247,0.25)" } : {}}
+                  >
+                    <Icon className="h-4 w-4 shrink-0" />
+                    {item.label}
+                  </button>
+                );
+              })}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -781,7 +877,10 @@ export default function Portfolio() {
       />
       <div className="fixed inset-0 -z-10 bg-background/35" />
 
-      {/* Circular HUD navigation wheel (bottom-left) */}
+      {/* Mobile sticky top navbar (hidden on md+) */}
+      <MobileNav activeSection={activeSection} onSelectSection={scrollToSection} />
+
+      {/* Circular HUD navigation wheel — desktop only (hidden on mobile) */}
       <NavigationWheel activeSection={activeSection} onSelectSection={scrollToSection} />
 
 
@@ -803,18 +902,16 @@ export default function Portfolio() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground drop-shadow-[0_4px_30px_rgba(0,0,0,0.6)] font-display"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground font-display"
+              style={{
+                fontFamily: '"Inter", system-ui, sans-serif',
+                textShadow:
+                  "0 0 8px rgba(168,85,247,0.9), 0 0 20px rgba(168,85,247,0.7), 0 0 45px rgba(168,85,247,0.5), 0 4px 30px rgba(0,0,0,0.6)",
+              }}
             >
-              Hi! I'm Vaibhavi Srivastava
+              Hi! I'm<br />Vaibhavi Srivastava
             </motion.h1>
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-              className="mt-4 text-4xl md:text-5xl lg:text-6xl font-bold text-gradient font-display"
-            >
-              Full Stack Developer
-            </motion.h2>
+            <TypewriterTitle />
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

@@ -33,6 +33,7 @@
   --color-neon-foreground: var(--neon-foreground);
   --font-display: "Inter", system-ui, sans-serif;
   --font-sans: "Inter", system-ui, sans-serif;
+  --font-title: "Rajdhani", "Inter", system-ui, sans-serif;
 }
 
 :root {
@@ -166,3 +167,8 @@
   50% { box-shadow: 0 0 40px oklch(0.72 0.22 305 / 0.7), 0 0 80px oklch(0.65 0.25 350 / 0.3); }
 }
 .animate-glow { animation: glow-pulse 3s ease-in-out infinite; }
+
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
