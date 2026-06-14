@@ -751,7 +751,18 @@ function MobileNav({ activeSection, onSelectSection }: MobileNavProps) {
           >
             VS
           </span>
-          <span className="text-sm font-semibold text-foreground/80 font-display tracking-wide">
+          <span
+            className="
+              text-sm
+              font-semibold
+              text-foreground/80
+              font-display
+              tracking-wide
+              truncate
+              max-w-[140px]
+              sm:max-w-none
+            "
+          >
             Vaibhavi Srivastava
           </span>
         </button>
