@@ -39,7 +39,7 @@ export default function ProjectsArchive() {
   });
 
   return (
-    <div className="relative min-h-screen text-foreground py-16 px-6 md:px-12 lg:px-24">
+    <div className="relative min-h-screen w-full overflow-x-hidden text-foreground py-16 px-6 md:px-12 lg:px-24">
       {/* Persistent city background */}
       <div
         className="fixed inset-0 -z-10 bg-cover bg-center"
