@@ -316,47 +316,47 @@ function SkillsSection() {
 const projects = [
   {
     title: "Learnscape",
-    tag: "Multimodal AI",
-    desc: "AI-powered visual learning platform that transforms real-world objects into interactive STEM lessons using computer vision, educational overlays, voice interaction, and agentic reasoning.",
-    stack: ["Next.js", "TypeScript", "Genkit", "Gemini", "Canvas API"],
+    tag: "Multimodal Agentic AI",
+    desc: "Point your camera at everyday objects and uncover the STEM concepts hidden behind them through contextual explanations, visual overlays, and interactive learning.",
+    stack: ["Next.js", "Computer Vision", "Voice AI", "Gemini"],
     image: learnscapeImg,
     demo: "",
     github: "https://github.com/archangel2006/learnscape",
   },
   {
     title: "AmbuCast",
-    tag: "Healthcare AI",
+    tag: "Emergency Response AI",
     desc: "Predictive ambulance intelligence system that forecasts emergency hotspots, analyzes risk levels, and recommends optimal ambulance deployment using machine learning and optimization pipelines.",
-    stack: ["Python", "XGBoost", "Scikit-learn", "Streamlit", "Pandas"],
-    image: "", // TODO: replace with ambucastImg once ambucast.jpg is added
+    stack: ["XGBoost", "Random Forest", "Risk Forecasting", "Optimization", "Resource Allocation"],
+    image: "",
     demo: "",
     github: "https://github.com/archangel2006/ambucast-dispatch",
   },
   {
     title: "Udyara",
     tag: "Trustworthy RAG",
-    desc: "Retrieval-Augmented Generation platform helping women entrepreneurs navigate government startup policies through semantic search, embeddings, and source-backed explanations.",
-    stack: ["FastAPI", "LangChain", "FAISS", "Gemini", "React"],
-    image: "", // TODO: replace with udyaraImg once udyara.jpg is added
+    desc: "Policy intelligence system that analyzes government startup incentives, evaluates eligibility requirements, and delivers trustworthy, source-backed guidance for women entrepreneurs.",
+    stack: ["LangChain", "FAISS", "Semantic Search", "FastAPI", "React"],
+    image: "",
     demo: "",
     github: "https://github.com/archangel2006/Udyara",
   },
 
   {
     title: "LawyerAI",
-    tag: "Legal AI",
-    desc: "Legal Retrieval-Augmented Generation assistant designed for document-aware legal question answering, intelligent policy interpretation, and context-grounded information retrieval.",
-    stack: ["FastAPI", "LangChain", "FAISS", "Gemini"],
-    image: "", // TODO: replace with lawyeraiImg once lawyerai.jpg is added
+    tag: "Legal RAG",
+    desc: "Simplify complex legal documents, policies, and regulations with an AI assistant designed for accurate, context-aware legal guidance.",
+    stack: ["Legal Search", "RAG", "FAISS", "LangChain", "Document QA"],
+    image: "",
     demo: "",
     github: "https://github.com/archangel2006/LawyerAI",
   },
   {
     title: "Quantinel",
     tag: "Quantum Cybersecurity",
-    desc: "Quantum-enhanced cybersecurity research platform combining Quantum Machine Learning, Intrusion Detection Systems, attack characterization, and threat intelligence pipelines for next-generation cyber defense.",
-    stack: ["Python", "Qiskit", "Scikit-learn", "Pandas", "NumPy"],
-    image: "", // TODO: replace with quantinelImg once quantinel.jpg is added
+    desc: "Hybrid quantum-classical cybersecurity system that detects network intrusions, characterizes attack behavior, and maps emerging threats to known attack families through similarity-based analysis.",
+    stack: ["QSVC", "Quantum Kernels", "XGBoost", "Attack Characterization"],
+    image: "",
     demo: "",
     github: "https://github.com/archangel2006/Quantinel",
   },
@@ -364,9 +364,9 @@ const projects = [
   {
     title: "MSIS",
     tag: "Financial ML",
-    desc: "Market Shock Intelligence System for financial regime detection, volatility analysis, drawdown prediction, risk modeling, and explainable market analytics.",
-    stack: ["Python", "XGBoost", "Scikit-learn", "Plotly", "Pandas"],
-    image: "", // TODO: replace with msisImg once msis.jpg is added
+    ddesc: "Market intelligence platform that discovers distinct market regimes and analyzes how volatility, drawdown risk, and model behavior change across periods of market stress.",
+    stack: ["Regime Detection", "K-Means", "Drawdown Prediction", "XGBoost", "Risk Modeling"],
+    image: "",
     demo: "",
     github: "https://github.com/archangel2006/MSIS",
   }
