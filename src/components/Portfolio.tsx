@@ -19,7 +19,7 @@ import cjmAsset from "@/assets/education/cjm.png";
 import bbpsAsset from "@/assets/education/bbps.png";
 
 // Project images — uncomment each line when you add the file to src/assets/projects/
-// import learnscapeImg from "@/assets/projects/learnscape.jpg";   // TODO: add learnscape.jpg
+import learnscapeImg from "@/assets/projects/learnscape1.png";   // TODO: add learnscape.jpg
 // import ambucastImg from "@/assets/projects/ambucast.jpg";       // TODO: add ambucast.jpg
 // import udyaraImg from "@/assets/projects/udyara.jpg";           // TODO: add udyara.jpg
 // import lawyeraiImg from "@/assets/projects/lawyerai.jpg";       // TODO: add lawyerai.jpg
@@ -319,7 +319,7 @@ const projects = [
     tag: "Multimodal AI",
     desc: "AI-powered visual learning platform that transforms real-world objects into interactive STEM lessons using computer vision, educational overlays, voice interaction, and agentic reasoning.",
     stack: ["Next.js", "TypeScript", "Genkit", "Gemini", "Canvas API"],
-    image: "", // TODO: replace with learnscapeImg once learnscape.jpg is added
+    image: learnscapeImg,
     demo: "",
     github: "https://github.com/archangel2006/learnscape",
   },

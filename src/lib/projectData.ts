@@ -2,7 +2,7 @@
 // Uncomment each import + update the image field below when you add the file
 
 // import quantinelImg from "@/assets/projects/quantinel.jpg";     // TODO: add quantinel.jpg
-// import learnscapeImg from "@/assets/projects/learnscape.jpg";   // TODO: add learnscape.jpg
+import learnscapeImg from "@/assets/projects/learnscape1.png";   // TODO: add learnscape.jpg
 // import ambucastImg from "@/assets/projects/ambucast.jpg";       // TODO: add ambucast.jpg
 // import udyaraImg from "@/assets/projects/udyara.jpg";           // TODO: add udyara.jpg
 // import msisImg from "@/assets/projects/msis.jpg";               // TODO: add msis.jpg
