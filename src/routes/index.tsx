@@ -23,6 +23,7 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Portfolio of Vaibhavi Srivastava" },
       { property: "og:title", content: "Vaibhavi" },
       { property: "og:description", content: "Portfolio of Vaibhavi Srivastava" },
+      { property: "og:image", content: "/image.png" }
     ],
   }),
   component: Portfolio,

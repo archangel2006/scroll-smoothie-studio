@@ -77,15 +77,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+
+      { title: "Vaibhavi Srivastava | Portfolio" },
+      { name: "description", content: "Portfolio of Vaibhavi Srivastava" },
+      { name: "author", content: "Vaibhavi Srivastava" },
+
+      { property: "og:title", content: "Vaibhavi Srivastava | Portfolio" },
+      { property: "og:description", content: "Portfolio of Vaibhavi Srivastava" },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
+
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },

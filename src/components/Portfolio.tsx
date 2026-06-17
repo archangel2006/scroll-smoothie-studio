@@ -327,7 +327,7 @@ const projects = [
     title: "AmbuCast",
     tag: "Emergency Response AI",
     desc: "Predictive ambulance intelligence system that forecasts emergency hotspots, analyzes risk levels, and recommends optimal ambulance deployment using machine learning and optimization pipelines.",
-    stack: ["XGBoost", "Risk Forecasting", "Optimization", "Resource Allocation"],
+    stack: ["XGBoost", "Random Forest", "Risk Forecasting", "Optimization", "Resource Allocation"],
     image: "",
     demo: "",
     github: "https://github.com/archangel2006/ambucast-dispatch",
