@@ -881,7 +881,7 @@ export default function Portfolio() {
   };
 
   return (
-    <div className="relative min-h-screen text-foreground">
+    <div className="relative min-h-screen w-full overflow-x-hidden text-foreground">
       {/* Persistent city background — kept visible (no global blur) */}
       <div
         className="fixed inset-0 -z-10 bg-cover bg-center"
