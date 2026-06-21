@@ -1,26 +1,24 @@
-// Project image imports — resolved by Vite bundler from src/assets/projects/
-// Uncomment each import + update the image field below when you add the file
 
 // import quantinelImg from "@/assets/projects/quantinel.jpg";     // TODO: add quantinel.jpg
-import learnscapeImg from "@/assets/projects/learnscape1.png";   // TODO: add learnscape.jpg
-// import ambucastImg from "@/assets/projects/ambucast.jpg";       // TODO: add ambucast.jpg
-// import udyaraImg from "@/assets/projects/udyara.jpg";           // TODO: add udyara.jpg
+import learnscapeImg from "@/assets/projects/learnscape2.png";   // TODO: add learnscape.jpg
+import ambucastImg from "@/assets/projects/ambucast.png";       // TODO: add ambucast.jpg
+import udyaraImg from "@/assets/projects/udyara.png";           // TODO: add udyara.jpg
 // import msisImg from "@/assets/projects/msis.jpg";               // TODO: add msis.jpg
 // import fridgemateImg from "@/assets/projects/fridgemate.jpg";   // TODO: add fridgemate.jpg
-// import agronomicsImg from "@/assets/projects/agronomics.jpg";   // TODO: add agronomics.jpg
-// import resqtweetImg from "@/assets/projects/resqtweet.jpg";     // TODO: add resqtweet.jpg
-// import lawyeraiImg from "@/assets/projects/lawyerai.jpg";       // TODO: add lawyerai.jpg
+import agronomicsImg from "@/assets/projects/agronomics.png";   // TODO: add agronomics.jpg
+import resqtweetImg from "@/assets/projects/resQtweet.png";     // TODO: add resqtweet.jpg
+import lawyeraiImg from "@/assets/projects/lawyer-ai.png";       // TODO: add lawyerai.jpg
 // import virasyaImg from "@/assets/projects/virasya.jpg";         // TODO: add virasya.jpg
-// import waste2worthImg from "@/assets/projects/waste2worth.jpg"; // TODO: add waste2worth.jpg
-// import sugarsyncImg from "@/assets/projects/sugarsync.jpg";     // TODO: add sugarsync.jpg
-// import safehavenImg from "@/assets/projects/safehaven.jpg";     // TODO: add safehaven.jpg
-// import cryptopulseImg from "@/assets/projects/cryptopulse.jpg"; // TODO: add cryptopulse.jpg
-// import planetquestImg from "@/assets/projects/planetquest.jpg"; // TODO: add planetquest.jpg
-// import unstableFlappyImg from "@/assets/projects/unstable-flappy.jpg"; // TODO: add unstable-flappy.jpg
-// import ticTacToeImg from "@/assets/projects/tic-tac-toe.jpg";   // TODO: add tic-tac-toe.jpg
-// import pokedexImg from "@/assets/projects/pokedex.jpg";         // TODO: add pokedex.jpg
-// import wordGameImg from "@/assets/projects/word-game.jpg";      // TODO: add word-game.jpg
-// import climatecastImg from "@/assets/projects/climate-cast.jpg"; // TODO: add climate-cast.jpg
+import waste2worthImg from "@/assets/projects/waste2worth.png"; // TODO: add waste2worth.jpg
+// import sugarsyncImg from "@/assets/projects/sugarsync.png";     // TODO: add sugarsync.jpg
+import safehavenImg from "@/assets/projects/safe-haven.png";     // TODO: add safehaven.jpg
+// import cryptopulseImg from "@/assets/projects/cryptopulse.png"; // TODO: add cryptopulse.jpg
+import planetquestImg from "@/assets/projects/planet-quest.png"; // TODO: add planetquest.jpg
+import unstableFlappyImg from "@/assets/projects/unstable-flappy.png"; // TODO: add unstable-flappy.jpg
+import ticTacToeImg from "@/assets/projects/t3.png";   // TODO: add tic-tac-toe.jpg
+// import pokedexImg from "@/assets/projects/pokedex.png";         // TODO: add pokedex.jpg
+import wordGameImg from "@/assets/projects/word-guess.png";      // TODO: add word-game.jpg
+import climatecastImg from "@/assets/projects/climate-cast.png"; // TODO: add climate-cast.jpg
 
 export interface Project {
   id: string;
@@ -41,12 +39,12 @@ export const placeholderProjects: Project[] = [
     id: "quantinel",
     title: "Quantinel",
     description: "Quantum-enhanced cybersecurity research platform combining Quantum Machine Learning, Intrusion Detection Systems, attack characterization, and threat intelligence pipelines. Built as a research-driven system exploring next-generation cyber defense.",
-    categories: ["AI & Machine Learning"],
+    categories: ["AI & Machine Learning", "Quantum Computing"],
     featured: true,
     tags: ["Quantum Computing", "Cybersecurity", "Machine Learning", "Research"],
     techStack: ["Python", "Qiskit", "Scikit-learn", "Pandas", "NumPy", "Matplotlib"],
     githubUrl: "https://github.com/archangel2006/Quantinel",
-    image: "" // TODO: replace with quantinelImg once quantinel.jpg is added
+    image: "" 
   },
 
   {
@@ -58,7 +56,7 @@ export const placeholderProjects: Project[] = [
     tags: ["Multimodal AI", "Computer Vision", "Education Technology", "Agentic AI"],
     techStack: ["Next.js", "TypeScript", "Genkit", "Gemini", "Canvas API", "Web Speech API"],
     githubUrl: "https://github.com/archangel2006/learnscape",
-    image: "" // TODO: replace with learnscapeImg once learnscape.jpg is added
+    image: learnscapeImg
   },
 
   {
@@ -70,7 +68,7 @@ export const placeholderProjects: Project[] = [
     tags: ["Predictive Analytics", "Healthcare AI", "Machine Learning", "Optimization"],
     techStack: ["Python", "Scikit-learn", "XGBoost", "Streamlit", "Pandas", "NumPy"],
     githubUrl: "https://github.com/archangel2006/ambucast-dispatch",
-    image: "" // TODO: replace with ambucastImg once ambucast.jpg is added
+    image: ambucastImg
   },
 
   {
@@ -82,7 +80,7 @@ export const placeholderProjects: Project[] = [
     tags: ["Retrieval-Augmented Generation", "Trustworthy AI", "Policy Intelligence"],
     techStack: ["FastAPI", "LangChain", "FAISS", "Sentence Transformers", "Gemini", "React"],
     githubUrl: "https://github.com/archangel2006/Udyara",
-    image: "" // TODO: replace with udyaraImg once udyara.jpg is added
+    image: udyaraImg
   },
 
   {
@@ -120,7 +118,7 @@ export const placeholderProjects: Project[] = [
     techStack: ["Python", "Flask", "Scikit-learn", "Pandas"],
     githubUrl: "https://github.com/archangel2006/Agronomics",
     demoUrl: "",
-    image: "" // TODO: replace with agronomicsImg once agronomics.jpg is added
+    image: agronomicsImg
   },
 
   {
@@ -133,20 +131,20 @@ export const placeholderProjects: Project[] = [
     techStack: ["Python", "Scikit-learn", "Transformers", "Hugging Face"],
     githubUrl: "https://github.com/archangel2006/ResQTweet",
     demoUrl: "",
-    image: "" // TODO: replace with resqtweetImg once resqtweet.jpg is added
+    image: resqtweetImg
   },
 
   {
     id: "lawyerai",
     title: "LawyerAI",
     description: "Legal Retrieval-Augmented Generation assistant for document-aware legal question answering and intelligent policy interpretation.",
-    categories: ["AI & Machine Learning"],
+    categories: ["AI & Machine Learning", "Social Impact"],
     featured: false,
     tags: ["Legal Technology", "RAG"],
     techStack: ["FastAPI", "LangChain", "FAISS", "Gemini"],
     githubUrl: "https://github.com/archangel2006/LawyerAI",
     demoUrl: "",
-    image: "" // TODO: replace with lawyeraiImg once lawyerai.jpg is added
+    image: lawyeraiImg
   },
 
   {
@@ -159,7 +157,7 @@ export const placeholderProjects: Project[] = [
     techStack: ["Next.js", "Firebase", "Genkit", "Gemini"],
     githubUrl: "https://github.com/archangel2006/virasya",
     demoUrl: "",
-    image: "" // TODO: replace with virasyaImg once virasya.jpg is added
+    image: "" 
   },
 
   {
@@ -172,7 +170,7 @@ export const placeholderProjects: Project[] = [
     techStack: ["Next.js", "Firebase", "Genkit", "Gemini"],
     githubUrl: "https://github.com/archangel2006/Waste2Worth",
     demoUrl: "",
-    image: "" // TODO: replace with waste2worthImg once waste2worth.jpg is added
+    image: waste2worthImg
   },
 
   {
@@ -185,7 +183,7 @@ export const placeholderProjects: Project[] = [
     techStack: ["React", "Firebase", "JavaScript"],
     githubUrl: "https://github.com/archangel2006/SugarSync",
     demoUrl: "",
-    image: "" // TODO: replace with sugarsyncImg once sugarsync.jpg is added
+    image: "" 
   },
 
   {
@@ -198,14 +196,14 @@ export const placeholderProjects: Project[] = [
     techStack: ["HTML", "CSS", "JavaScript"],
     githubUrl: "https://github.com/archangel2006/SafeHaven",
     demoUrl: "",
-    image: "" // TODO: replace with safehavenImg once safehaven.jpg is added
+    image: safehavenImg
   },
 
   {
     id: "cryptopulse",
     title: "CryptoPulse",
     description: "Interactive cryptocurrency analytics dashboard delivering market intelligence, trend monitoring, API-driven insights, and financial data visualizations.",
-    categories: ["Full-Stack & Products"],
+    categories: ["Full-Stack & Products", "FinTech"],
     featured: false,
     tags: ["FinTech", "Analytics", "Data Visualization"],
     techStack: ["React", "REST APIs", "Charts"],
@@ -224,7 +222,7 @@ export const placeholderProjects: Project[] = [
     techStack: ["HTML", "CSS", "JavaScript"],
     githubUrl: "https://github.com/archangel2006/PlanetQuest",
     demoUrl: "",
-    image: "" // TODO: replace with planetquestImg once planetquest.jpg is added
+    image: planetquestImg
   },
 
   {
@@ -237,7 +235,7 @@ export const placeholderProjects: Project[] = [
     techStack: ["HTML", "CSS", "JavaScript"],
     githubUrl: "https://github.com/archangel2006/unstable-flappy",
     demoUrl: "",
-    image: "" // TODO: replace with unstableFlappyImg once unstable-flappy.jpg is added
+    image: unstableFlappyImg
   },
 
   {
@@ -250,7 +248,7 @@ export const placeholderProjects: Project[] = [
     techStack: ["HTML", "CSS", "JavaScript"],
     githubUrl: "https://github.com/archangel2006/Tic-Tac-Toe",
     demoUrl: "",
-    image: "" // TODO: replace with ticTacToeImg once tic-tac-toe.jpg is added
+    image: ticTacToeImg
   },
 
   {
@@ -267,7 +265,7 @@ export const placeholderProjects: Project[] = [
   },
 
   {
-    id: "word-game",
+    id: "word-guess",
     title: "Word Guess Game",
     description: "Vocabulary and word-association game developed to explore frontend interaction patterns and user engagement mechanics.",
     categories: ["Fun & Experimental"],
@@ -276,7 +274,7 @@ export const placeholderProjects: Project[] = [
     techStack: ["HTML", "CSS", "JavaScript"],
     githubUrl: "https://github.com/archangel2006/WordGuessGame",
     demoUrl: "",
-    image: "" // TODO: replace with wordGameImg once word-game.jpg is added
+    image: wordGameImg
   },
 
   {
@@ -289,6 +287,6 @@ export const placeholderProjects: Project[] = [
     techStack: ["HTML", "CSS", "JavaScript", "Weather API"],
     githubUrl: "https://github.com/archangel2006/ClimateCase",
     demoUrl: "",
-    image: "" // TODO: replace with climatecastImg once climate-cast.jpg is added
+    image: climatecastImg
   }
 ];

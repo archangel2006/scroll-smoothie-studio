@@ -316,47 +316,47 @@ function SkillsSection() {
 const projects = [
   {
     title: "Learnscape",
-    tag: "Multimodal AI",
-    desc: "AI-powered visual learning platform that transforms real-world objects into interactive STEM lessons using computer vision, educational overlays, voice interaction, and agentic reasoning.",
-    stack: ["Next.js", "TypeScript", "Genkit", "Gemini", "Canvas API"],
+    tag: "Multimodal Agentic AI",
+    desc: "Point your camera at everyday objects and uncover the STEM concepts hidden behind them through contextual explanations, visual overlays, and interactive learning.",
+    stack: ["Next.js", "Computer Vision", "Voice AI", "Gemini"],
     image: learnscapeImg,
     demo: "",
     github: "https://github.com/archangel2006/learnscape",
   },
   {
     title: "AmbuCast",
-    tag: "Healthcare AI",
+    tag: "Emergency Response AI",
     desc: "Predictive ambulance intelligence system that forecasts emergency hotspots, analyzes risk levels, and recommends optimal ambulance deployment using machine learning and optimization pipelines.",
-    stack: ["Python", "XGBoost", "Scikit-learn", "Streamlit", "Pandas"],
-    image: "", // TODO: replace with ambucastImg once ambucast.jpg is added
+    stack: ["XGBoost", "Random Forest", "Risk Forecasting", "Optimization", "Resource Allocation"],
+    image: "",
     demo: "",
     github: "https://github.com/archangel2006/ambucast-dispatch",
   },
   {
     title: "Udyara",
     tag: "Trustworthy RAG",
-    desc: "Retrieval-Augmented Generation platform helping women entrepreneurs navigate government startup policies through semantic search, embeddings, and source-backed explanations.",
-    stack: ["FastAPI", "LangChain", "FAISS", "Gemini", "React"],
-    image: "", // TODO: replace with udyaraImg once udyara.jpg is added
+    desc: "Policy intelligence system that analyzes government startup incentives, evaluates eligibility requirements, and delivers trustworthy, source-backed guidance for women entrepreneurs.",
+    stack: ["LangChain", "FAISS", "Semantic Search", "FastAPI", "React"],
+    image: "",
     demo: "",
     github: "https://github.com/archangel2006/Udyara",
   },
 
   {
     title: "LawyerAI",
-    tag: "Legal AI",
-    desc: "Legal Retrieval-Augmented Generation assistant designed for document-aware legal question answering, intelligent policy interpretation, and context-grounded information retrieval.",
-    stack: ["FastAPI", "LangChain", "FAISS", "Gemini"],
-    image: "", // TODO: replace with lawyeraiImg once lawyerai.jpg is added
+    tag: "Legal RAG",
+    desc: "Simplify complex legal documents, policies, and regulations with an AI assistant designed for accurate, context-aware legal guidance.",
+    stack: ["Legal Search", "RAG", "FAISS", "LangChain", "Document QA"],
+    image: "",
     demo: "",
     github: "https://github.com/archangel2006/LawyerAI",
   },
   {
     title: "Quantinel",
     tag: "Quantum Cybersecurity",
-    desc: "Quantum-enhanced cybersecurity research platform combining Quantum Machine Learning, Intrusion Detection Systems, attack characterization, and threat intelligence pipelines for next-generation cyber defense.",
-    stack: ["Python", "Qiskit", "Scikit-learn", "Pandas", "NumPy"],
-    image: "", // TODO: replace with quantinelImg once quantinel.jpg is added
+    desc: "Hybrid quantum-classical cybersecurity system that detects network intrusions, characterizes attack behavior, and maps emerging threats to known attack families through similarity-based analysis.",
+    stack: ["QSVC", "Quantum Kernels", "Attack Characterization", "XGBoost"],
+    image: "",
     demo: "",
     github: "https://github.com/archangel2006/Quantinel",
   },
@@ -364,9 +364,9 @@ const projects = [
   {
     title: "MSIS",
     tag: "Financial ML",
-    desc: "Market Shock Intelligence System for financial regime detection, volatility analysis, drawdown prediction, risk modeling, and explainable market analytics.",
-    stack: ["Python", "XGBoost", "Scikit-learn", "Plotly", "Pandas"],
-    image: "", // TODO: replace with msisImg once msis.jpg is added
+    desc: "Market intelligence platform that discovers distinct market regimes and analyzes how volatility, drawdown risk, and model behavior change across periods of market stress.",
+    stack: ["Regime Detection", "K-Means", "XGBoost", "Risk Modeling", "Drawdown Prediction"],
+    image: "",
     demo: "",
     github: "https://github.com/archangel2006/MSIS",
   }
@@ -381,7 +381,7 @@ function ProjectsSection() {
     <Section id="projects">
       <SectionTitle kicker="Featured Projects" title="Projects" className="mb-4" />
       <div className="mx-auto max-w-6xl">
-        <div className="relative h-[460px] md:h-[500px] flex items-center justify-center">
+        <div className="relative h-[500px] md:h-[560px] flex items-center justify-center">
           {projects.map((p, i) => {
             const offset = ((i - idx) + projects.length) % projects.length;
             const rel = offset > projects.length / 2 ? offset - projects.length : offset;
@@ -398,7 +398,7 @@ function ProjectsSection() {
                   rotateY: rel * -8,
                 }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute w-[88%] sm:w-[520px] md:w-[640px] rounded-3xl overflow-hidden shadow-card"
+                className="absolute w-[88%] sm:w-[520px] md:w-[600px] rounded-3xl overflow-hidden shadow-card"
                 style={{
                   transformStyle: "preserve-3d",
                   background: "oklch(0.18 0.08 295 / 0.45)",
@@ -407,7 +407,7 @@ function ProjectsSection() {
                   border: "1px solid oklch(0.6 0.18 305 / 0.35)",
                 }}
               >
-                <div className="relative h-56 md:h-72 overflow-hidden">
+                <div className="relative h-48 md:h-62 overflow-hidden">
                   <img src={p.image} alt={p.title} className="w-full h-full object-cover opacity-70" style={{ filter: "blur(2px)" }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-background/30" />
                   <span className="absolute top-4 left-4 text-xs font-semibold px-3 py-1 rounded-full bg-accent/30 backdrop-blur-md border border-accent/40 text-foreground">
@@ -417,7 +417,7 @@ function ProjectsSection() {
                 </div>
                 <div className="p-6 relative">
                   <p className="text-sm md:text-base text-foreground/85 leading-relaxed mb-4">{p.desc}</p>
-                  <div className="flex flex-wrap gap-2 pr-24">
+                  <div className="flex flex-wrap gap-1.5 pr-8">
                     {p.stack.map((s) => (
                       <span key={s} className="text-xs px-2.5 py-1 rounded bg-primary/15 text-foreground/85 border border-primary/30">{s}</span>
                     ))}
@@ -440,7 +440,7 @@ function ProjectsSection() {
 
 
         {/* Controls and CTA row (aligned to bottom-right of section) */}
-        <div className="mt-4 flex flex-col md:flex-row items-center justify-between gap-6 relative max-w-3xl mx-auto">
+        <div className="mt-2 flex flex-col md:flex-row items-center justify-between gap-6 relative max-w-3xl mx-auto">
           {/* Left spacer to keep controls centered */}
           <div className="hidden md:block w-48" />
 
