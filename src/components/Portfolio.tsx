@@ -20,9 +20,9 @@ import bbpsAsset from "@/assets/education/bbps.png";
 
 // Project images
 import learnscapeImg from "@/assets/projects/learnscape2.png";
-import ambucastImg from "@/assets/projects/ambucast.png";
-import udyaraImg from "@/assets/projects/udyara.png";
-import lawyeraiImg from "@/assets/projects/lawyer-ai.png";
+import ambucastImg from "@/assets/projects/ambucast1.png";
+import udyaraImg from "@/assets/projects/udyara1.png";
+import lawyeraiImg from "@/assets/projects/lawyerai2.png";
 
 // =================== TYPEWRITER HOOK ===================
 const ROLES = [

@@ -1,24 +1,28 @@
 
-// import quantinelImg from "@/assets/projects/quantinel.jpg";     // TODO: add quantinel.jpg
-import learnscapeImg from "@/assets/projects/learnscape2.png";   // TODO: add learnscape.jpg
-import ambucastImg from "@/assets/projects/ambucast.png";       // TODO: add ambucast.jpg
-import udyaraImg from "@/assets/projects/udyara.png";           // TODO: add udyara.jpg
-// import msisImg from "@/assets/projects/msis.jpg";               // TODO: add msis.jpg
-// import fridgemateImg from "@/assets/projects/fridgemate.jpg";   // TODO: add fridgemate.jpg
-import agronomicsImg from "@/assets/projects/agronomics.png";   // TODO: add agronomics.jpg
-import resqtweetImg from "@/assets/projects/resQtweet.png";     // TODO: add resqtweet.jpg
-import lawyeraiImg from "@/assets/projects/lawyer-ai.png";       // TODO: add lawyerai.jpg
-// import virasyaImg from "@/assets/projects/virasya.jpg";         // TODO: add virasya.jpg
-import waste2worthImg from "@/assets/projects/waste2worth.png"; // TODO: add waste2worth.jpg
-// import sugarsyncImg from "@/assets/projects/sugarsync.png";     // TODO: add sugarsync.jpg
-import safehavenImg from "@/assets/projects/safe-haven.png";     // TODO: add safehaven.jpg
-// import cryptopulseImg from "@/assets/projects/cryptopulse.png"; // TODO: add cryptopulse.jpg
-import planetquestImg from "@/assets/projects/planet-quest.png"; // TODO: add planetquest.jpg
-import unstableFlappyImg from "@/assets/projects/unstable-flappy.png"; // TODO: add unstable-flappy.jpg
-import ticTacToeImg from "@/assets/projects/t3.png";   // TODO: add tic-tac-toe.jpg
-// import pokedexImg from "@/assets/projects/pokedex.png";         // TODO: add pokedex.jpg
-import wordGameImg from "@/assets/projects/word-guess.png";      // TODO: add word-guess.jpg
-import climatecastImg from "@/assets/projects/climate-cast.png"; // TODO: add climate-cast.jpg
+import quantinelImg from "@/assets/projects/quantinel.jpg";
+import learnscapeImg from "@/assets/projects/learnscape1.png";
+import ambucastImg from "@/assets/projects/ambucast2.png";
+import udyaraImg from "@/assets/projects/udyara2.png";
+import agronomicsImg from "@/assets/projects/agronomics.png";
+import resqtweetImg from "@/assets/projects/resQtweet.png";
+import lawyeraiImg from "@/assets/projects/lawyerai2.png";
+import virasyaImg from "@/assets/projects/virasya.png";
+import waste2worthImg from "@/assets/projects/waste2worth2.png";
+// import sugarsyncImg from "@/assets/projects/sugarsync.png";     
+import safehavenImg from "@/assets/projects/safe-haven.png";
+import cryptopulseImg from "@/assets/projects/cryptopulse1.png";
+import planetquestImg from "@/assets/projects/planet-quest.png";
+import unstableFlappyImg from "@/assets/projects/unstable-flappy.png";
+import ticTacToeImg from "@/assets/projects/tic-tac-toe.png";
+import pokedexImg from "@/assets/projects/pokedex.png";
+import wordGameImg from "@/assets/projects/word-guess.png";
+import climatecastImg from "@/assets/projects/climate-cast.png";
+import loretrailImg from "@/assets/projects/lore-trail.png";
+import hiddenMileImg from "@/assets/projects/hidden-mile.png";
+import appleCrateImg from "@/assets/projects/apple-crate2.png";
+import dailyprophetImg from "@/assets/projects/daily-prophet.png";
+import chartlabImg from "@/assets/projects/chart-lab2.png";
+import webtoonImg from "@/assets/projects/webtoon2.png";
 
 export interface Project {
   id: string;
@@ -162,7 +166,7 @@ export const placeholderProjects: Project[] = [
     techStack: ["Next.js", "Firebase", "Genkit", "Gemini"],
     githubUrl: "https://github.com/archangel2006/virasya",
     demoUrl: "https://github.com/archangel2006/virasya",
-    image: ""
+    image: virasyaImg
   },
 
   {
@@ -213,8 +217,8 @@ export const placeholderProjects: Project[] = [
     tags: ["FinTech", "Analytics", "Data Visualization"],
     techStack: ["React", "REST APIs", "Charts"],
     githubUrl: "https://github.com/archangel2006/CryptoPulse",
-    demoUrl: "https://github.com/archangel2006/CryptoPulse",
-    image: ""
+    demoUrl: "https://crypto-pulse.streamlit.app/",
+    image: cryptopulseImg
   },
 
   {
@@ -258,7 +262,7 @@ export const placeholderProjects: Project[] = [
 
   {
     id: "pokedex",
-    title: "Pokedex",
+    title: "Pokédex",
     description: "Pokémon encyclopedia application powered by public APIs with dynamic search, filtering, and interactive data exploration.",
     categories: ["Fun & Experimental"],
     featured: false,
@@ -266,7 +270,7 @@ export const placeholderProjects: Project[] = [
     techStack: ["HTML", "CSS", "JavaScript", "REST APIs"],
     githubUrl: "https://github.com/archangel2006/Pokedex",
     demoUrl: "https://github.com/archangel2006/Pokedex",
-    image: ""
+    image: pokedexImg
   },
 
   {
@@ -290,8 +294,8 @@ export const placeholderProjects: Project[] = [
     featured: false,
     tags: ["API Integration", "Weather Data"],
     techStack: ["HTML", "CSS", "JavaScript", "Weather API"],
-    githubUrl: "https://github.com/archangel2006/ClimateCase",
-    demoUrl: "https://github.com/archangel2006/ClimateCase",
+    githubUrl: "https://github.com/archangel2006/ClimateCast",
+    demoUrl: "https://climate-cast-hazel.vercel.app/",
     image: climatecastImg
   },
 
@@ -305,7 +309,7 @@ export const placeholderProjects: Project[] = [
     techStack: ["Figma", "UI Design", "Prototyping", "Information Architecture"],
     githubUrl: "https://github.com/archangel2006/LoreTrail",
     demoUrl: "https://www.figma.com/proto/loretrail",
-    image: ""
+    image: loretrailImg
   },
 
   {
@@ -318,7 +322,7 @@ export const placeholderProjects: Project[] = [
     techStack: ["Figma", "UI Design", "Prototyping", "User Experience"],
     githubUrl: "https://github.com/archangel2006/TheHiddenMile",
     demoUrl: "https://www.figma.com/proto/thehiddenmile",
-    image: ""
+    image: hiddenMileImg
   },
 
   {
@@ -331,7 +335,7 @@ export const placeholderProjects: Project[] = [
     techStack: ["Figma", "Usability Testing", "Surveys", "Iterative Redesign"],
     githubUrl: "https://github.com/archangel2006/AppleCrate",
     demoUrl: "https://www.figma.com/proto/applecrate",
-    image: ""
+    image: appleCrateImg
   },
 
   {
@@ -344,7 +348,7 @@ export const placeholderProjects: Project[] = [
     techStack: ["Figma", "Visual Design", "Typography", "Editorial Layouts"],
     githubUrl: "https://github.com/archangel2006/DailyProphetUI",
     demoUrl: "https://www.figma.com/proto/dailyprophet",
-    image: ""
+    image: dailyprophetImg
   },
 
   {
@@ -357,7 +361,7 @@ export const placeholderProjects: Project[] = [
     techStack: ["Figma", "Replication", "UI Components", "Layout Composition"],
     githubUrl: "https://github.com/archangel2006/ChartLabUI",
     demoUrl: "https://www.figma.com/proto/chartlab",
-    image: ""
+    image: chartlabImg
   },
 
   {
@@ -370,6 +374,6 @@ export const placeholderProjects: Project[] = [
     techStack: ["Figma", "Wireframing", "Interaction Flow", "Mobile Layouts"],
     githubUrl: "https://github.com/archangel2006/WebToonWireframes",
     demoUrl: "https://www.figma.com/proto/webtoon",
-    image: ""
+    image: webtoonImg
   }
 ];
