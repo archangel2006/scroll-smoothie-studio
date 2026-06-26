@@ -17,7 +17,7 @@ import planetquestImg from "@/assets/projects/planet-quest.png"; // TODO: add pl
 import unstableFlappyImg from "@/assets/projects/unstable-flappy.png"; // TODO: add unstable-flappy.jpg
 import ticTacToeImg from "@/assets/projects/t3.png";   // TODO: add tic-tac-toe.jpg
 // import pokedexImg from "@/assets/projects/pokedex.png";         // TODO: add pokedex.jpg
-import wordGameImg from "@/assets/projects/word-guess.png";      // TODO: add word-game.jpg
+import wordGameImg from "@/assets/projects/word-guess.png";      // TODO: add word-guess.jpg
 import climatecastImg from "@/assets/projects/climate-cast.png"; // TODO: add climate-cast.jpg
 
 export interface Project {
@@ -38,13 +38,14 @@ export const placeholderProjects: Project[] = [
   {
     id: "quantinel",
     title: "Quantinel",
-    description: "Quantum-enhanced cybersecurity research platform combining Quantum Machine Learning, Intrusion Detection Systems, attack characterization, and threat intelligence pipelines. Built as a research-driven system exploring next-generation cyber defense.",
+    description: "Hybrid quantum-classical cybersecurity system that detects network intrusions, characterizes attack behavior, and maps emerging threats to known attack families through similarity-based analysis.",
     categories: ["AI & Machine Learning", "Quantum Computing"],
     featured: true,
     tags: ["Quantum Computing", "Cybersecurity", "Machine Learning", "Research"],
     techStack: ["Python", "Qiskit", "Scikit-learn", "Pandas", "NumPy", "Matplotlib"],
     githubUrl: "https://github.com/archangel2006/Quantinel",
-    image: "" 
+    demoUrl: "https://github.com/archangel2006/Quantinel",
+    image: ""
   },
 
   {
@@ -56,6 +57,7 @@ export const placeholderProjects: Project[] = [
     tags: ["Multimodal AI", "Computer Vision", "Education Technology", "Agentic AI"],
     techStack: ["Next.js", "TypeScript", "Genkit", "Gemini", "Canvas API", "Web Speech API"],
     githubUrl: "https://github.com/archangel2006/learnscape",
+    demoUrl: "https://github.com/archangel2006/learnscape",
     image: learnscapeImg
   },
 
@@ -68,18 +70,20 @@ export const placeholderProjects: Project[] = [
     tags: ["Predictive Analytics", "Healthcare AI", "Machine Learning", "Optimization"],
     techStack: ["Python", "Scikit-learn", "XGBoost", "Streamlit", "Pandas", "NumPy"],
     githubUrl: "https://github.com/archangel2006/ambucast-dispatch",
+    demoUrl: "https://github.com/archangel2006/ambucast-dispatch",
     image: ambucastImg
   },
 
   {
     id: "udyara",
     title: "Udyara",
-    description: "Trustworthy Retrieval-Augmented Generation system helping women entrepreneurs navigate government startup policies through semantic search and source-backed explanations.",
+    description: "Policy intelligence system that analyzes government startup incentives, evaluates eligibility requirements, and delivers trustworthy, source-backed guidance for women entrepreneurs.",
     categories: ["AI & Machine Learning", "Social Impact"],
     featured: true,
-    tags: ["Retrieval-Augmented Generation", "Trustworthy AI", "Policy Intelligence"],
+    tags: ["Retrieval-Augmented Generation", "Policy Intelligence"],
     techStack: ["FastAPI", "LangChain", "FAISS", "Sentence Transformers", "Gemini", "React"],
     githubUrl: "https://github.com/archangel2006/Udyara",
+    demoUrl: "https://github.com/archangel2006/Udyara",
     image: udyaraImg
   },
 
@@ -89,10 +93,11 @@ export const placeholderProjects: Project[] = [
     description: "Market Shock Intelligence System that detects financial market regimes, analyzes volatility behavior, predicts drawdown risks, and evaluates strategy robustness across market conditions.",
     categories: ["AI & Machine Learning"],
     featured: true,
-    tags: ["Financial Machine Learning", "Risk Modeling", "Explainable Analytics"],
+    tags: ["Financial ML", "Risk Modeling", "Explainable Analytics"],
     techStack: ["Python", "Scikit-learn", "XGBoost", "Streamlit", "Plotly", "Pandas"],
     githubUrl: "https://github.com/archangel2006/MSIS",
-    image: "" // TODO: replace with msisImg once msis.jpg is added
+    demoUrl: "https://github.com/archangel2006/MSIS",
+    image: ""
   },
 
   {
@@ -104,8 +109,8 @@ export const placeholderProjects: Project[] = [
     tags: ["Computer Vision", "Generative AI"],
     techStack: ["YOLOv8", "FastAPI", "React", "Gemini", "OpenCV"],
     githubUrl: "https://github.com/archangel2006/FridgeMate",
-    demoUrl: "",
-    image: "" // TODO: replace with fridgemateImg once fridgemate.jpg is added
+    demoUrl: "https://github.com/archangel2006/FridgeMate",
+    image: ""
   },
 
   {
@@ -117,7 +122,7 @@ export const placeholderProjects: Project[] = [
     tags: ["Agritech", "Machine Learning"],
     techStack: ["Python", "Flask", "Scikit-learn", "Pandas"],
     githubUrl: "https://github.com/archangel2006/Agronomics",
-    demoUrl: "",
+    demoUrl: "https://github.com/archangel2006/Agronomics",
     image: agronomicsImg
   },
 
@@ -130,7 +135,7 @@ export const placeholderProjects: Project[] = [
     tags: ["Natural Language Processing", "Crisis Intelligence"],
     techStack: ["Python", "Scikit-learn", "Transformers", "Hugging Face"],
     githubUrl: "https://github.com/archangel2006/ResQTweet",
-    demoUrl: "",
+    demoUrl: "https://github.com/archangel2006/ResQTweet",
     image: resqtweetImg
   },
 
@@ -143,7 +148,7 @@ export const placeholderProjects: Project[] = [
     tags: ["Legal Technology", "RAG"],
     techStack: ["FastAPI", "LangChain", "FAISS", "Gemini"],
     githubUrl: "https://github.com/archangel2006/LawyerAI",
-    demoUrl: "",
+    demoUrl: "https://github.com/archangel2006/LawyerAI",
     image: lawyeraiImg
   },
 
@@ -156,8 +161,8 @@ export const placeholderProjects: Project[] = [
     tags: ["Marketplace", "Generative AI", "Social Commerce"],
     techStack: ["Next.js", "Firebase", "Genkit", "Gemini"],
     githubUrl: "https://github.com/archangel2006/virasya",
-    demoUrl: "",
-    image: "" 
+    demoUrl: "https://github.com/archangel2006/virasya",
+    image: ""
   },
 
   {
@@ -169,7 +174,7 @@ export const placeholderProjects: Project[] = [
     tags: ["Sustainability", "Food Redistribution", "Social Impact"],
     techStack: ["Next.js", "Firebase", "Genkit", "Gemini"],
     githubUrl: "https://github.com/archangel2006/Waste2Worth",
-    demoUrl: "",
+    demoUrl: "https://github.com/archangel2006/Waste2Worth",
     image: waste2worthImg
   },
 
@@ -182,8 +187,8 @@ export const placeholderProjects: Project[] = [
     tags: ["Healthcare", "Patient Monitoring", "HealthTech"],
     techStack: ["React", "Firebase", "JavaScript"],
     githubUrl: "https://github.com/archangel2006/SugarSync",
-    demoUrl: "",
-    image: "" 
+    demoUrl: "https://github.com/archangel2006/SugarSync",
+    image: ""
   },
 
   {
@@ -195,7 +200,7 @@ export const placeholderProjects: Project[] = [
     tags: ["Disaster Management", "Community Response", "Emergency Systems"],
     techStack: ["HTML", "CSS", "JavaScript"],
     githubUrl: "https://github.com/archangel2006/SafeHaven",
-    demoUrl: "",
+    demoUrl: "https://github.com/archangel2006/SafeHaven",
     image: safehavenImg
   },
 
@@ -208,8 +213,8 @@ export const placeholderProjects: Project[] = [
     tags: ["FinTech", "Analytics", "Data Visualization"],
     techStack: ["React", "REST APIs", "Charts"],
     githubUrl: "https://github.com/archangel2006/CryptoPulse",
-    demoUrl: "",
-    image: "" // TODO: replace with cryptopulseImg once cryptopulse.jpg is added
+    demoUrl: "https://github.com/archangel2006/CryptoPulse",
+    image: ""
   },
 
   {
@@ -221,7 +226,7 @@ export const placeholderProjects: Project[] = [
     tags: ["Education", "Sustainability", "Gamification"],
     techStack: ["HTML", "CSS", "JavaScript"],
     githubUrl: "https://github.com/archangel2006/PlanetQuest",
-    demoUrl: "",
+    demoUrl: "https://github.com/archangel2006/PlanetQuest",
     image: planetquestImg
   },
 
@@ -234,7 +239,7 @@ export const placeholderProjects: Project[] = [
     tags: ["Game Development", "Physics Simulation"],
     techStack: ["HTML", "CSS", "JavaScript"],
     githubUrl: "https://github.com/archangel2006/unstable-flappy",
-    demoUrl: "",
+    demoUrl: "https://github.com/archangel2006/unstable-flappy",
     image: unstableFlappyImg
   },
 
@@ -247,7 +252,7 @@ export const placeholderProjects: Project[] = [
     tags: ["Game Development", "Frontend Development"],
     techStack: ["HTML", "CSS", "JavaScript"],
     githubUrl: "https://github.com/archangel2006/Tic-Tac-Toe",
-    demoUrl: "",
+    demoUrl: "https://github.com/archangel2006/Tic-Tac-Toe",
     image: ticTacToeImg
   },
 
@@ -260,8 +265,8 @@ export const placeholderProjects: Project[] = [
     tags: ["API Integration", "Frontend Development"],
     techStack: ["HTML", "CSS", "JavaScript", "REST APIs"],
     githubUrl: "https://github.com/archangel2006/Pokedex",
-    demoUrl: "",
-    image: "" // TODO: replace with pokedexImg once pokedex.jpg is added
+    demoUrl: "https://github.com/archangel2006/Pokedex",
+    image: ""
   },
 
   {
@@ -273,7 +278,7 @@ export const placeholderProjects: Project[] = [
     tags: ["Interactive UI", "Frontend Development"],
     techStack: ["HTML", "CSS", "JavaScript"],
     githubUrl: "https://github.com/archangel2006/WordGuessGame",
-    demoUrl: "",
+    demoUrl: "https://github.com/archangel2006/WordGuessGame",
     image: wordGameImg
   },
 
@@ -286,7 +291,85 @@ export const placeholderProjects: Project[] = [
     tags: ["API Integration", "Weather Data"],
     techStack: ["HTML", "CSS", "JavaScript", "Weather API"],
     githubUrl: "https://github.com/archangel2006/ClimateCase",
-    demoUrl: "",
+    demoUrl: "https://github.com/archangel2006/ClimateCase",
     image: climatecastImg
+  },
+
+  {
+    id: "loretrail",
+    title: "Lore Trail",
+    description: "A digital library preserving global folklore through interactive storytelling and community features.",
+    categories: ["Design & UI/UX"],
+    featured: false,
+    tags: ["UI/UX", "Creative", "Web Design", "Storytelling"],
+    techStack: ["Figma", "UI Design", "Prototyping", "Information Architecture"],
+    githubUrl: "https://github.com/archangel2006/LoreTrail",
+    demoUrl: "https://www.figma.com/proto/loretrail",
+    image: ""
+  },
+
+  {
+    id: "hidden-mile",
+    title: "The Hidden Mile",
+    description: "A visual platform for discovering lesser-known travel spots through community-driven stories.",
+    categories: ["Design & UI/UX"],
+    featured: false,
+    tags: ["UI/UX", "Creative", "Web Design", "Storytelling"],
+    techStack: ["Figma", "UI Design", "Prototyping", "User Experience"],
+    githubUrl: "https://github.com/archangel2006/TheHiddenMile",
+    demoUrl: "https://www.figma.com/proto/thehiddenmile",
+    image: ""
+  },
+
+  {
+    id: "apple-crate",
+    title: "Apple Crate",
+    description: "An iterative UI redesign case study based on deep usability testing and user feedback.",
+    categories: ["Design & UI/UX"],
+    featured: false,
+    tags: ["UI/UX", "Technology", "Usability"],
+    techStack: ["Figma", "Usability Testing", "Surveys", "Iterative Redesign"],
+    githubUrl: "https://github.com/archangel2006/AppleCrate",
+    demoUrl: "https://www.figma.com/proto/applecrate",
+    image: ""
+  },
+
+  {
+    id: "daily-prophet",
+    title: "The Daily Prophet",
+    description: "A high-fidelity Harry Potter-themed news portal focusing on information hierarchy and editorial layouts.",
+    categories: ["Design & UI/UX"],
+    featured: false,
+    tags: ["UI/UX", "Creative", "Web Design"],
+    techStack: ["Figma", "Visual Design", "Typography", "Editorial Layouts"],
+    githubUrl: "https://github.com/archangel2006/DailyProphetUI",
+    demoUrl: "https://www.figma.com/proto/dailyprophet",
+    image: ""
+  },
+
+  {
+    id: "chart-lab",
+    title: "Chart Lab Landing Page",
+    description: "A modern SaaS landing page UI designed to showcase visual principles and component-based layouts.",
+    categories: ["Design & UI/UX"],
+    featured: false,
+    tags: ["UI/UX", "Creative", "Web Design"],
+    techStack: ["Figma", "Replication", "UI Components", "Layout Composition"],
+    githubUrl: "https://github.com/archangel2006/ChartLabUI",
+    demoUrl: "https://www.figma.com/proto/chartlab",
+    image: ""
+  },
+
+  {
+    id: "webtoon-wireframes",
+    title: "Webtoon Wireframes",
+    description: "Mid-fidelity wireframes for a WebToon platform emphasizing intuitive navigation and reader experience.",
+    categories: ["Design & UI/UX"],
+    featured: false,
+    tags: ["UI/UX", "Creative", "Web Design", "Storytelling"],
+    techStack: ["Figma", "Wireframing", "Interaction Flow", "Mobile Layouts"],
+    githubUrl: "https://github.com/archangel2006/WebToonWireframes",
+    demoUrl: "https://www.figma.com/proto/webtoon",
+    image: ""
   }
 ];
