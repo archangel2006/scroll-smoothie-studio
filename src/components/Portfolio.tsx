@@ -501,12 +501,35 @@ function ProjectsSection() {
 // =================== CONTACT ===================
 function ContactSection() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState("");
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Portfolio message from ${form.name}`);
-    const body = encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`);
-    window.location.href = `mailto:26.archangel@gmail.com?subject=${subject}&body=${body}`;
+    setStatus("Sending...");
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "f3a16c9c-7515-4768-bb61-0bebe791ad90",
+          ...form
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus("Message sent successfully!");
+        setForm({ name: "", email: "", message: "" });
+        setTimeout(() => setStatus(""), 5000);
+      } else {
+        setStatus("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      setStatus("Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -575,9 +598,14 @@ function ContactSection() {
                 placeholder="Tell me about your project..."
               />
             </div>
-            <button type="submit" className="glass-btn">
-              Send Message <Send className="h-4 w-4" />
-            </button>
+            <div className="flex items-center gap-4">
+              <button type="submit" className="glass-btn" disabled={status === "Sending..."}>
+                {status === "Sending..." ? "Sending..." : "Send Message"} <Send className="h-4 w-4" />
+              </button>
+              {status && status !== "Sending..." && (
+                <span className="text-sm font-medium text-primary">{status}</span>
+              )}
+            </div>
           </motion.form>
         </div>
         <p className="mt-12 text-center text-xs text-foreground/60">© 2026 Vaibhavi Srivastava · Crafted with !hate</p>
