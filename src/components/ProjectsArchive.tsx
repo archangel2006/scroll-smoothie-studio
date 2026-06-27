@@ -3,12 +3,13 @@ import { Link } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Star, Brain, Atom, Code2, Globe, PenTool, FlaskConical,
-  Search, ArrowLeft, Github, ExternalLink, BookOpen
+  Search, ArrowLeft, Github, ExternalLink, BookOpen, LayoutGrid
 } from "lucide-react";
 import { placeholderProjects, Project } from "@/lib/projectData";
 import cityAsset from "@/assets/background1.png";
 
 const filters = [
+  { id: "All", label: "All", icon: LayoutGrid },
   { id: "Featured", label: "Featured", icon: Star },
   { id: "AI & Machine Learning", label: "AI & Machine Learning", icon: Brain },
   { id: "Quantum Computing", label: "Quantum Computing", icon: Atom },
@@ -20,14 +21,16 @@ const filters = [
 
 export default function ProjectsArchive() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeFilter, setActiveFilter] = useState("Featured");
+  const [activeFilter, setActiveFilter] = useState("All");
 
   // Filter projects by both search query and active category pill
   const filteredProjects = placeholderProjects.filter((project) => {
     const matchesFilter =
-      activeFilter === "Featured"
-        ? project.featured
-        : project.categories.includes(activeFilter);
+      activeFilter === "All"
+        ? true
+        : activeFilter === "Featured"
+          ? project.featured
+          : project.categories.includes(activeFilter);
 
     const matchesSearch =
       project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -112,7 +115,7 @@ export default function ProjectsArchive() {
         {/* Projects Cards Grid */}
         <motion.div
           layout
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto w-full"
         >
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project) => (
@@ -123,8 +126,8 @@ export default function ProjectsArchive() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4 }}
-                whileHover={{ y: -6 }}
-                className="glass-card rounded-3xl overflow-hidden flex flex-col hover:shadow-neon transition-all duration-500"
+                whileHover={{ y: -6, boxShadow: "0 0 25px rgba(168, 85, 247, 0.4)" }}
+                className="group glass-card rounded-3xl overflow-hidden flex flex-col hover:shadow-neon transition-all duration-500"
                 style={{
                   background: "oklch(0.18 0.08 295 / 0.45)",
                   backdropFilter: "blur(24px) saturate(160%)",
@@ -133,43 +136,42 @@ export default function ProjectsArchive() {
                 }}
               >
                 {/* Cover Image */}
-                <div className="relative h-48 overflow-hidden bg-background/25">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover opacity-70 group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/45 to-transparent" />
-
-                  {/* Domain Tags */}
-                  <div className="absolute top-4 left-4 flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-accent/25 border border-accent/40 text-foreground"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                <div className="relative aspect-video overflow-hidden bg-background/25 flex flex-col justify-center">
+                  {project.image ? (
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-contain object-center opacity-95 transition-all duration-500"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-primary/30 via-accent/20 to-background/50 flex items-center justify-center">
+                      {project.categories.includes("Quantum Computing") ? (
+                        <Atom className="h-16 w-16 text-primary/30 animate-float" />
+                      ) : project.categories.includes("Design & UI/UX") ? (
+                        <PenTool className="h-16 w-16 text-accent/30 animate-float" />
+                      ) : (
+                        <Brain className="h-16 w-16 text-primary/30 animate-float" />
+                      )}
+                    </div>
+                  )}
                 </div>
 
                 {/* Content */}
-                <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="text-xl font-bold font-display text-gradient mb-3">
+                <div className="p-5 flex flex-col flex-grow">
+                  <h3 className="text-xl font-bold font-display text-gradient mb-1.5">
                     {project.title}
                   </h3>
-                  <p className="text-sm text-foreground/80 leading-relaxed mb-5 flex-grow">
+                  <p className="text-sm text-foreground/80 leading-relaxed mb-3 flex-grow">
                     {project.description}
                   </p>
 
                   {/* Tech Stack Tags */}
-                  <div className="flex flex-wrap gap-1.5 mb-6">
+                  <div className="flex flex-wrap gap-1.5 mb-4">
                     {project.techStack.map((tech) => (
                       <span
                         key={tech}
-                        className="text-[10px] font-semibold px-2 py-0.5 rounded bg-primary/10 text-foreground/80 border border-primary/20"
+                        className="text-[10px] font-semibold px-2 py-0.5 rounded bg-primary/10 text-foreground/80 border border-primary/20 hover:bg-primary/25 hover:scale-105 transition-all cursor-default"
                       >
                         {tech}
                       </span>
@@ -177,7 +179,7 @@ export default function ProjectsArchive() {
                   </div>
 
                   {/* Actions / Links */}
-                  <div className="flex items-center gap-3 mt-auto border-t border-primary/10 pt-4">
+                  <div className="flex items-center gap-3 mt-auto border-t border-primary/10 pt-3">
                     {project.githubUrl && (
                       <a
                         href={project.githubUrl}

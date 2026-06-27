@@ -18,13 +18,14 @@ import igdtuwAsset from "@/assets/education/igdtuw.png";
 import cjmAsset from "@/assets/education/cjm.png";
 import bbpsAsset from "@/assets/education/bbps.png";
 
-// Project images — uncomment each line when you add the file to src/assets/projects/
-import learnscapeImg from "@/assets/projects/learnscape1.png";   // TODO: add learnscape.jpg
-// import ambucastImg from "@/assets/projects/ambucast.jpg";       // TODO: add ambucast.jpg
-// import udyaraImg from "@/assets/projects/udyara.jpg";           // TODO: add udyara.jpg
-// import lawyeraiImg from "@/assets/projects/lawyerai.jpg";       // TODO: add lawyerai.jpg
-// import quantinelImg from "@/assets/projects/quantinel.jpg";     // TODO: add quantinel.jpg
-// import msisImg from "@/assets/projects/msis.jpg";               // TODO: add msis.jpg
+// Project images
+import quantinelImg from "@/assets/projects/quantinel.png";
+import msisImg from "@/assets/projects/msis.png";
+import learnscapeImg from "@/assets/projects/learnscape2.png";
+import ambucastImg from "@/assets/projects/ambucast1.png";
+import udyaraImg from "@/assets/projects/udyara1.png";
+import lawyeraiImg from "@/assets/projects/lawyerai2.png";
+import fridgemateImg from "@/assets/projects/fridgemate.png";
 
 // =================== TYPEWRITER HOOK ===================
 const ROLES = [
@@ -320,7 +321,7 @@ const projects = [
     desc: "Point your camera at everyday objects and uncover the STEM concepts hidden behind them through contextual explanations, visual overlays, and interactive learning.",
     stack: ["Next.js", "Computer Vision", "Voice AI", "Gemini"],
     image: learnscapeImg,
-    demo: "",
+    demo: "https://github.com/archangel2006/learnscape",
     github: "https://github.com/archangel2006/learnscape",
   },
   {
@@ -328,8 +329,8 @@ const projects = [
     tag: "Emergency Response AI",
     desc: "Predictive ambulance intelligence system that forecasts emergency hotspots, analyzes risk levels, and recommends optimal ambulance deployment using machine learning and optimization pipelines.",
     stack: ["XGBoost", "Random Forest", "Risk Forecasting", "Optimization", "Resource Allocation"],
-    image: "",
-    demo: "",
+    image: ambucastImg,
+    demo: "https://github.com/archangel2006/ambucast-dispatch",
     github: "https://github.com/archangel2006/ambucast-dispatch",
   },
   {
@@ -337,8 +338,8 @@ const projects = [
     tag: "Trustworthy RAG",
     desc: "Policy intelligence system that analyzes government startup incentives, evaluates eligibility requirements, and delivers trustworthy, source-backed guidance for women entrepreneurs.",
     stack: ["LangChain", "FAISS", "Semantic Search", "FastAPI", "React"],
-    image: "",
-    demo: "",
+    image: udyaraImg,
+    demo: "https://github.com/archangel2006/Udyara",
     github: "https://github.com/archangel2006/Udyara",
   },
 
@@ -347,8 +348,8 @@ const projects = [
     tag: "Legal RAG",
     desc: "Simplify complex legal documents, policies, and regulations with an AI assistant designed for accurate, context-aware legal guidance.",
     stack: ["Legal Search", "RAG", "FAISS", "LangChain", "Document QA"],
-    image: "",
-    demo: "",
+    image: lawyeraiImg,
+    demo: "https://github.com/archangel2006/LawyerAI",
     github: "https://github.com/archangel2006/LawyerAI",
   },
   {
@@ -356,8 +357,8 @@ const projects = [
     tag: "Quantum Cybersecurity",
     desc: "Hybrid quantum-classical cybersecurity system that detects network intrusions, characterizes attack behavior, and maps emerging threats to known attack families through similarity-based analysis.",
     stack: ["QSVC", "Quantum Kernels", "Attack Characterization", "XGBoost"],
-    image: "",
-    demo: "",
+    image: quantinelImg,
+    demo: "https://github.com/archangel2006/Quantinel",
     github: "https://github.com/archangel2006/Quantinel",
   },
 
@@ -366,9 +367,19 @@ const projects = [
     tag: "Financial ML",
     desc: "Market intelligence platform that discovers distinct market regimes and analyzes how volatility, drawdown risk, and model behavior change across periods of market stress.",
     stack: ["Regime Detection", "K-Means", "XGBoost", "Risk Modeling", "Drawdown Prediction"],
-    image: "",
-    demo: "",
+    image: msisImg,
+    demo: "https://github.com/archangel2006/MSIS",
     github: "https://github.com/archangel2006/MSIS",
+  },
+
+  {
+    title: "FridgeMate",
+    tag: "AI Recipe Generator",
+    desc: "AI-powered recipe generator that detects ingredients from fridge images using computer vision and generates personalized recipes using Large Language Models.",
+    stack: ["YOLOv8", "Gemini", "OpenCV"],
+    image: fridgemateImg,
+    demo: "https://github.com/archangel2006/FridgeMate",
+    github: "https://github.com/archangel2006/FridgeMate",
   }
 ];
 
@@ -407,8 +418,18 @@ function ProjectsSection() {
                   border: "1px solid oklch(0.6 0.18 305 / 0.35)",
                 }}
               >
-                <div className="relative h-48 md:h-62 overflow-hidden">
-                  <img src={p.image} alt={p.title} className="w-full h-full object-cover opacity-70" style={{ filter: "blur(2px)" }} />
+                <div className="relative h-48 md:h-62 overflow-hidden bg-background/25">
+                  {p.image ? (
+                    <img src={p.image} alt={p.title} className="w-full h-full object-cover opacity-70 transition-transform duration-500 hover:scale-105" />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-primary/30 via-accent/20 to-background/50 flex items-center justify-center">
+                      {p.title === "Quantinel" ? (
+                        <Atom className="h-16 w-16 text-primary/30 animate-float" />
+                      ) : (
+                        <Brain className="h-16 w-16 text-accent/30 animate-float" />
+                      )}
+                    </div>
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-background/30" />
                   <span className="absolute top-4 left-4 text-xs font-semibold px-3 py-1 rounded-full bg-accent/30 backdrop-blur-md border border-accent/40 text-foreground">
                     {p.tag}
