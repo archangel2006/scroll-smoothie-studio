@@ -19,10 +19,13 @@ import cjmAsset from "@/assets/education/cjm.png";
 import bbpsAsset from "@/assets/education/bbps.png";
 
 // Project images
+import quantinelImg from "@/assets/projects/quantinel.png";
+import msisImg from "@/assets/projects/msis.png";
 import learnscapeImg from "@/assets/projects/learnscape2.png";
 import ambucastImg from "@/assets/projects/ambucast1.png";
 import udyaraImg from "@/assets/projects/udyara1.png";
 import lawyeraiImg from "@/assets/projects/lawyerai2.png";
+import fridgemateImg from "@/assets/projects/fridgemate.png";
 
 // =================== TYPEWRITER HOOK ===================
 const ROLES = [
@@ -354,7 +357,7 @@ const projects = [
     tag: "Quantum Cybersecurity",
     desc: "Hybrid quantum-classical cybersecurity system that detects network intrusions, characterizes attack behavior, and maps emerging threats to known attack families through similarity-based analysis.",
     stack: ["QSVC", "Quantum Kernels", "Attack Characterization", "XGBoost"],
-    image: "",
+    image: quantinelImg,
     demo: "https://github.com/archangel2006/Quantinel",
     github: "https://github.com/archangel2006/Quantinel",
   },
@@ -364,9 +367,19 @@ const projects = [
     tag: "Financial ML",
     desc: "Market intelligence platform that discovers distinct market regimes and analyzes how volatility, drawdown risk, and model behavior change across periods of market stress.",
     stack: ["Regime Detection", "K-Means", "XGBoost", "Risk Modeling", "Drawdown Prediction"],
-    image: "",
+    image: msisImg,
     demo: "https://github.com/archangel2006/MSIS",
     github: "https://github.com/archangel2006/MSIS",
+  },
+
+  {
+    title: "FridgeMate",
+    tag: "AI Recipe Generator",
+    desc: "AI-powered recipe generator that detects ingredients from fridge images using computer vision and generates personalized recipes using Large Language Models.",
+    stack: ["YOLOv8", "Gemini", "OpenCV"],
+    image: fridgemateImg,
+    demo: "https://github.com/archangel2006/FridgeMate",
+    github: "https://github.com/archangel2006/FridgeMate",
   }
 ];
 

@@ -1,14 +1,16 @@
 
-import quantinelImg from "@/assets/projects/quantinel.jpg";
 import learnscapeImg from "@/assets/projects/learnscape1.png";
 import ambucastImg from "@/assets/projects/ambucast2.png";
 import udyaraImg from "@/assets/projects/udyara2.png";
-import agronomicsImg from "@/assets/projects/agronomics.png";
+import quantinelImg from "@/assets/projects/quantinel.png";
+import msisImg from "@/assets/projects/msis.png";
+import agronomicsImg from "@/assets/projects/agronomics2.png";
 import resqtweetImg from "@/assets/projects/resQtweet.png";
 import lawyeraiImg from "@/assets/projects/lawyerai2.png";
+import fridgemateImg from "@/assets/projects/fridgemate.png";
 import virasyaImg from "@/assets/projects/virasya.png";
 import waste2worthImg from "@/assets/projects/waste2worth2.png";
-// import sugarsyncImg from "@/assets/projects/sugarsync.png";     
+import sugarsyncImg from "@/assets/projects/sugarsync.png";
 import safehavenImg from "@/assets/projects/safe-haven.png";
 import cryptopulseImg from "@/assets/projects/cryptopulse1.png";
 import planetquestImg from "@/assets/projects/planet-quest.png";
@@ -49,7 +51,7 @@ export const placeholderProjects: Project[] = [
     techStack: ["Python", "Qiskit", "Scikit-learn", "Pandas", "NumPy", "Matplotlib"],
     githubUrl: "https://github.com/archangel2006/Quantinel",
     demoUrl: "https://github.com/archangel2006/Quantinel",
-    image: ""
+    image: quantinelImg
   },
 
   {
@@ -101,7 +103,7 @@ export const placeholderProjects: Project[] = [
     techStack: ["Python", "Scikit-learn", "XGBoost", "Streamlit", "Plotly", "Pandas"],
     githubUrl: "https://github.com/archangel2006/MSIS",
     demoUrl: "https://github.com/archangel2006/MSIS",
-    image: ""
+    image: msisImg
   },
 
   {
@@ -114,7 +116,7 @@ export const placeholderProjects: Project[] = [
     techStack: ["YOLOv8", "FastAPI", "React", "Gemini", "OpenCV"],
     githubUrl: "https://github.com/archangel2006/FridgeMate",
     demoUrl: "https://github.com/archangel2006/FridgeMate",
-    image: ""
+    image: fridgemateImg
   },
 
   {
@@ -192,7 +194,7 @@ export const placeholderProjects: Project[] = [
     techStack: ["React", "Firebase", "JavaScript"],
     githubUrl: "https://github.com/archangel2006/SugarSync",
     demoUrl: "https://github.com/archangel2006/SugarSync",
-    image: ""
+    image: sugarsyncImg
   },
 
   {
