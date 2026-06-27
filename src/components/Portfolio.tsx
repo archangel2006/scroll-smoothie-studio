@@ -982,8 +982,7 @@ export default function Portfolio() {
               transition={{ duration: 0.8, delay: 0.9 }}
               className="mt-6 text-sm sm:text-base md:text-lg text-foreground/85 font-semibold leading-relaxed max-w-xl mx-auto md:ml-auto md:mr-0"
             >
-              Crafting immersive digital experiences with code, design, and a touch of neon.
-              Specialized in building scalable web applications that blur the line between art and engineering.
+              Crafting immersive digital experiences with code and design. Building products where art meets engineering.
             </motion.p>
 
             <motion.div
