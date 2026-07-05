@@ -104,6 +104,7 @@ const socials = [
   { icon: Github, href: "https://github.com/archangel2006", label: "GitHub" },
   { icon: Instagram, href: "https://www.instagram.com/archangel.26/", label: "Instagram" },
   { icon: Mail, href: "mailto:26.archangel@gmail.com", label: "Email" },
+  { icon: Code2, href: "https://codolio.com/profile/archangel26", label: "Codolio" },
 ];
 
 const fadeUp = {
@@ -143,7 +144,7 @@ const educationData = [
     place: "Indira Gandhi Delhi Technical University",
     course: "Bachelor Of Technology",
     field: "Computer Science Engineering with Artificial Intelligence",
-    score: "CGPA: 9.12",
+    score: "CGPA: 9.15",
     desc: "Focused on building practical software projects while strengthening foundations in algorithms, artificial intelligence, and system design. Actively exploring full-stack development and modern development tools.",
     image: igdtuwAsset,
     tag: "",
