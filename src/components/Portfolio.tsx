@@ -102,9 +102,9 @@ const navItems = [
 const socials = [
   { icon: Linkedin, href: "https://www.linkedin.com/in/vaibhavi-srivastava26/", label: "LinkedIn" },
   { icon: Github, href: "https://github.com/archangel2006", label: "GitHub" },
+  { icon: Code2, href: "https://codolio.com/profile/archangel26", label: "Codolio" },
   { icon: Instagram, href: "https://www.instagram.com/archangel.26/", label: "Instagram" },
   { icon: Mail, href: "mailto:26.archangel@gmail.com", label: "Email" },
-  { icon: Code2, href: "https://codolio.com/profile/archangel26", label: "Codolio" },
 ];
 
 const fadeUp = {
